@@ -1,25 +1,14 @@
-#include "table.h"
-
 #include <iostream>
 
 using namespace std;
 
-struct tabela
+struct table
 {
-	int iDate;
+	int iTDate;
 };
 
-table::table()
-{
 
-}
-
-table::~table()
-{
-
-}
-
-void table::tableMenu()
+void tableMenu()
 {
 	short sTChoiceTableMenu;
 
@@ -56,7 +45,7 @@ void table::tableMenu()
 	}
 }
 
-void table::pushMenu()
+void pushMenu()
 {
 	short sTChoicePushMenu;
 
@@ -93,7 +82,7 @@ void table::pushMenu()
 	}
 }
 
-void table::popMenu()
+void popMenu()
 {
 	short sTChoicePopMenu;
 
@@ -130,7 +119,7 @@ void table::popMenu()
 	}
 }
 
-void table::displayMenu()
+void displayMenu()
 {
 	short sTChoiceDisplayMenu;
 
@@ -162,42 +151,42 @@ void table::displayMenu()
 	}
 }
 
-void table::pushFront()
+void pushFront()
 {
 
 }
 
-void table::pushEnd()
+void pushEnd()
 {
 
 }
 
-void table::pushMiddle()
+void pushMiddle()
 {
 
 }
 
-void table::popFront()
+void popFront()
 {
 
 }
 
-void table::popEnd()
+void popEnd()
 {
 
 }
 
-void table::popMiddle()
+void popMiddle()
 {
 
 }
 
-void table::displayAll()
+void displayAll()
 {
 
 }
 
-void table::displayOne()
+void displayOne()
 {
 
 }
