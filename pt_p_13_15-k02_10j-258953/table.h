@@ -1,7 +1,11 @@
 #pragma once
 class table
 {
+private:
 	int iTElement;
+
+	table();
+	~table();
 
 	void tableMenu();
 
