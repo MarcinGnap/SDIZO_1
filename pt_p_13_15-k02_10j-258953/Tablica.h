@@ -1,6 +1,10 @@
 #pragma once
+#include "table.cpp"
+
 class Tablica
 {
+private:
+
 	short sTChoiceTableMenu;
 
 	Tablica();
@@ -22,4 +26,6 @@ class Tablica
 
 	void displayAll();
 	void displayOne();
+
+    unsigned int getSize();
 };

@@ -12,7 +12,7 @@ Tablica::Tablica()
 
 Tablica::~Tablica()
 {
-	
+	delete *nowaTablica;
 }
 
 void Tablica::tableMenu()
@@ -161,31 +161,36 @@ void Tablica::displayMenu()
 void Tablica::pushFront()
 {
 
+    uiTIndex++;
 }
 
 void Tablica::pushEnd()
 {
 
+    uiTIndex++;
 }
 
 void Tablica::pushMiddle()
 {
 
+    uiTIndex++;
 }
 
 void Tablica::popFront()
 {
 
+    uiTIndex--;
 }
 
 void Tablica::popEnd()
 {
 
+    uiTIndex--;
 }
 
 void Tablica::popMiddle()
 {
-
+    uiTIndex--;
 }
 
 void Tablica::displayAll()
@@ -196,4 +201,9 @@ void Tablica::displayAll()
 void Tablica::displayOne()
 {
 
+}
+
+unsigned int Tablica::getSize()  //tutaj dodać unsigned int uiTindex ?
+{
+    return (uiTIndex + 1);
 }

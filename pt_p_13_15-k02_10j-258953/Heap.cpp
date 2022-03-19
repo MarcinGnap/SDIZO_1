@@ -39,17 +39,19 @@ bool Heap::isEmpty()
 
 void Heap::pushElement()
 {
-    unsigned int iuIndex = getSize() - 1;
+    unsigned int uiIndex = getSize() - 1;
     int iNewElement;
     cout << "Podaj wartosc jaka chcesz dodac do kopca:" << endl;
     cin >> iNewElement;
+
+    iHTab[uiIndex] = iNewElement;
 
     HeapifyUp(uiIndex);
 }
 
 void Heap::popElement()
 {
-
+    iHTab[0] = iHTab[getSize() - 1];
 }
 
 void Heap::HeapifyDown()

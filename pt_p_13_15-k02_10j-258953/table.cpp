@@ -4,7 +4,7 @@ using namespace std;
 
 struct Table
 {
-	unsigned int uiTIndex, uiTSize;
+	unsigned int uiTIndex;
 	int iTData;
-	Table *next;
+    unsigned int *next, *prev;
 };
