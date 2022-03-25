@@ -1,4 +1,6 @@
 #pragma once
+#include "table.cpp"
+
 class Tablica
 {
 public:
@@ -24,4 +26,6 @@ private:
 
 	void displayAll();
 	void displayOne();
+
+	unsigned int getSize();
 };
