@@ -1,16 +1,20 @@
 #pragma once
 #include "list.cpp"
-
+/*
 class Lista
 {
+public:
+
 	short sLChoiceListMenu;
 
 	Lista();
 	~Lista();
 
-	List *findTail(val, head);
+private:
 
 	void listMenu();
+
+	List *findTail(val, head);
 
 	void pushMenu();
 	void popMenu();
@@ -27,3 +31,4 @@ class Lista
 	void displayAll(List *head);
 	void displayOne();
 };
+*/

@@ -123,6 +123,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Heap.cpp" />
     <ClCompile Include="list.cpp" />
     <ClCompile Include="Lista.cpp" />
     <ClCompile Include="mainWindow.cpp" />
@@ -130,6 +131,7 @@
     <ClCompile Include="Tablica.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Heap.h" />
     <ClInclude Include="Lista.h" />
     <ClInclude Include="mainWindow.h" />
     <ClInclude Include="Tablica.h" />

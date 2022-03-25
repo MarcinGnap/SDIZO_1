@@ -1,12 +1,14 @@
 #pragma once
 class Tablica
 {
-	short sTChoiceTableMenu;
+public:
 
 	Tablica();
 	~Tablica();
 
 	void tableMenu();
+
+private:
 
 	void pushMenu();
 	void popMenu();

@@ -1,10 +1,9 @@
 #include "Lista.h"
-#include "list.cpp"
 
 #include <iostream>
 
 using namespace std;
-
+/*
 Lista::Lista()
 {
 	Lista *nowaLista = new Lista;
@@ -201,3 +200,4 @@ void Lista::displayOne()
 {
 
 }
+*/

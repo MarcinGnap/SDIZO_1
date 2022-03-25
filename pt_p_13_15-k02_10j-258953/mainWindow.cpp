@@ -6,7 +6,7 @@ using namespace std;
 
 mainWindow::mainWindow()
 {
-
+	Tablica TablicaNowa;
 }
 
 mainWindow::~mainWindow()

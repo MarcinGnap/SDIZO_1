@@ -7,7 +7,7 @@ using namespace std;
 
 Tablica::Tablica()
 {
-	Table *nowaTablica = new Table;
+	int *nowaTablica = new int[];  //add here loading datas from text file or do it in another place
 }
 
 Tablica::~Tablica()
