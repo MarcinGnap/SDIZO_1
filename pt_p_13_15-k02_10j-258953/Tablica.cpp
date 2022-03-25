@@ -163,36 +163,31 @@ void Tablica::displayMenu()
 void Tablica::pushFront()
 {
 
-    //uiTIndex++;
 }
 
 void Tablica::pushEnd()
 {
 
-    //uiTIndex++;
 }
 
 void Tablica::pushMiddle()
 {
 
-   //uiTIndex++;
 }
 
 void Tablica::popFront()
 {
 
-   // uiTIndex--;
 }
 
 void Tablica::popEnd()
 {
-
-   // uiTIndex--;
+	
 }
 
 void Tablica::popMiddle()
 {
-   // uiTIndex--;
+	
 }
 
 void Tablica::displayAll()
