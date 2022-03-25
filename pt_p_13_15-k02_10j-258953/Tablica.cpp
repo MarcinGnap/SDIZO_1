@@ -7,12 +7,14 @@ using namespace std;
 
 Tablica::Tablica()
 {
-	int *nowaTablica = new int[];  //add here loading datas from text file or do it in another place
+	iTSize = 0;
+	int *nowaTablica = nullptr;  //add here loading datas from text file or do it in another place
+	nowaTablica = new int[iTSize];
 }
 
 Tablica::~Tablica()
 {
-	delete *nowaTablica;
+	//delete *nowaTablica;
 }
 
 void Tablica::tableMenu()
@@ -161,36 +163,36 @@ void Tablica::displayMenu()
 void Tablica::pushFront()
 {
 
-    uiTIndex++;
+    //uiTIndex++;
 }
 
 void Tablica::pushEnd()
 {
 
-    uiTIndex++;
+    //uiTIndex++;
 }
 
 void Tablica::pushMiddle()
 {
 
-    uiTIndex++;
+   //uiTIndex++;
 }
 
 void Tablica::popFront()
 {
 
-    uiTIndex--;
+   // uiTIndex--;
 }
 
 void Tablica::popEnd()
 {
 
-    uiTIndex--;
+   // uiTIndex--;
 }
 
 void Tablica::popMiddle()
 {
-    uiTIndex--;
+   // uiTIndex--;
 }
 
 void Tablica::displayAll()
@@ -205,5 +207,5 @@ void Tablica::displayOne()
 
 unsigned int Tablica::getSize()  //tutaj dodać unsigned int uiTindex ?
 {
-    return (uiTIndex + 1);
+    return (0);
 }

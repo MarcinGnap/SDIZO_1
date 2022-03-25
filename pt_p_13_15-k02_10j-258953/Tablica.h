@@ -4,6 +4,7 @@
 class Tablica
 {
 public:
+	int iTSize;
 
 	Tablica();
 	~Tablica();
@@ -27,5 +28,5 @@ private:
 	void displayAll();
 	void displayOne();
 
-	unsigned int getSize();
+    unsigned int getSize();
 };

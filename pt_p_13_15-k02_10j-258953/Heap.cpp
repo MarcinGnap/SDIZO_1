@@ -2,7 +2,7 @@
 #include <iostream>
 
 using namespace std;
-
+/*
 Heap::Heap() {
 
 }
@@ -68,3 +68,4 @@ void Heap::displayAll()
 {
 
 }
+*/

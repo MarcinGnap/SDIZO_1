@@ -127,7 +127,6 @@
     <ClCompile Include="list.cpp" />
     <ClCompile Include="Lista.cpp" />
     <ClCompile Include="mainWindow.cpp" />
-    <ClCompile Include="table.cpp" />
     <ClCompile Include="Tablica.cpp" />
   </ItemGroup>
   <ItemGroup>
