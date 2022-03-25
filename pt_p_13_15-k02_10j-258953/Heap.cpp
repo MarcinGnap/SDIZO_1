@@ -2,7 +2,7 @@
 #include <iostream>
 
 using namespace std;
-/*
+
 Heap::Heap() {
 
 }
@@ -10,6 +10,48 @@ Heap::Heap() {
 Heap::~Heap()
 {
 
+}
+
+void Heap::heapMenu()
+{
+	short sHChoiceHeapMenu;
+
+	for (;;)
+	{
+		system("CLS");
+
+		cout << "Prosze wybrac:" << endl << "1.Dodanie elementu." << endl << "2.Usuniecie elementu." << endl << "3.Wyswietlenie struktury." << endl << "4.Powrot" << endl;
+		cin >> sHChoiceHeapMenu;
+
+		switch (sHChoiceHeapMenu)
+		{
+		case 1:
+		{
+			pushElement();
+			break;
+		}
+		case 2:
+		{
+			popElement();
+			break;
+		}
+		case 3:
+		{
+			displayAll();
+			break;
+		}
+		case 4:
+		{
+			return;
+			break;
+		}
+		default:
+		{
+			cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
+			break;
+		}
+		}
+	}
 }
 
 int Heap::checkLeft(int i)
@@ -29,7 +71,7 @@ int Heap::checkParent(int i)
 
 unsigned int Heap::getSize()
 {
-	return (sizeof(iHTab) / sizeof(*iHTab));
+	return (0);
 }
 
 bool Heap::isEmpty()
@@ -39,7 +81,7 @@ bool Heap::isEmpty()
 
 void Heap::pushElement()
 {
-	unsigned int uiIndex = getSize() - 1;
+	/*unsigned int uiIndex = getSize() - 1;
 	int iNewElement;
 	cout << "Podaj wartosc jaka chcesz dodac do kopca:" << endl;
 	cin >> iNewElement;
@@ -47,7 +89,7 @@ void Heap::pushElement()
 	iHTab[uiIndex] = iNewElement;
 
 	HeapifyUp(uiIndex);
-}
+*/}
 
 void Heap::popElement()
 {
@@ -68,4 +110,3 @@ void Heap::displayAll()
 {
 
 }
-*/

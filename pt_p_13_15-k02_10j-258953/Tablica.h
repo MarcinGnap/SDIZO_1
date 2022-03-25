@@ -5,6 +5,7 @@ class Tablica
 {
 public:
 	int iTSize;
+	int *newTable = nullptr;
 
 	Tablica();
 	~Tablica();

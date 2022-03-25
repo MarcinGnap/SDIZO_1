@@ -10,9 +10,9 @@ public:
 	Lista();
 	~Lista();
 
-private:
-
 	void listMenu();
+
+private:
 
 	List *findTail(val, head);
 

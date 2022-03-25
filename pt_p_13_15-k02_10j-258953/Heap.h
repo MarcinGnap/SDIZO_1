@@ -9,6 +9,8 @@ public:
 	Heap();
 	~Heap();
 
+	void heapMenu();
+
 private:
 
 	int checkLeft(int i);

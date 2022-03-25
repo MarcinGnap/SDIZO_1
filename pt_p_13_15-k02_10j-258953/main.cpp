@@ -4,9 +4,11 @@ using namespace std;
 
 int main()
 {
-	cout << "Starting..." << endl;
+	cout << "Starting..." << endl << endl;
 
-	mainWindow;
+	mainWindow noweOkno;
+
+	noweOkno.main();
 
 	return 0;
 }
