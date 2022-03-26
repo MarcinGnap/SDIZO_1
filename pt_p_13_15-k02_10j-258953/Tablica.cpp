@@ -54,6 +54,7 @@ void Tablica::tableMenu()
 		{
 			cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
 			getchar();
+			getchar();
 			break;
 		}
 		}
@@ -96,6 +97,7 @@ void Tablica::pushMenu()
 		default:
 		{
 			cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
+			getchar();
 			getchar();
 			break;
 		}
@@ -140,6 +142,7 @@ void Tablica::popMenu()
 		{
 			cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
 			getchar();
+			getchar();
 			break;
 		}
 		}
@@ -177,6 +180,7 @@ void Tablica::displayMenu()
 		default:
 		{
 			cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
+			getchar();
 			getchar();
 			break;
 		}
@@ -235,6 +239,7 @@ void Tablica::pushEnd()
 
 	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
 	getchar();
+	getchar();
 	system("CLS");
 }
 
@@ -266,6 +271,7 @@ void Tablica::pushMiddle()
 
 	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
 	getchar();
+	getchar();
 	system("CLS");
 }
 
@@ -284,6 +290,7 @@ void Tablica::popFront()
 
 	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
 	getchar();
+	getchar();
 	system("CLS");
 }
 
@@ -301,6 +308,7 @@ void Tablica::popEnd()
 	iTSize--;
 
 	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
+	getchar();
 	getchar();
 	system("CLS");
 }
@@ -329,15 +337,23 @@ void Tablica::popMiddle()
 
 	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
 	getchar();
+	getchar();
 	system("CLS");
 }
 
 void Tablica::displayAll()
 {
-	for (int i = 0; i >= iTSize; i++)
+	if (iTSize != 0)
 	{
-		cout << "Element nr " << iTSize + 1 << " = " << newTable[i] << endl;
+		for (int j = 0; j >= iTSize; j++)
+		{
+			cout << "Element nr " << j + 1 << " = " << newTable[j] << endl;
+		}
 	}
+	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
+	getchar();
+	getchar();
+	system("CLS");
 }
 
 void Tablica::displayOne()
@@ -347,6 +363,11 @@ void Tablica::displayOne()
 	cout << "Wybierz element, ktory chcesz wyswietlic (zakladamy ze numeracja zaczyna sie od 1): " << endl;
 	cin >> iTChoiceDisplay;
 	cout << "Element nr " << iTChoiceDisplay << " ma wartosc rowna: " << newTable[iTChoiceDisplay - 1] << endl;
+
+	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
+	getchar();
+	getchar();
+	system("CLS");
 }
 
 unsigned int Tablica::getSize()
