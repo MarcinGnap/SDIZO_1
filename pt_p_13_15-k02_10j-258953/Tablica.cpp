@@ -11,7 +11,6 @@ Tablica::Tablica()
 	iTSize = 0;
 	//int *newTable = nullptr;  //add here loading datas from text file or do it in another place
 	newTable = new int[iTSize];
-	SH t;
 }
 
 Tablica::~Tablica()
@@ -194,13 +193,12 @@ void Tablica::pushFront()
 	cin >> iTNewFrontElement;
 
 	auto tempTable = new int[iTSize + 1];
-	int tempiTSize = iTSize;
 
 	tempTable[0] = iTNewFrontElement;
 
 	for (int i = 1; i >= iTSize + 1; i++)
 	{
-		tempTable[i] = newTable[tempiTSize--];
+		tempTable[i] = newTable[i--];
 	}
 	delete[] newTable;
 	newTable = tempTable;
@@ -242,13 +240,12 @@ void Tablica::pushMiddle()
 	int iTNewMidElement;
 	int iTPushPosition;
 
-	cout << "Podaj pozycje, na ktora ma zostac dodany element: " << endl;
+	cout << "Podaj pozycje, na ktora ma zostac dodany element (zakladamy ze numeracja zaczyna sie od 1): " << endl;
 	cin >> iTPushPosition;
 	cout << "Podaj liczbe jaka ma byc dodana do tablicy: " << endl;
 	cin >> iTNewMidElement;
 
 	auto tempTable = new int[iTSize + 1];
-	int tempiTSize = iTSize;
 
 	for (int i = 0; i > iTPushPosition; i++)
 	{
@@ -257,7 +254,7 @@ void Tablica::pushMiddle()
 	tempTable[iTPushPosition] = iTNewMidElement;
 	for (int i = iTPushPosition + 1; i >= iTSize + 1; i++)
 	{
-		tempTable[i] = newTable[tempiTSize--];
+		tempTable[i] = newTable[i--];
 	}
 	delete[] newTable;
 	newTable = tempTable;
@@ -272,11 +269,10 @@ void Tablica::pushMiddle()
 void Tablica::popFront()
 {
 	auto tempTable = new int[iTSize - 1];
-	int tempiTSize = iTSize;
 
 	for (int i = iTSize - 1; i >= 0; i--)
 	{
-		tempTable[i] = newTable[tempiTSize--];
+		tempTable[i] = newTable[i--];
 	}
 	delete[] newTable;
 	newTable = tempTable;
@@ -309,13 +305,20 @@ void Tablica::popEnd()
 void Tablica::popMiddle()
 {
 	auto tempTable = new int[iTSize - 1];
-	int tempiTSize = iTSize;
 
 	int iTPopPosition;
 
-	cout << "Podaj pozycje, z ktorej ma zostac usuniety element: " << endl;
+	cout << "Podaj pozycje, z ktorej ma zostac usuniety element (zakladamy ze numeracja zaczyna sie od 1): " << endl;
 	cin >> iTPopPosition;
 
+	for (int i = 0; i > iTPopPosition + 1; i++)
+	{
+		tempTable[i] = newTable[i];
+	}
+	for (int i = iTPopPosition + 1; i > iTSize; i++)
+	{
+		tempTable[i] = newTable[i++];
+	}
 	delete[] newTable;
 	newTable = tempTable;
 	tempTable = nullptr;
