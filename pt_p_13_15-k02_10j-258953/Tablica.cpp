@@ -1,4 +1,5 @@
 #include "Tablica.h"
+#include "SH.h"
 #include "table.cpp"
 
 #include <iostream>
@@ -53,6 +54,7 @@ void Tablica::tableMenu()
 		default:
 		{
 			cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
+			getchar();
 			break;
 		}
 		}
@@ -95,6 +97,7 @@ void Tablica::pushMenu()
 		default:
 		{
 			cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
+			getchar();
 			break;
 		}
 		}
@@ -137,6 +140,7 @@ void Tablica::popMenu()
 		default:
 		{
 			cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
+			getchar();
 			break;
 		}
 		}
@@ -174,6 +178,7 @@ void Tablica::displayMenu()
 		default:
 		{
 			cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
+			getchar();
 			break;
 		}
 		}

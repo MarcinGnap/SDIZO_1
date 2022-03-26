@@ -1,4 +1,6 @@
 #include "Heap.h"
+#include "SH.h"
+
 #include <iostream>
 
 using namespace std;

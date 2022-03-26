@@ -1,4 +1,5 @@
 #include "mainWindow.h"
+#include "SH.h"
 
 #include <iostream>
 
@@ -16,6 +17,7 @@ mainWindow::~mainWindow()
 
 void mainWindow::main()
 {
+	SH h;
 	Tablica nowaTablica;
 	//Lista NowaLista;
 	Heap nowyKopiec;
@@ -59,7 +61,7 @@ void mainWindow::main()
 		}
 		default:
 		{
-			cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
+			h.outOfChoice();
 			break;
 		}
 		}
