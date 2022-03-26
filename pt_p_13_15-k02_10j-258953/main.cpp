@@ -11,7 +11,7 @@ int main()
 
 	mainWindow noweOkno;
 
-	noweOkno.main();
+	noweOkno.mainMenu();
 
 	return 0;
 }

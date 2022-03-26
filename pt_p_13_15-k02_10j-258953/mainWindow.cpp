@@ -15,9 +15,8 @@ mainWindow::~mainWindow()
 
 }
 
-void mainWindow::main()
+void mainWindow::mainMenu()
 {
-	SH h;
 	Tablica nowaTablica;
 	//Lista NowaLista;
 	Heap nowyKopiec;
@@ -27,7 +26,7 @@ void mainWindow::main()
 
 	for (;;) 
 	{
-		h.cls();
+		system("CLS");
 
 		cout << "Prosze wybrac:" << endl << "1.Tablica." << endl << "2.Lista dwukierunkowa." << endl << "3.Kopiec binarny(maksymalny)." << endl << "4.Drzewo czerwono-czarne" << endl << "5.Wyjscie." << endl;
 		cin >> sMChoice;
@@ -61,10 +60,10 @@ void mainWindow::main()
 		}
 		default:
 		{
-			h.outOfChoice();
+			cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
+			getchar();
 			break;
 		}
 		}
 	}
-
 }

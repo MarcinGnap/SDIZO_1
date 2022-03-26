@@ -9,5 +9,5 @@ public:
 	mainWindow();
 	~mainWindow();
 
-	void main();
+	void mainMenu();
 };

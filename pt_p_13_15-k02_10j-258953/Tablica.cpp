@@ -9,7 +9,6 @@ using namespace std;
 Tablica::Tablica()
 {
 	iTSize = 0;
-	//int *newTable = nullptr;  //add here loading datas from text file or do it in another place
 	newTable = new int[iTSize];
 }
 
@@ -191,21 +190,25 @@ void Tablica::pushFront()
 	
 	cout << "Podaj liczbe jaka ma byc dodana do tablicy: " << endl;
 	cin >> iTNewFrontElement;
-
+	
+	int iTTempSize = iTSize + 1;
 	auto tempTable = new int[iTSize + 1];
-
+	
 	tempTable[0] = iTNewFrontElement;
-
-	for (int i = 1; i >= iTSize + 1; i++)
+	if (iTSize != 0)
 	{
-		tempTable[i] = newTable[i--];
+		for (int i = 1; i >= iTTempSize; i++)
+		{
+			tempTable[i] = newTable[i--];
+		}
 	}
 	delete[] newTable;
 	newTable = tempTable;
 	tempTable = nullptr;
 	iTSize++;
-
+	
 	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
+	getchar();
 	getchar();
 	system("CLS");
 }
