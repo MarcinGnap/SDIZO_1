@@ -27,7 +27,7 @@ void mainWindow::main()
 
 	for (;;) 
 	{
-		system ("CLS");
+		h.cls();
 
 		cout << "Prosze wybrac:" << endl << "1.Tablica." << endl << "2.Lista dwukierunkowa." << endl << "3.Kopiec binarny(maksymalny)." << endl << "4.Drzewo czerwono-czarne" << endl << "5.Wyjscie." << endl;
 		cin >> sMChoice;

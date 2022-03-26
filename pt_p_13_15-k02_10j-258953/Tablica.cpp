@@ -11,6 +11,7 @@ Tablica::Tablica()
 	iTSize = 0;
 	//int *newTable = nullptr;  //add here loading datas from text file or do it in another place
 	newTable = new int[iTSize];
+	SH t;
 }
 
 Tablica::~Tablica()
@@ -187,17 +188,85 @@ void Tablica::displayMenu()
 
 void Tablica::pushFront()
 {
-	 
+	int iTNewFrontElement;
+	
+	cout << "Podaj liczbe jaka ma byc dodana do tablicy: " << endl;
+	cin >> iTNewFrontElement;
+
+	auto tempTable = new int[iTSize + 1];
+	int tempiTSize = iTSize;
+
+	tempTable[0] = iTNewFrontElement;
+
+	for (int i = 1; i >= iTSize + 1; i++)
+	{
+		tempTable[i] = newTable[tempiTSize--];
+	}
+	delete[] newTable;
+	newTable = tempTable;
+	tempTable = nullptr;
+	iTSize++;
+
+	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
+	getchar();
+	system("CLS");
 }
 
 void Tablica::pushEnd()
 {
+	int iTNewEndElement;
 
+	cout << "Podaj liczbe jaka ma byc dodana do tablicy: " << endl;
+	cin >> iTNewEndElement;
+
+	auto tempTable = new int[iTSize + 1];
+
+	tempTable[iTSize + 1] = iTNewEndElement;
+
+	for (int i = 0; i > iTSize; i++)
+	{
+		tempTable[i] = newTable[i];
+	}
+	delete[] newTable;
+	newTable = tempTable;
+	tempTable = nullptr;
+	iTSize++;
+
+	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
+	getchar();
+	system("CLS");
 }
 
 void Tablica::pushMiddle()
 {
+	int iTNewMidElement;
+	int iTPushPosition;
 
+	cout << "Podaj pozycje, na ktora ma zostac dodany element: " << endl;
+	cin >> iTPushPosition;
+	cout << "Podaj liczbe jaka ma byc dodana do tablicy: " << endl;
+	cin >> iTNewMidElement;
+
+	auto tempTable = new int[iTSize + 1];
+	int tempiTSize = iTSize;
+
+	for (int i = 0; i > iTPushPosition; i++)
+	{
+		tempTable[i] = newTable[i];
+	}
+	tempTable[iTPushPosition] = iTNewMidElement;
+	for (int i = iTPushPosition + 1; i >= iTSize + 1; i++)
+	{
+		tempTable[i] = newTable[tempiTSize--];
+	}
+	delete[] newTable;
+	newTable = tempTable;
+	tempTable = nullptr;
+	iTSize++;
+
+	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
+	getchar();
+	system("CLS");
 }
 
 void Tablica::popFront()
@@ -213,6 +282,10 @@ void Tablica::popFront()
 	newTable = tempTable;
 	tempTable = nullptr;
 	iTSize--;
+
+	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
+	getchar();
+	system("CLS");
 }
 
 void Tablica::popEnd()
@@ -227,11 +300,30 @@ void Tablica::popEnd()
 	newTable = tempTable;
 	tempTable = nullptr;
 	iTSize--;
+
+	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
+	getchar();
+	system("CLS");
 }
 
 void Tablica::popMiddle()
 {
-	
+	auto tempTable = new int[iTSize - 1];
+	int tempiTSize = iTSize;
+
+	int iTPopPosition;
+
+	cout << "Podaj pozycje, z ktorej ma zostac usuniety element: " << endl;
+	cin >> iTPopPosition;
+
+	delete[] newTable;
+	newTable = tempTable;
+	tempTable = nullptr;
+	iTSize--;
+
+	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
+	getchar();
+	system("CLS");
 }
 
 void Tablica::displayAll()
