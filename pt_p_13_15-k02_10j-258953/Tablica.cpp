@@ -201,12 +201,12 @@ void Tablica::pushFront()
 	tempTable[0] = iTNewFrontElement;
 	if (iTSize != 0)
 	{
-		for (int i = 1; i >= iTTempSize; i++)
+		for (int i = iTTempSize; i >= 1; i--)
 		{
-			tempTable[i] = newTable[i--];
+			tempTable[i] = newTable[i - 1];
 		}
 	}
-	delete[] newTable;
+	delete [] newTable;
 	newTable = tempTable;
 	tempTable = nullptr;
 	iTSize++;
@@ -345,10 +345,14 @@ void Tablica::displayAll()
 {
 	if (iTSize != 0)
 	{
-		for (int j = 0; j >= iTSize; j++)
+		for (int i = 0; i >= iTSize; i++)
 		{
-			cout << "Element nr " << j + 1 << " = " << newTable[j] << endl;
+			cout << "Element nr " << i + 1 << " = " << newTable[i] << endl;
 		}
+	}
+	else
+	{
+		cout << "Struktura nie ma zawartosci..." << endl;
 	}
 	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
 	getchar();
