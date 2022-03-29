@@ -28,6 +28,4 @@ private:
 
 	void displayAll();
 	void displayOne();
-
-    unsigned int getSize();
 };

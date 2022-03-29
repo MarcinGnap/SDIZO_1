@@ -3,6 +3,7 @@
 #include "table.cpp"
 
 #include <iostream>
+#include <stdlib.h>
 
 using namespace std;
 
@@ -226,13 +227,15 @@ void Tablica::pushEnd()
 
 	auto tempTable = new int[iTSize + 1];
 
-	tempTable[iTSize + 1] = iTNewEndElement;
-
-	for (int i = 0; i > iTSize; i++)
+	tempTable[iTSize] = iTNewEndElement;
+	if (iTSize != 0)
 	{
-		tempTable[i] = newTable[i];
+		for (int i = 0; i < iTSize; i++)
+		{
+			tempTable[i] = newTable[i];
+		}
 	}
-	delete[] newTable;
+	delete [] newTable;
 	newTable = tempTable;
 	tempTable = nullptr;
 	iTSize++;
@@ -250,25 +253,32 @@ void Tablica::pushMiddle()
 
 	cout << "Podaj pozycje, na ktora ma zostac dodany element (zakladamy ze numeracja zaczyna sie od 1): " << endl;
 	cin >> iTPushPosition;
-	cout << "Podaj liczbe jaka ma byc dodana do tablicy: " << endl;
-	cin >> iTNewMidElement;
+	int iTRightPush = iTPushPosition - 1;
 
-	auto tempTable = new int[iTSize + 1];
-
-	for (int i = 0; i > iTPushPosition; i++)
+	if (iTRightPush >= 0 && iTRightPush <= iTSize)
 	{
-		tempTable[i] = newTable[i];
-	}
-	tempTable[iTPushPosition] = iTNewMidElement;
-	for (int i = iTPushPosition + 1; i >= iTSize + 1; i++)
-	{
-		tempTable[i] = newTable[i--];
-	}
-	delete[] newTable;
-	newTable = tempTable;
-	tempTable = nullptr;
-	iTSize++;
+		cout << "Podaj liczbe jaka ma byc dodana do tablicy: " << endl;
+		cin >> iTNewMidElement;
 
+		auto tempTable = new int[iTSize + 1];
+		tempTable[iTRightPush] = iTNewMidElement;
+		for (int i = 0; i < iTRightPush; i++)
+		{
+			tempTable[i] = newTable[i];
+		}
+		for (int i = iTRightPush + 1; i < iTSize + 1; i++)
+		{
+			tempTable[i] = newTable[i-1];
+		}
+		delete [] newTable;
+		newTable = tempTable;
+		tempTable = nullptr;
+		iTSize++;
+	}
+	else
+	{
+		cout << "Wybrana pozycja znajduje sie poza tablica..." << endl << "Wybierz inna pozycje..." << endl;
+	}
 	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
 	getchar();
 	getchar();
@@ -277,16 +287,23 @@ void Tablica::pushMiddle()
 
 void Tablica::popFront()
 {
-	auto tempTable = new int[iTSize - 1];
-
-	for (int i = iTSize - 1; i >= 0; i--)
+	if (iTSize != 0)
 	{
-		tempTable[i] = newTable[i--];
+		auto tempTable = new int[iTSize - 1];
+
+		for (int i = iTSize - 1; i >= 0; i--)
+		{
+			tempTable[i] = newTable[i + 1];
+		}
+		delete [] newTable;
+		newTable = tempTable;
+		tempTable = nullptr;
+		iTSize--;
 	}
-	delete[] newTable;
-	newTable = tempTable;
-	tempTable = nullptr;
-	iTSize--;
+	else
+	{
+		cout << "Tablica nie ma elementow do usuniecia..." << endl;
+	}
 
 	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
 	getchar();
@@ -296,17 +313,23 @@ void Tablica::popFront()
 
 void Tablica::popEnd()
 {
-	auto tempTable = new int[iTSize - 1];
-
-	for (int i = 0; i > iTSize; i++)
+	if (iTSize != 0)
 	{
-		tempTable[i] = newTable[i];
-	}
-	delete[] newTable;
-	newTable = tempTable;
-	tempTable = nullptr;
-	iTSize--;
+		auto tempTable = new int[iTSize - 1];
 
+		for (int i = 0; i < iTSize - 1; i++)
+		{
+			tempTable[i] = newTable[i];
+		}
+		delete [] newTable;
+		newTable = tempTable;
+		tempTable = nullptr;
+		iTSize--;
+	}
+	else
+	{
+		cout << "Tablica nie ma elementow do usuniecia..." << endl;
+	}
 	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
 	getchar();
 	getchar();
@@ -315,26 +338,33 @@ void Tablica::popEnd()
 
 void Tablica::popMiddle()
 {
-	auto tempTable = new int[iTSize - 1];
-
 	int iTPopPosition;
 
 	cout << "Podaj pozycje, z ktorej ma zostac usuniety element (zakladamy ze numeracja zaczyna sie od 1): " << endl;
 	cin >> iTPopPosition;
+	int iTRightPop = iTPopPosition - 1;
 
-	for (int i = 0; i > iTPopPosition + 1; i++)
+	if (iTRightPop >= 0 && iTRightPop <= iTSize)
 	{
-		tempTable[i] = newTable[i];
-	}
-	for (int i = iTPopPosition + 1; i > iTSize; i++)
-	{
-		tempTable[i] = newTable[i++];
-	}
-	delete[] newTable;
-	newTable = tempTable;
-	tempTable = nullptr;
-	iTSize--;
+		auto tempTable = new int[iTSize - 1];
 
+		for (int i = 0; i < iTPopPosition + 1; i++)
+		{
+			tempTable[i] = newTable[i];
+		}
+		for (int i = iTPopPosition + 1; i < iTSize; i++)
+		{
+			tempTable[i] = newTable[i+1];
+		}
+		delete [] newTable;
+		newTable = tempTable;
+		tempTable = nullptr;
+		iTSize--;
+	}
+	else
+	{
+		cout << "Wybrana pozycja znajduje sie poza tablica..." << endl << "Wybierz inna pozycje..." << endl;
+	}
 	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
 	getchar();
 	getchar();
@@ -345,7 +375,7 @@ void Tablica::displayAll()
 {
 	if (iTSize != 0)
 	{
-		for (int i = 0; i >= iTSize; i++)
+		for (int i = 0; i < iTSize; i++)
 		{
 			cout << "Element nr " << i + 1 << " = " << newTable[i] << endl;
 		}
@@ -362,19 +392,28 @@ void Tablica::displayAll()
 
 void Tablica::displayOne()
 {
-	int iTChoiceDisplay;
+	if (iTSize != 0)
+	{
+		int iTChoiceDisplay;
 
-	cout << "Wybierz element, ktory chcesz wyswietlic (zakladamy ze numeracja zaczyna sie od 1): " << endl;
-	cin >> iTChoiceDisplay;
-	cout << "Element nr " << iTChoiceDisplay << " ma wartosc rowna: " << newTable[iTChoiceDisplay - 1] << endl;
+		cout << "Wybierz element, ktory chcesz wyswietlic (zakladamy ze numeracja zaczyna sie od 1): " << endl;
+		cin >> iTChoiceDisplay;
 
+		if (iTChoiceDisplay >= 0 && iTChoiceDisplay < iTSize)
+		{
+			cout << "Element nr " << iTChoiceDisplay << " ma wartosc rowna: " << newTable[iTChoiceDisplay - 1] << endl;
+		}
+		else
+		{
+			cout << "Wybranego elementu nie ma w strukturze." << endl;
+		}
+	}
+	else
+	{
+		cout << "Struktura nie ma zawartosci..." << endl;
+	}
 	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
 	getchar();
 	getchar();
 	system("CLS");
-}
-
-unsigned int Tablica::getSize()
-{
-    return (iTSize);
 }

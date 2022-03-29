@@ -2,6 +2,7 @@
 #include "SH.h"
 
 #include <iostream>
+#include <stdlib.h>
 
 using namespace std;
 
