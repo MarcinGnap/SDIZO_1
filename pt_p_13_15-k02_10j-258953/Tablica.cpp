@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <fstream>
 #include <string>
+#include <time.h>
 
 using namespace std;
 
@@ -27,7 +28,7 @@ void Tablica::tableMenu()
 	{
 		system("CLS");
 
-		cout << "Prosze wybrac:" << endl << "1.Menu dodawania." << endl << "2.Menu odejmowania." << endl << "3.Menu wyswietlania." << endl << "4.Powrot" << endl;
+		cout << "Prosze wybrac:" << endl << "1.Menu dodawania." << endl << "2.Menu odejmowania." << endl << "3.Menu wyswietlania." << endl << "4.Menu pomiarow i losowania elementow." << endl << "5.Powrot" << endl;
 		cin >> sTChoiceTableMenu;
 
 		switch (sTChoiceTableMenu)
@@ -48,6 +49,11 @@ void Tablica::tableMenu()
 			break;
 		}
 		case 4:
+		{
+			testMenu();
+			break;
+		}
+		case 5:
 		{
 			return;
 			break;
@@ -71,7 +77,7 @@ void Tablica::pushMenu()
 	{
 		system("CLS");
 
-		cout << "Prosze wybrac:" << endl << "1.Dodanie na poczatek struktury." << endl << "2.Dodanie na koniec struktury." << endl << "3.Dodanie w okreslonie miejsce w strukturze." << endl << "4.Wczytanie danych z pliku tekstowego do struktury." << endl << "5.Powrot" << endl;
+		cout << "Prosze wybrac:" << endl << "1.Dodanie na poczatek struktury." << endl << "2.Dodanie na koniec struktury." << endl << "3.Dodanie w okreslonie miejsce w strukturze." << endl << "4.Wczytanie danych z pliku tekstowego do struktury." << endl << "5.Wylosowanie okreslonej liczby elementow do struktury." << endl << "6.Powrot" << endl;
 		cin >> sTChoicePushMenu;
 
 		switch (sTChoicePushMenu)
@@ -97,6 +103,11 @@ void Tablica::pushMenu()
 			break;
 		}
 		case 5:
+		{
+			generateElements();
+			break;
+		}
+		case 6:
 		{
 			return;
 			break;
@@ -182,6 +193,45 @@ void Tablica::displayMenu()
 		case 2:
 		{
 			displayOne();
+			break;
+		}
+		case 3:
+		{
+			return;
+			break;
+		}
+		default:
+		{
+			cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
+			getchar();
+			getchar();
+			break;
+		}
+		}
+	}
+}
+
+void Tablica::testMenu()
+{
+	short sTChoiceTestMenu;
+
+	for (;;)
+	{
+		system("CLS");
+
+		cout << "Prosze wybrac:" << endl;
+		cin >> sTChoiceTestMenu;
+
+		switch (sTChoiceTestMenu)
+		{
+		case 1:
+		{
+			
+			break;
+		}
+		case 2:
+		{
+			
 			break;
 		}
 		case 3:
@@ -341,6 +391,32 @@ void Tablica::readFromFileT()
 		getchar();
 		system("CLS");
 	}
+}
+
+void Tablica::generateElements()
+{
+	int iTNumberOfGen;
+	cout << "Ile elementow ma zostac wygenerowanych?" << endl;
+	cin >> iTNumberOfGen;
+
+	int iTSize = iTNumberOfGen;
+	auto tempTable = new int[iTSize];
+
+	srand(time(0));
+
+	for (int i = 0; i < iTNumberOfGen; i++)
+	{
+		int iTGenerated = rand();
+		tempTable[i] = iTGenerated;
+	}
+	delete[] newTable;
+	newTable = tempTable;
+	tempTable = nullptr;
+
+	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
+	getchar();
+	getchar();
+	system("CLS");
 }
 
 void Tablica::popFront()

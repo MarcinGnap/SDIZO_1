@@ -17,11 +17,13 @@ private:
 	void pushMenu();
 	void popMenu();
 	void displayMenu();
+	void testMenu();
 
 	void pushFront();
 	void pushEnd();
 	void pushMiddle();
 	void readFromFileT();
+	void generateElements();
 
 	void popFront();
 	void popEnd();
