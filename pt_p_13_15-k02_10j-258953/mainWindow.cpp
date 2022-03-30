@@ -1,5 +1,4 @@
 #include "mainWindow.h"
-#include "SH.h"
 
 #include <iostream>
 #include <stdlib.h>

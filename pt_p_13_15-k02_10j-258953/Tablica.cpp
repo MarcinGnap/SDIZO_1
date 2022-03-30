@@ -1,5 +1,4 @@
 #include "Tablica.h"
-#include "SH.h"
 #include "table.cpp"
 
 #include <iostream>
@@ -94,9 +93,6 @@ void Tablica::pushMenu()
 		}
 		case 4:
 		{
-			cout << "tada" << endl;
-			getchar();
-			getchar();
 			readFromFileT();
 			break;
 		}
@@ -302,15 +298,38 @@ void Tablica::pushMiddle()
 
 void Tablica::readFromFileT()
 {
-	cout << "przed" << endl;
-	getchar();
-	getchar();
-	system("CLS");
-
-	ifstream ifTFile("dane.txt", ifstream::in);
+	ifstream ifTFile("dane.txt", ios::in);
 	if (ifTFile.good())
 	{
 		cout << "Plik pomyslnie otwarto..." << endl;
+		getchar();
+		getchar();
+		
+		string sTLineCountBuffer;
+		getline(ifTFile, sTLineCountBuffer);
+		int iTLineCount = stoi(sTLineCountBuffer);
+		iTSize = iTLineCount;
+		cout << "Ilosc elementow przekazanych do struktury: " << iTLineCount << endl;
+		
+		auto tempTable = new int[iTSize];
+
+		for (int i = 1; i <= iTLineCount; i++)
+		{
+			string sTLineValueBuffer;
+			getline(ifTFile, sTLineValueBuffer);
+			
+			int iTLineValue = stoi(sTLineValueBuffer);
+
+			tempTable[i-1] = iTLineValue;
+		}
+
+		delete[] newTable;
+		newTable = tempTable;
+		tempTable = nullptr;
+
+		ifTFile.close();
+
+		cout << "Operacja wykonana..." << endl;
 		getchar();
 		getchar();
 		system("CLS");
@@ -322,11 +341,6 @@ void Tablica::readFromFileT()
 		getchar();
 		system("CLS");
 	}
-
-	cout << "po" << endl;
-	getchar();
-	getchar();
-	system("CLS");
 }
 
 void Tablica::popFront()
