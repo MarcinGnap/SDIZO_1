@@ -4,6 +4,8 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include <fstream>
+#include <string>
 
 using namespace std;
 
@@ -70,7 +72,7 @@ void Tablica::pushMenu()
 	{
 		system("CLS");
 
-		cout << "Prosze wybrac:" << endl << "1.Dodanie na poczatek struktury." << endl << "2.Dodanie na koniec struktury." << endl << "3.Dodanie w okreslonie miejsce w strukturze." << endl << "4.Powrot" << endl;
+		cout << "Prosze wybrac:" << endl << "1.Dodanie na poczatek struktury." << endl << "2.Dodanie na koniec struktury." << endl << "3.Dodanie w okreslonie miejsce w strukturze." << endl << "4.Wczytanie danych z pliku tekstowego do struktury." << endl << "5.Powrot" << endl;
 		cin >> sTChoicePushMenu;
 
 		switch (sTChoicePushMenu)
@@ -91,6 +93,14 @@ void Tablica::pushMenu()
 			break;
 		}
 		case 4:
+		{
+			cout << "tada" << endl;
+			getchar();
+			getchar();
+			readFromFileT();
+			break;
+		}
+		case 5:
 		{
 			return;
 			break;
@@ -114,7 +124,7 @@ void Tablica::popMenu()
 	{
 		system("CLS");
 
-		cout << "Prosze wybrac:" << endl << "1.Usuniecie elementu z poczatku struktury." << endl << "2.Usuniecie elementu z konca struktury." << endl << "3.Usuniecie elementu z okreslonego miejsca w struktury." << endl << "4.Powrot" << endl;
+		cout << "Prosze wybrac:" << endl << "1.Usuniecie elementu z poczatku struktury." << endl << "2.Usuniecie elementu z konca struktury." << endl << "3.Usuniecie elementu z okreslonego miejsca w struktury." << endl << "4.Usuniecie wszystkich elementow ze struktury." << endl << "5.Powrot" << endl;
 		cin >> sTChoicePopMenu;
 
 		switch (sTChoicePopMenu)
@@ -135,6 +145,11 @@ void Tablica::popMenu()
 			break;
 		}
 		case 4:
+		{
+			clearAllT();
+			break;
+		}
+		case 5:
 		{
 			return;
 			break;
@@ -285,6 +300,35 @@ void Tablica::pushMiddle()
 	system("CLS");
 }
 
+void Tablica::readFromFileT()
+{
+	cout << "przed" << endl;
+	getchar();
+	getchar();
+	system("CLS");
+
+	ifstream ifTFile("dane.txt", ifstream::in);
+	if (ifTFile.good())
+	{
+		cout << "Plik pomyslnie otwarto..." << endl;
+		getchar();
+		getchar();
+		system("CLS");
+	}
+	else
+	{
+		cout << "Nie udalo sie otworzyc pliku..." << endl;
+		getchar();
+		getchar();
+		system("CLS");
+	}
+
+	cout << "po" << endl;
+	getchar();
+	getchar();
+	system("CLS");
+}
+
 void Tablica::popFront()
 {
 	if (iTSize != 0)
@@ -365,6 +409,24 @@ void Tablica::popMiddle()
 	{
 		cout << "Wybrana pozycja znajduje sie poza tablica..." << endl << "Wybierz inna pozycje..." << endl;
 	}
+	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
+	getchar();
+	getchar();
+	system("CLS");
+}
+
+void Tablica::clearAllT()
+{
+	if (iTSize != 0)
+	{
+		delete [] newTable;
+		iTSize = 0;
+	}
+	else
+	{
+		cout << "Tablica nie ma elementow do usuniecia..." << endl;
+	}
+
 	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
 	getchar();
 	getchar();

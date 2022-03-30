@@ -21,10 +21,12 @@ private:
 	void pushFront();
 	void pushEnd();
 	void pushMiddle();
+	void readFromFileT();
 
 	void popFront();
 	void popEnd();
 	void popMiddle();
+	void clearAllT();
 
 	void displayAll();
 	void displayOne();
