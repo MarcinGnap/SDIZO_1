@@ -344,15 +344,15 @@ void Tablica::popMiddle()
 	cin >> iTPopPosition;
 	int iTRightPop = iTPopPosition - 1;
 
-	if (iTRightPop >= 0 && iTRightPop <= iTSize)
+	if (iTRightPop >= 0 && iTRightPop < iTSize)
 	{
 		auto tempTable = new int[iTSize - 1];
 
-		for (int i = 0; i < iTPopPosition + 1; i++)
+		for (int i = 0; i < iTRightPop; i++)
 		{
 			tempTable[i] = newTable[i];
 		}
-		for (int i = iTPopPosition + 1; i < iTSize; i++)
+		for (int i = iTRightPop; i < iTSize; i++)
 		{
 			tempTable[i] = newTable[i+1];
 		}
