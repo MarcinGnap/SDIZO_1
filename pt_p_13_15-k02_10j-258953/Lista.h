@@ -1,6 +1,7 @@
 #pragma once
+#include "timeMeasurement.h"
 
-/*
+
 class Lista
 {
 public:
@@ -14,13 +15,14 @@ public:
 
 private:
 
-	List *findTail(val, head);
+	int iLData;
+	Lista *next, *prev;
 
 	void pushMenu();
 	void popMenu();
-	void displayMenu(List *head);
+	void displayMenu();
 
-	void pushFront();
+	void pushFront(Lista &*head);
 	void pushEnd();
 	void pushMiddle();
 
@@ -28,7 +30,6 @@ private:
 	void popEnd();
 	void popMiddle();
 
-	void displayAll(List *head);
+	void displayAll(Lista *head);
 	void displayOne();
 };
-*/

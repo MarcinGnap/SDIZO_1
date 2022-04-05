@@ -1,8 +1,6 @@
 #pragma once
 #include "timeMeasurement.h"
 
-#include <chrono>
-
 class Tablica
 {
 public:

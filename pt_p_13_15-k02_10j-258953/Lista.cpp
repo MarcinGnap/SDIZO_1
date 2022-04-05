@@ -1,9 +1,15 @@
 #include "Lista.h"
 
 #include <iostream>
+#include <stdlib.h>
+#include <fstream>
+#include <string>
+#include <time.h>
+#include <chrono>
+#include <ratio>
 
 using namespace std;
-/*
+
 Lista::Lista()
 {
 	Lista *nowaLista = new Lista;
@@ -35,7 +41,7 @@ void Lista::listMenu()
 	}
 	case 3:
 	{
-		void displayMenu(List *head);
+		void displayMenu();
 		break;
 	}
 	case 4:
@@ -125,7 +131,7 @@ void Lista::popMenu()
 	}
 }
 
-void Lista::displayMenu(List *head)
+void Lista::displayMenu()
 {
 	short sLChoiceDisplayMenu;
 
@@ -136,7 +142,7 @@ void Lista::displayMenu(List *head)
 	{
 	case 1:
 	{
-		void displayAll(List *head);
+		void displayAll();
 		break;
 	}
 	case 2:
@@ -157,9 +163,11 @@ void Lista::displayMenu(List *head)
 	}
 }
 
-void Lista::pushFront()
+void Lista::pushFront(Lista &*head)
 {
-
+	Lista *p = new Lista;
+	p->next = head;
+	p->iLData
 }
 
 void Lista::pushEnd()
@@ -187,7 +195,7 @@ void Lista::popMiddle()
 
 }
 
-void Lista::displayAll(List *head)
+void Lista::displayAll(Lista *head)
 {
 	while (head != NULL)
 	{
@@ -200,4 +208,3 @@ void Lista::displayOne()
 {
 
 }
-*/
