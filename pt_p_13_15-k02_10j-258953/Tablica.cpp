@@ -1,11 +1,14 @@
 #include "Tablica.h"
 #include "table.cpp"
+#include "timeMeasurement.h"
 
 #include <iostream>
 #include <stdlib.h>
 #include <fstream>
 #include <string>
 #include <time.h>
+#include <chrono>
+#include <ratio>
 
 using namespace std;
 
@@ -399,8 +402,7 @@ void Tablica::generateElements()
 	cout << "Ile elementow ma zostac wygenerowanych?" << endl;
 	cin >> iTNumberOfGen;
 
-	int iTSize = iTNumberOfGen;
-	auto tempTable = new int[iTSize];
+	auto tempTable = new int[iTNumberOfGen];
 
 	srand(time(0));
 
@@ -412,6 +414,7 @@ void Tablica::generateElements()
 	delete[] newTable;
 	newTable = tempTable;
 	tempTable = nullptr;
+	iTSize = iTNumberOfGen;
 
 	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
 	getchar();

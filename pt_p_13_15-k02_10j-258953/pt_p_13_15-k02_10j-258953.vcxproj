@@ -124,17 +124,18 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Heap.cpp" />
-    <ClCompile Include="list.cpp" />
     <ClCompile Include="Lista.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="mainWindow.cpp" />
     <ClCompile Include="Tablica.cpp" />
+    <ClCompile Include="timeMeasurement.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Heap.h" />
     <ClInclude Include="Lista.h" />
     <ClInclude Include="mainWindow.h" />
     <ClInclude Include="Tablica.h" />
+    <ClInclude Include="timeMeasurement.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
