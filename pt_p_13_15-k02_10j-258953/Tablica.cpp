@@ -1,6 +1,4 @@
 #include "Tablica.h"
-#include "table.cpp"
-#include "timeMeasurement.h"
 
 #include <iostream>
 #include <stdlib.h>
@@ -260,6 +258,8 @@ void Tablica::pushFront()
 	cout << "Podaj liczbe jaka ma byc dodana do tablicy: " << endl;
 	cin >> iTNewFrontElement;
 	
+	auto o1 = chrono::high_resolution_clock::now();
+
 	int iTTempSize = iTSize + 1;
 	auto tempTable = new int[iTSize + 1];
 	
@@ -275,6 +275,9 @@ void Tablica::pushFront()
 	newTable = tempTable;
 	tempTable = nullptr;
 	iTSize++;
+	auto o2 = chrono::high_resolution_clock::now();
+
+	outcomeTable.tMOutcome(o1, o2);
 	
 	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
 	getchar();
@@ -288,6 +291,8 @@ void Tablica::pushEnd()
 
 	cout << "Podaj liczbe jaka ma byc dodana do tablicy: " << endl;
 	cin >> iTNewEndElement;
+
+	auto o1 = chrono::high_resolution_clock::now();
 
 	auto tempTable = new int[iTSize + 1];
 
@@ -303,6 +308,9 @@ void Tablica::pushEnd()
 	newTable = tempTable;
 	tempTable = nullptr;
 	iTSize++;
+	auto o2 = chrono::high_resolution_clock::now();
+
+	outcomeTable.tMOutcome(o1, o2);
 
 	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
 	getchar();
@@ -317,6 +325,7 @@ void Tablica::pushMiddle()
 
 	cout << "Podaj pozycje, na ktora ma zostac dodany element (zakladamy ze numeracja zaczyna sie od 1): " << endl;
 	cin >> iTPushPosition;
+
 	int iTRightPush = iTPushPosition - 1;
 
 	if (iTRightPush >= 0 && iTRightPush <= iTSize)
@@ -324,6 +333,7 @@ void Tablica::pushMiddle()
 		cout << "Podaj liczbe jaka ma byc dodana do tablicy: " << endl;
 		cin >> iTNewMidElement;
 
+		auto o1 = chrono::high_resolution_clock::now();
 		auto tempTable = new int[iTSize + 1];
 		tempTable[iTRightPush] = iTNewMidElement;
 		for (int i = 0; i < iTRightPush; i++)
@@ -338,6 +348,9 @@ void Tablica::pushMiddle()
 		newTable = tempTable;
 		tempTable = nullptr;
 		iTSize++;
+		auto o2 = chrono::high_resolution_clock::now();
+
+		outcomeTable.tMOutcome(o1, o2);
 	}
 	else
 	{
@@ -358,6 +371,8 @@ void Tablica::readFromFileT()
 		getchar();
 		getchar();
 		
+
+		auto o1 = chrono::high_resolution_clock::now();
 		string sTLineCountBuffer;
 		getline(ifTFile, sTLineCountBuffer);
 		int iTLineCount = stoi(sTLineCountBuffer);
@@ -382,6 +397,10 @@ void Tablica::readFromFileT()
 
 		ifTFile.close();
 
+		auto o2 = chrono::high_resolution_clock::now();
+
+		outcomeTable.tMOutcome(o1, o2);
+
 		cout << "Operacja wykonana..." << endl;
 		getchar();
 		getchar();
@@ -402,6 +421,8 @@ void Tablica::generateElements()
 	cout << "Ile elementow ma zostac wygenerowanych?" << endl;
 	cin >> iTNumberOfGen;
 
+	auto o1 = chrono::high_resolution_clock::now();
+
 	auto tempTable = new int[iTNumberOfGen];
 
 	srand(time(0));
@@ -415,6 +436,9 @@ void Tablica::generateElements()
 	newTable = tempTable;
 	tempTable = nullptr;
 	iTSize = iTNumberOfGen;
+	auto o2 = chrono::high_resolution_clock::now();
+
+	outcomeTable.tMOutcome(o1, o2);
 
 	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
 	getchar();
@@ -426,6 +450,7 @@ void Tablica::popFront()
 {
 	if (iTSize != 0)
 	{
+		auto o1 = chrono::high_resolution_clock::now();
 		auto tempTable = new int[iTSize - 1];
 
 		for (int i = iTSize - 1; i >= 0; i--)
@@ -436,6 +461,9 @@ void Tablica::popFront()
 		newTable = tempTable;
 		tempTable = nullptr;
 		iTSize--;
+		auto o2 = chrono::high_resolution_clock::now();
+
+		outcomeTable.tMOutcome(o1, o2);
 	}
 	else
 	{
@@ -452,6 +480,7 @@ void Tablica::popEnd()
 {
 	if (iTSize != 0)
 	{
+		auto o1 = chrono::high_resolution_clock::now();
 		auto tempTable = new int[iTSize - 1];
 
 		for (int i = 0; i < iTSize - 1; i++)
@@ -462,6 +491,9 @@ void Tablica::popEnd()
 		newTable = tempTable;
 		tempTable = nullptr;
 		iTSize--;
+		auto o2 = chrono::high_resolution_clock::now();
+
+		outcomeTable.tMOutcome(o1, o2);
 	}
 	else
 	{
@@ -479,10 +511,12 @@ void Tablica::popMiddle()
 
 	cout << "Podaj pozycje, z ktorej ma zostac usuniety element (zakladamy ze numeracja zaczyna sie od 1): " << endl;
 	cin >> iTPopPosition;
+
 	int iTRightPop = iTPopPosition - 1;
 
 	if (iTRightPop >= 0 && iTRightPop < iTSize)
 	{
+		auto o1 = chrono::high_resolution_clock::now();
 		auto tempTable = new int[iTSize - 1];
 
 		for (int i = 0; i < iTRightPop; i++)
@@ -497,6 +531,9 @@ void Tablica::popMiddle()
 		newTable = tempTable;
 		tempTable = nullptr;
 		iTSize--;
+		auto o2 = chrono::high_resolution_clock::now();
+
+		outcomeTable.tMOutcome(o1, o2);
 	}
 	else
 	{
@@ -512,8 +549,12 @@ void Tablica::clearAllT()
 {
 	if (iTSize != 0)
 	{
+		auto o1 = chrono::high_resolution_clock::now();
 		delete [] newTable;
 		iTSize = 0;
+		auto o2 = chrono::high_resolution_clock::now();
+
+		outcomeTable.tMOutcome(o1, o2);
 	}
 	else
 	{
@@ -530,10 +571,14 @@ void Tablica::displayAll()
 {
 	if (iTSize != 0)
 	{
+		auto o1 = chrono::high_resolution_clock::now();
 		for (int i = 0; i < iTSize; i++)
 		{
 			cout << "Element nr " << i + 1 << " = " << newTable[i] << endl;
 		}
+		auto o2 = chrono::high_resolution_clock::now();
+
+		outcomeTable.tMOutcome(o1,o2);
 	}
 	else
 	{
@@ -554,6 +599,8 @@ void Tablica::displayOne()
 		cout << "Wybierz element, ktory chcesz wyswietlic (zakladamy ze numeracja zaczyna sie od 1): " << endl;
 		cin >> iTChoiceDisplay;
 
+		auto o1 = chrono::high_resolution_clock::now();
+
 		if (iTChoiceDisplay >= 0 && iTChoiceDisplay < iTSize)
 		{
 			cout << "Element nr " << iTChoiceDisplay << " ma wartosc rowna: " << newTable[iTChoiceDisplay - 1] << endl;
@@ -562,6 +609,9 @@ void Tablica::displayOne()
 		{
 			cout << "Wybranego elementu nie ma w strukturze." << endl;
 		}
+		auto o2 = chrono::high_resolution_clock::now();
+
+		outcomeTable.tMOutcome(o1, o2);
 	}
 	else
 	{

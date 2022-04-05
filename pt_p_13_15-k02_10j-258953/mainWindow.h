@@ -2,6 +2,7 @@
 #include "Tablica.h"
 #include "Lista.h"
 #include "Heap.h"
+#include "timeMeasurement.h"
 
 class mainWindow
 {

@@ -1,5 +1,5 @@
 #pragma once
-#include "table.cpp"
+#include "timeMeasurement.h"
 
 #include <chrono>
 
@@ -8,8 +8,7 @@ class Tablica
 public:
 	int iTSize;
 	int *newTable = nullptr;
-	std::chrono::high_resolution_clock::time_point o1;
-	std::chrono::high_resolution_clock::time_point o2;
+	timeMeasurement outcomeTable;
 
 	Tablica();
 	~Tablica();
