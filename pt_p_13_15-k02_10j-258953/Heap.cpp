@@ -1,4 +1,4 @@
-#include "Heap.h"
+/*#include "Heap.h"
 
 #include <iostream>
 
@@ -82,7 +82,7 @@ bool Heap::isEmpty()
 
 void Heap::pushElement()
 {
-	/*unsigned int uiIndex = getSize() - 1;
+	unsigned int uiIndex = getSize() - 1;
 	int iNewElement;
 	cout << "Podaj wartosc jaka chcesz dodac do kopca:" << endl;
 	cin >> iNewElement;
@@ -90,7 +90,7 @@ void Heap::pushElement()
 	iHTab[uiIndex] = iNewElement;
 
 	HeapifyUp(uiIndex);
-*/}
+}
 
 void Heap::popElement()
 {
@@ -110,4 +110,4 @@ void Heap::HeapifyUp(int i)
 void Heap::displayAll()
 {
 
-}
+}*/

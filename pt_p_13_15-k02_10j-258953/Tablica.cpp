@@ -27,7 +27,7 @@ void Tablica::tableMenu()
 
 	for (;;)
 	{
-		system("CLS");
+		shT.cls();
 
 		cout << "Prosze wybrac:" << endl << "1.Menu dodawania." << endl << "2.Menu odejmowania." << endl << "3.Menu wyswietlania." << endl << "4.Menu pomiarow i losowania elementow." << endl << "5.Powrot" << endl;
 		cin >> sTChoiceTableMenu;
@@ -61,9 +61,7 @@ void Tablica::tableMenu()
 		}
 		default:
 		{
-			cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
-			getchar();
-			getchar();
+			shT.noOption();
 			break;
 		}
 		}
@@ -115,9 +113,7 @@ void Tablica::pushMenu()
 		}
 		default:
 		{
-			cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
-			getchar();
-			getchar();
+			shT.noOption();
 			break;
 		}
 		}
@@ -130,7 +126,7 @@ void Tablica::popMenu()
 
 	for (;;)
 	{
-		system("CLS");
+		shT.cls();
 
 		cout << "Prosze wybrac:" << endl << "1.Usuniecie elementu z poczatku struktury." << endl << "2.Usuniecie elementu z konca struktury." << endl << "3.Usuniecie elementu z okreslonego miejsca w struktury." << endl << "4.Usuniecie wszystkich elementow ze struktury." << endl << "5.Powrot" << endl;
 		cin >> sTChoicePopMenu;
@@ -164,9 +160,7 @@ void Tablica::popMenu()
 		}
 		default:
 		{
-			cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
-			getchar();
-			getchar();
+			shT.noOption();
 			break;
 		}
 		}
@@ -179,7 +173,7 @@ void Tablica::displayMenu()
 
 	for (;;)
 	{
-		system("CLS");
+		shT.cls();
 
 		cout << "Prosze wybrac:" << endl << "1.Wyswietlenie calej zawartosci struktury." << endl << "2.Wyswietlenie okreslonego elementu struktury." << endl << "3.Powrot." << endl;
 		cin >> sTChoiceDisplayMenu;
@@ -203,9 +197,7 @@ void Tablica::displayMenu()
 		}
 		default:
 		{
-			cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
-			getchar();
-			getchar();
+			shT.noOption();
 			break;
 		}
 		}
@@ -218,7 +210,7 @@ void Tablica::testMenu()
 
 	for (;;)
 	{
-		system("CLS");
+		shT.cls();
 
 		cout << "Prosze wybrac:" << endl;
 		cin >> sTChoiceTestMenu;
@@ -242,9 +234,7 @@ void Tablica::testMenu()
 		}
 		default:
 		{
-			cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
-			getchar();
-			getchar();
+			shT.noOption();
 			break;
 		}
 		}
@@ -279,10 +269,7 @@ void Tablica::pushFront()
 
 	outcomeTable.tMOutcome(o1, o2);
 	
-	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
-	getchar();
-	getchar();
-	system("CLS");
+	shT.done();
 }
 
 void Tablica::pushEnd()
@@ -312,10 +299,7 @@ void Tablica::pushEnd()
 
 	outcomeTable.tMOutcome(o1, o2);
 
-	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
-	getchar();
-	getchar();
-	system("CLS");
+	shT.done();
 }
 
 void Tablica::pushMiddle()
@@ -354,12 +338,9 @@ void Tablica::pushMiddle()
 	}
 	else
 	{
-		cout << "Wybrana pozycja znajduje sie poza tablica..." << endl << "Wybierz inna pozycje..." << endl;
+		shT.away();
 	}
-	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
-	getchar();
-	getchar();
-	system("CLS");
+	shT.done();
 }
 
 void Tablica::readFromFileT()
@@ -367,10 +348,7 @@ void Tablica::readFromFileT()
 	ifstream ifTFile("dane.txt", ios::in);
 	if (ifTFile.good())
 	{
-		cout << "Plik pomyslnie otwarto..." << endl;
-		getchar();
-		getchar();
-		
+		shT.opened();		
 
 		auto o1 = chrono::high_resolution_clock::now();
 		string sTLineCountBuffer;
@@ -401,17 +379,11 @@ void Tablica::readFromFileT()
 
 		outcomeTable.tMOutcome(o1, o2);
 
-		cout << "Operacja wykonana..." << endl;
-		getchar();
-		getchar();
-		system("CLS");
+		shT.done();
 	}
 	else
 	{
-		cout << "Nie udalo sie otworzyc pliku..." << endl;
-		getchar();
-		getchar();
-		system("CLS");
+		shT.noFile();
 	}
 }
 
@@ -440,10 +412,7 @@ void Tablica::generateElements()
 
 	outcomeTable.tMOutcome(o1, o2);
 
-	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
-	getchar();
-	getchar();
-	system("CLS");
+	shT.done();
 }
 
 void Tablica::popFront()
@@ -467,13 +436,10 @@ void Tablica::popFront()
 	}
 	else
 	{
-		cout << "Tablica nie ma elementow do usuniecia..." << endl;
+		shT.empty();
 	}
 
-	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
-	getchar();
-	getchar();
-	system("CLS");
+	shT.done();
 }
 
 void Tablica::popEnd()
@@ -497,12 +463,9 @@ void Tablica::popEnd()
 	}
 	else
 	{
-		cout << "Tablica nie ma elementow do usuniecia..." << endl;
+		shT.empty();
 	}
-	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
-	getchar();
-	getchar();
-	system("CLS");
+	shT.done();
 }
 
 void Tablica::popMiddle()
@@ -537,12 +500,9 @@ void Tablica::popMiddle()
 	}
 	else
 	{
-		cout << "Wybrana pozycja znajduje sie poza tablica..." << endl << "Wybierz inna pozycje..." << endl;
+		shT.away();
 	}
-	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
-	getchar();
-	getchar();
-	system("CLS");
+	shT.done();
 }
 
 void Tablica::clearAllT()
@@ -561,10 +521,7 @@ void Tablica::clearAllT()
 		cout << "Tablica nie ma elementow do usuniecia..." << endl;
 	}
 
-	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
-	getchar();
-	getchar();
-	system("CLS");
+	shT.done();
 }
 
 void Tablica::displayAll()
@@ -584,10 +541,7 @@ void Tablica::displayAll()
 	{
 		cout << "Struktura nie ma zawartosci..." << endl;
 	}
-	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
-	getchar();
-	getchar();
-	system("CLS");
+	shT.done();
 }
 
 void Tablica::displayOne()
@@ -617,8 +571,5 @@ void Tablica::displayOne()
 	{
 		cout << "Struktura nie ma zawartosci..." << endl;
 	}
-	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
-	getchar();
-	getchar();
-	system("CLS");
+	shT.done();
 }

@@ -1,10 +1,11 @@
-#pragma once
-#include "kopiec.cpp"
+/*#pragma once
+#include "timeMeasurement.h"
+#include "SH.h"
 
 class Heap {
 public:
 
-	Kopiec iHTab[];
+	kopiec iHTab[];
 
 	Heap();
 	~Heap();
@@ -26,4 +27,4 @@ private:
 	void HeapifyUp(int i);
 
 	void displayAll();
-};
+};*/

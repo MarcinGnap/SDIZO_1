@@ -1,12 +1,15 @@
 #pragma once
+#include "Node.h"
 #include "timeMeasurement.h"
-
+#include "SH.h"
 
 class Lista
 {
 public:
 
 	short sLChoiceListMenu;
+	timeMeasurement outcomeList;
+	SH shL;
 
 	Lista();
 	~Lista();
@@ -15,14 +18,13 @@ public:
 
 private:
 
-	int iLData;
-	Lista *next, *prev;
+	Node *nHead, *nTail;
 
 	void pushMenu();
 	void popMenu();
 	void displayMenu();
 
-	void pushFront(Lista &*head);
+	void pushFront();
 	void pushEnd();
 	void pushMiddle();
 
@@ -30,6 +32,6 @@ private:
 	void popEnd();
 	void popMiddle();
 
-	void displayAll(Lista *head);
+	void displayAll();
 	void displayOne();
 };

@@ -1,5 +1,6 @@
 #pragma once
 #include "timeMeasurement.h"
+#include "SH.h"
 
 class Tablica
 {
@@ -7,6 +8,7 @@ public:
 	int iTSize;
 	int *newTable = nullptr;
 	timeMeasurement outcomeTable;
+	SH shT;
 
 	Tablica();
 	~Tablica();
