@@ -192,8 +192,26 @@ void Lista::pushFront()
 	cin >> iLNewFrontElement;
 
 	auto o1 = chrono::high_resolution_clock::now();
+
+
+
+	auto o2 = chrono::high_resolution_clock::now();
 	
-	Node *newNode = new Node(iLNewFrontElement);
+	outcomeList.tMOutcome(o1, o2);
+
+	shL.done();
+}
+
+void Lista::pushEnd()
+{
+	int iLNewEndElement;
+
+	cout << "Podaj liczbe jaka ma byc dodana do listy: " << endl;
+	cin >> iLNewEndElement;
+
+	auto o1 = chrono::high_resolution_clock::now();
+
+	Node *newNode = new Node(iLNewEndElement);
 	if (nHead != NULL)
 	{
 		Node *tempNode = nHead;
@@ -210,15 +228,8 @@ void Lista::pushFront()
 	}
 
 	auto o2 = chrono::high_resolution_clock::now();
-	
+
 	outcomeList.tMOutcome(o1, o2);
-
-	shL.done();
-}
-
-void Lista::pushEnd()
-{
-
 
 	shL.done();
 }
@@ -269,12 +280,14 @@ void Lista::displayAll()
 
 	if (nHead != NULL)
 	{
+		int i = 0;
 		Node *tempNode = nHead;
-		cout << "Zawartosc listy: \n";
+		cout << "Zawartosc listy (od glowy): \n";
 		while (tempNode != NULL)
 		{
-			cout << tempNode->iNData << " ";
+			cout << "Element nr " << i << " ma wartosc rowna: " << tempNode->iNData << endl;
 			tempNode = tempNode->nNext;
+			i++;
 		}
 	}
 	else
@@ -289,7 +302,26 @@ void Lista::displayAll()
 
 void Lista::displayOne()
 {
+	auto o1 = chrono::high_resolution_clock::now();
+	
+	if (nHead != NULL)
+	{
+		Node *tempNode = nHead;
+		int iLDisplayChoice;
+		cout << "Wybierz, ktory element ma zostac wyswietlony (liczac od glowy): " << endl;
+		cin >> iLDisplayChoice;
+		for(int i = 0; i < iLDisplayChoice; i++)
+		{
+			tempNode = tempNode->nNext;
+		}
+		cout << "Element nr " << iLDisplayChoice << tempNode->iNData << endl;
+	}
+	else
+	{
+		shL.empty();
+	}
+	auto o2 = chrono::high_resolution_clock::now();
 
-
+	outcomeList.tMOutcome(o1, o2);
 	shL.done();
 }

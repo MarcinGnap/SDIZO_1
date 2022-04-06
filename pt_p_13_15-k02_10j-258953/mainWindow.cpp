@@ -18,8 +18,8 @@ mainWindow::~mainWindow()
 void mainWindow::mainMenu()
 {
 	Tablica nowaTablica;
-	//Lista NowaLista;
-	Heap nowyKopiec;
+	Lista nowaLista;
+	//Heap nowyKopiec;
 	//Tree noweDrzewo;
 
 	short sMChoice;
@@ -40,12 +40,12 @@ void mainWindow::mainMenu()
 		}
 		case 2:
 		{
-			//nowaLista.listMenu();
+			nowaLista.listMenu();
 			break;
 		}
 		case 3:
 		{
-			nowyKopiec.heapMenu();
+			//nowyKopiec.heapMenu();
 			break;
 		}
 		case 4:
