@@ -113,7 +113,7 @@ void Lista::popMenu()
 
 		short sLChoicePopMenu;
 
-		cout << "Prosze wybrac:" << endl << "1.Usuniecie elementu z poczatku struktury." << endl << "2.Usuniecie elementu z konca struktury." << endl << "3.Usuniecie elementu z okreslonego miejsca w struktury." << endl << "4.Powrot" << endl;
+		cout << "Prosze wybrac:" << endl << "1.Usuniecie elementu z poczatku struktury." << endl << "2.Usuniecie elementu z konca struktury." << endl << "3.Usuniecie elementu z okreslonego miejsca w struktury." << endl << "4.Usuniecie wszytkich elementow w strukturze." << endl << "5.Powrot" << endl;
 		cin >> sLChoicePopMenu;
 
 		switch (sLChoicePopMenu)
@@ -134,6 +134,11 @@ void Lista::popMenu()
 			break;
 		}
 		case 4:
+		{
+			clearAll();
+			break;
+		}
+		case 5:
 		{
 			return;
 			break;
@@ -193,7 +198,9 @@ void Lista::pushFront()
 
 	auto o1 = chrono::high_resolution_clock::now();
 
-
+	Node *newNode = new Node(iLNewFrontElement);
+	newNode->nNext = nHead;
+	nHead = newNode;
 
 	auto o2 = chrono::high_resolution_clock::now();
 	
@@ -210,7 +217,7 @@ void Lista::pushEnd()
 	cin >> iLNewEndElement;
 
 	auto o1 = chrono::high_resolution_clock::now();
-
+	/*
 	Node *newNode = new Node(iLNewEndElement);
 	if (nHead != NULL)
 	{
@@ -226,7 +233,7 @@ void Lista::pushEnd()
 		nHead = newNode;
 		nTail = newNode;
 	}
-
+	*/
 	auto o2 = chrono::high_resolution_clock::now();
 
 	outcomeList.tMOutcome(o1, o2);
@@ -243,14 +250,21 @@ void Lista::pushMiddle()
 
 void Lista::popFront()
 {
+	auto o1 = chrono::high_resolution_clock::now();
 	if (nHead != NULL)
 	{
-		
+		Node *tempNode = nHead->nNext;
+		delete nHead;
+		nHead = tempNode;
 	}
 	else
 	{
 		shL.empty();
 	}
+	auto o2 = chrono::high_resolution_clock::now();
+
+	outcomeList.tMOutcome(o1, o2);
+
 	shL.done();
 }
 
@@ -308,13 +322,17 @@ void Lista::displayOne()
 	{
 		Node *tempNode = nHead;
 		int iLDisplayChoice;
-		cout << "Wybierz, ktory element ma zostac wyswietlony (liczac od glowy): " << endl;
+		int i = 0;
+		cout << "Wybierz, ktory element ma zostac wyswietlony: " << endl;
 		cin >> iLDisplayChoice;
-		for(int i = 0; i < iLDisplayChoice; i++)
+		while (tempNode->nNext != NULL)
 		{
-			tempNode = tempNode->nNext;
+			i++;
+			if (tempNode->iNData == iLDisplayChoice)
+			{
+				cout << "Wybrany element: " << iLDisplayChoice << endl << "Ilosc pozycji od glowy: " << i << endl;
+			}
 		}
-		cout << "Element nr " << iLDisplayChoice << tempNode->iNData << endl;
 	}
 	else
 	{
@@ -324,4 +342,14 @@ void Lista::displayOne()
 
 	outcomeList.tMOutcome(o1, o2);
 	shL.done();
+}
+
+void Lista::clearAll()
+{
+
+}
+
+Node Lista::findTail()
+{
+
 }

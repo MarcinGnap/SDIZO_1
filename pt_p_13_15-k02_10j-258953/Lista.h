@@ -34,4 +34,8 @@ private:
 
 	void displayAll();
 	void displayOne();
+
+	void clearAll();
+
+	Node findTail();
 };
