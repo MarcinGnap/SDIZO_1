@@ -294,7 +294,7 @@ void Lista::displayAll()
 
 	if (nHead != NULL)
 	{
-		int i = 0;
+		int i = 1;
 		Node *tempNode = nHead;
 		cout << "Zawartosc listy (od glowy): \n";
 		while (tempNode != NULL)
@@ -349,7 +349,7 @@ void Lista::clearAll()
 
 }
 
-Node Lista::findTail()
+/*Node Lista::findTail()
 {
 
-}
+}*/

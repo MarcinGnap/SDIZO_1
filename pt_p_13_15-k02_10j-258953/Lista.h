@@ -37,5 +37,5 @@ private:
 
 	void clearAll();
 
-	Node findTail();
+	//Node findTail();
 };
