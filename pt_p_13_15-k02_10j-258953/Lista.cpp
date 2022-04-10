@@ -307,8 +307,33 @@ void Lista::popEnd()
 
 void Lista::popMiddle()
 {
+	Node *tempNode = nHead;
+	int iLPopChoice;
+	cout << "Wybierz, ktory element ma zostac usuniety: " << endl;
+	cin >> iLPopChoice;
 
+	auto o1 = chrono::high_resolution_clock::now();
 
+	if (nHead != NULL)
+	{
+		if (tempNode->iNData == iLPopChoice)
+		{
+			cout << "Wybrany element: " << iLPopChoice << endl;
+			tempNode->nNext->nPrev = tempNode->nPrev;
+			tempNode->nPrev->nNext = tempNode->nNext;
+			delete tempNode;
+			goto poped;
+		}
+		tempNode = tempNode->nNext;
+	}
+	else
+	{
+		shL.empty();
+	}
+	poped:
+	auto o2 = chrono::high_resolution_clock::now();
+
+	outcomeList.tMOutcome(o1, o2);
 	shL.done();
 }
 
@@ -341,15 +366,16 @@ void Lista::displayAll()
 
 void Lista::displayOne()
 {
+	Node *tempNode = nHead;
+	int iLDisplayChoice;
+	int i = 0;
+	cout << "Wybierz, ktory element ma zostac wyswietlony: " << endl;
+	cin >> iLDisplayChoice;
+
 	auto o1 = chrono::high_resolution_clock::now();
 	
 	if (nHead != NULL)
 	{
-		Node *tempNode = nHead;
-		int iLDisplayChoice;
-		int i = 0;
-		cout << "Wybierz, ktory element ma zostac wyswietlony: " << endl;
-		cin >> iLDisplayChoice;
 		cout << "Wybrany element: " << iLDisplayChoice << endl;
 		while (tempNode->nNext != NULL)
 		{
