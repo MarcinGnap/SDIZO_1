@@ -36,6 +36,4 @@ private:
 	void displayOne();
 
 	void clearAll();
-
-	//Node findTail();
 };

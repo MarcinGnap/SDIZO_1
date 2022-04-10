@@ -197,11 +197,18 @@ void Lista::pushFront()
 	cin >> iLNewFrontElement;
 
 	auto o1 = chrono::high_resolution_clock::now();
-
 	Node *newNode = new Node(iLNewFrontElement);
-	newNode->nNext = nHead;
-	nHead = newNode;
 
+	if (nHead != NULL)
+	{
+		newNode->nNext = nHead;
+		nHead = newNode;
+	}
+	else
+	{
+		nHead = newNode;
+		nTail = newNode;
+	}
 	auto o2 = chrono::high_resolution_clock::now();
 	
 	outcomeList.tMOutcome(o1, o2);
@@ -217,23 +224,19 @@ void Lista::pushEnd()
 	cin >> iLNewEndElement;
 
 	auto o1 = chrono::high_resolution_clock::now();
-	/*
+	
 	Node *newNode = new Node(iLNewEndElement);
 	if (nHead != NULL)
 	{
-		Node *tempNode = nHead;
-		while (tempNode->nNext != NULL)
-		{
-			tempNode = tempNode->nNext;
-		}
-		tempNode->nNext = newNode;
+		newNode->nPrev = nTail;
+		nTail->nNext = newNode;
+		nTail = newNode;
 	}
 	else
 	{
 		nHead = newNode;
 		nTail = newNode;
 	}
-	*/
 	auto o2 = chrono::high_resolution_clock::now();
 
 	outcomeList.tMOutcome(o1, o2);
@@ -253,9 +256,16 @@ void Lista::popFront()
 	auto o1 = chrono::high_resolution_clock::now();
 	if (nHead != NULL)
 	{
-		Node *tempNode = nHead->nNext;
-		delete nHead;
-		nHead = tempNode;
+		if (nHead->nNext != NULL)
+		{
+			Node *tempNode = nHead->nNext;
+			delete nHead;
+			nHead = tempNode;
+		}
+		else
+		{
+			delete nHead;
+		}
 	}
 	else
 	{
@@ -270,14 +280,28 @@ void Lista::popFront()
 
 void Lista::popEnd()
 {
+	auto o1 = chrono::high_resolution_clock::now();
 	if (nHead != NULL)
 	{
-
+		if (nTail->nPrev != NULL)
+		{
+			Node *tempNode = nTail->nPrev;
+			delete nTail;
+			nTail = tempNode;
+		}
+		else
+		{
+			delete nTail;
+		}
 	}
 	else
 	{
 		shL.empty();
 	}
+	auto o2 = chrono::high_resolution_clock::now();
+
+	outcomeList.tMOutcome(o1, o2);
+
 	shL.done();
 }
 
@@ -303,6 +327,7 @@ void Lista::displayAll()
 			tempNode = tempNode->nNext;
 			i++;
 		}
+		cout << "Head = " << nHead->iNData << endl << "Tail = " << nTail->iNData << endl;
 	}
 	else
 	{
@@ -325,13 +350,15 @@ void Lista::displayOne()
 		int i = 0;
 		cout << "Wybierz, ktory element ma zostac wyswietlony: " << endl;
 		cin >> iLDisplayChoice;
+		cout << "Wybrany element: " << iLDisplayChoice << endl;
 		while (tempNode->nNext != NULL)
 		{
 			i++;
 			if (tempNode->iNData == iLDisplayChoice)
 			{
-				cout << "Wybrany element: " << iLDisplayChoice << endl << "Ilosc pozycji od glowy: " << i << endl;
+				cout << "Ilosc pozycji od glowy: " << i << endl;
 			}
+			tempNode = tempNode->nNext;
 		}
 	}
 	else
@@ -346,10 +373,25 @@ void Lista::displayOne()
 
 void Lista::clearAll()
 {
+	auto o1 = chrono::high_resolution_clock::now();
 
+	Node *tempNode = nHead;
+
+	if (nHead != NULL)
+	{
+		while (nHead != NULL)
+		{
+			tempNode = nHead->nNext;
+			delete nHead;
+			nHead = tempNode->nNext;
+		}
+	}
+	else
+	{
+		shL.empty();
+	}
+	auto o2 = chrono::high_resolution_clock::now();
+
+	outcomeList.tMOutcome(o1, o2);
+	shL.done();
 }
-
-/*Node Lista::findTail()
-{
-
-}*/
