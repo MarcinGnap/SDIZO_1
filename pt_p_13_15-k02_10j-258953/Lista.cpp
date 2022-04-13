@@ -322,14 +322,25 @@ void Lista::readFromFileL()
 		Node *tempNode = new Node(iLFileHead);
 		nHead = tempNode;
 
-		for (int i = 1; i <= iLLineCount - 1; i++)
+		for (int i = 1; i <= iLLineCount - 2; i++)
 		{
 			string sLLineValueBuffer;
 			getline(ifLFile, sLLineValueBuffer);
 			int iLLineValue = stoi(sLLineValueBuffer);
 
 			Node *newNode = new Node(iLLineValue);
+			tempNode->nNext = newNode;
+			newNode->nPrev = tempNode;
+			tempNode = newNode;
 		}
+		string sLFileTail;
+		getline(ifLFile, sLFileTail);
+		int iLFileTail = stoi(sLFileTail);
+		Node *newNode = new Node(iLFileTail);
+		tempNode->nNext = newNode;
+		newNode->nPrev = tempNode;
+		nTail = newNode;
+
 		ifLFile.close();
 
 		auto o2 = chrono::high_resolution_clock::now();
@@ -346,7 +357,37 @@ void Lista::readFromFileL()
 
 void Lista::generateElements()
 {
+	int iLNumberOfGen;
+	cout << "Ile elementow ma zostac wygenerowanych?" << endl;
+	cin >> iLNumberOfGen;
 
+	auto o1 = chrono::high_resolution_clock::now();
+
+	srand(time(0));
+
+	int iLGeneratedHead = rand();
+	Node *tempNode = new Node(iLGeneratedHead);
+	nHead = tempNode;
+
+	for (int i = 0; i < iLNumberOfGen - 2; i++)
+	{
+		int iLGenerated = rand();
+		Node *newNode = new Node(iLGenerated);
+		tempNode->nNext = newNode;
+		newNode->nPrev = tempNode;
+		tempNode = newNode;
+	}
+	int iLGeneratedTail = rand();
+	Node *newNode = new Node(iLGeneratedTail);
+	tempNode->nNext = newNode;
+	newNode->nPrev = tempNode;
+	nTail = newNode;
+
+	auto o2 = chrono::high_resolution_clock::now();
+
+	outcomeList.tMOutcome(o1, o2);
+
+	shL.done();
 }
 
 void Lista::popFront()
