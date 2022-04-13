@@ -27,13 +27,14 @@ private:
 	void pushFront();
 	void pushEnd();
 	void pushMiddle();
+	void readFromFileL();
+	void generateElements();
 
 	void popFront();
 	void popEnd();
 	void popMiddle();
+	void clearAll();
 
 	void displayAll();
 	void displayOne();
-
-	void clearAll();
 };

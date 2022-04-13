@@ -71,7 +71,7 @@ void Lista::pushMenu()
 
 		short sLChoicePushMenu;
 
-		cout << "Prosze wybrac:" << endl << "1.Dodanie na poczatek struktury." << endl << "2.Dodanie na koniec struktury." << endl << "3.Dodanie w okreslonie miejsce w strukturze." << endl << "4.Powrot" << endl;
+		cout << "Prosze wybrac:" << endl << "1.Dodanie na poczatek struktury." << endl << "2.Dodanie na koniec struktury." << endl << "3.Dodanie w okreslonie miejsce w strukturze." << endl << "4.Odczytanie danych z pliku tekstowego." << endl << "5.Wygenerowanie okreslonej ilosci danej do struktury." << endl << "6.Powrot" << endl;
 		cin >> sLChoicePushMenu;
 
 		switch (sLChoicePushMenu)
@@ -92,6 +92,16 @@ void Lista::pushMenu()
 			break;
 		}
 		case 4:
+		{
+			readFromFileL();
+			break;
+		}
+		case 5:
+		{
+			generateElements();
+			break;
+		}
+		case 6:
 		{
 			return;
 			break;
@@ -246,9 +256,97 @@ void Lista::pushEnd()
 
 void Lista::pushMiddle()
 {
+	Node *tempNode = nHead;
+	int iLPushPosition, iLPushElement;
+	cout << "Wybierz, po ktorym elemencie ma zostac wstawiony twoj element: " << endl;
+	cin >> iLPushPosition;
+	cout << "Wybierz wartosc wstawianego elementu: " << endl;
+	cin >> iLPushElement;
+	cout << "Wybrany element zostanie wstawiony po elemencie: " << iLPushPosition << " i bedzie mial wartosc: " << iLPushElement << "." << endl;
 
+	auto o1 = chrono::high_resolution_clock::now();
 
+	if (nHead != NULL)
+	{
+		while (tempNode->nNext != NULL)
+		{
+			if (tempNode->iNData == iLPushPosition)
+			{
+				Node *newNode = new Node(iLPushElement);
+				if (tempNode == nTail)
+				{
+					newNode->nPrev = nTail;
+					nTail->nNext = newNode;
+					nTail = newNode;
+				}
+				else
+				{
+					tempNode->nNext->nPrev = newNode;
+					newNode->nNext = tempNode->nNext;
+					newNode->nPrev = tempNode;
+					tempNode->nNext = newNode;
+				}
+				goto pushed;
+			}
+			tempNode = tempNode->nNext;
+		}
+	}
+	else
+	{
+		shL.empty();
+	}
+pushed:
+	auto o2 = chrono::high_resolution_clock::now();
+
+	outcomeList.tMOutcome(o1, o2);
 	shL.done();
+}
+
+void Lista::readFromFileL()
+{
+	ifstream ifLFile("dane.txt", ios::in);
+	if (ifLFile.good())
+	{
+		shL.opened();
+
+		auto o1 = chrono::high_resolution_clock::now();
+
+		string sLLineCountBuffer;
+		getline(ifLFile, sLLineCountBuffer);
+		int iLLineCount = stoi(sLLineCountBuffer);
+		cout << "Ilosc elementow przekazanych do struktury: " << iLLineCount << endl;
+
+		string sLFileHead;
+		getline(ifLFile, sLFileHead);
+		int iLFileHead = stoi(sLFileHead);
+		Node *tempNode = new Node(iLFileHead);
+		nHead = tempNode;
+
+		for (int i = 1; i <= iLLineCount - 1; i++)
+		{
+			string sLLineValueBuffer;
+			getline(ifLFile, sLLineValueBuffer);
+			int iLLineValue = stoi(sLLineValueBuffer);
+
+			Node *newNode = new Node(iLLineValue);
+		}
+		ifLFile.close();
+
+		auto o2 = chrono::high_resolution_clock::now();
+
+		outcomeList.tMOutcome(o1, o2);
+
+		shL.done();
+	}
+	else
+	{
+		shL.noFile();
+	}
+}
+
+void Lista::generateElements()
+{
+
 }
 
 void Lista::popFront()
@@ -311,26 +409,54 @@ void Lista::popMiddle()
 	int iLPopChoice;
 	cout << "Wybierz, ktory element ma zostac usuniety: " << endl;
 	cin >> iLPopChoice;
+	cout << "Wybrany element: " << iLPopChoice << endl;
 
 	auto o1 = chrono::high_resolution_clock::now();
 
 	if (nHead != NULL)
 	{
-		if (tempNode->iNData == iLPopChoice)
+		while (tempNode->nNext != NULL)
 		{
-			cout << "Wybrany element: " << iLPopChoice << endl;
-			tempNode->nNext->nPrev = tempNode->nPrev;
-			tempNode->nPrev->nNext = tempNode->nNext;
-			delete tempNode;
-			goto poped;
+			if (tempNode->iNData == iLPopChoice)
+			{
+				tempNode->nNext->nPrev = tempNode->nPrev;
+				tempNode->nPrev->nNext = tempNode->nNext;
+				delete tempNode;
+				goto poped;
+			}
+			tempNode = tempNode->nNext;
 		}
-		tempNode = tempNode->nNext;
 	}
 	else
 	{
 		shL.empty();
 	}
 	poped:
+	auto o2 = chrono::high_resolution_clock::now();
+
+	outcomeList.tMOutcome(o1, o2);
+	shL.done();
+}
+
+void Lista::clearAll()
+{
+	auto o1 = chrono::high_resolution_clock::now();
+
+	Node *tempNode = nHead;
+
+	if (nHead != NULL)
+	{
+		while (nHead != NULL)
+		{
+			tempNode = nHead->nNext;
+			delete nHead;
+			nHead = tempNode->nNext;
+		}
+	}
+	else
+	{
+		shL.empty();
+	}
 	auto o2 = chrono::high_resolution_clock::now();
 
 	outcomeList.tMOutcome(o1, o2);
@@ -385,31 +511,6 @@ void Lista::displayOne()
 				cout << "Ilosc pozycji od glowy: " << i << endl;
 			}
 			tempNode = tempNode->nNext;
-		}
-	}
-	else
-	{
-		shL.empty();
-	}
-	auto o2 = chrono::high_resolution_clock::now();
-
-	outcomeList.tMOutcome(o1, o2);
-	shL.done();
-}
-
-void Lista::clearAll()
-{
-	auto o1 = chrono::high_resolution_clock::now();
-
-	Node *tempNode = nHead;
-
-	if (nHead != NULL)
-	{
-		while (nHead != NULL)
-		{
-			tempNode = nHead->nNext;
-			delete nHead;
-			nHead = tempNode->nNext;
 		}
 	}
 	else
