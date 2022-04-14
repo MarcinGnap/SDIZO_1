@@ -35,7 +35,7 @@ private:
 	void HeapifyDown();
 	void HeapifyUp();
 
-	int getLeft(int x);
-	int getRight(int x);
-	int getParent(int x);
+	int getLeft(int);
+	int getRight(int);
+	int getParent(int);
 };

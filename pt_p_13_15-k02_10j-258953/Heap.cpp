@@ -113,7 +113,7 @@ void Heap::popMenu()
 	{
 		shH.cls();
 
-		cout << "Prosze wybrac:" << endl << "1.Usuniecie elementu ze strultury." << endl << "2.Usuniecie wszystkich elementow ze struktury." << endl << "3.Powrót." << endl;
+		cout << "Prosze wybrac:" << endl << "1.Usuniecie elementu ze strultury." << endl << "2.Usuniecie wszystkich elementow ze struktury." << endl << "3.Powrot." << endl;
 		cin >> sHChoicePopMenu;
 
 		switch (sHChoicePopMenu)
@@ -202,6 +202,9 @@ void Heap::pushElement()
 	newHeap = tempHeap;
 	tempHeap = nullptr;
 	iHSize++;
+
+	HeapifyUp();
+
 	auto o2 = chrono::high_resolution_clock::now();
 
 	outcomeHeap.tMOutcome(o1, o2);
@@ -216,7 +219,29 @@ void Heap::readFromFileH()
 
 void Heap::generateElements()
 {
+	int iHNumberOfGen;
+	cout << "Ile elementow ma zostac wygenerowanych?" << endl;
+	cin >> iHNumberOfGen;
 
+	auto o1 = chrono::high_resolution_clock::now();
+
+	srand(time(0));
+
+	delete[] newHeap;
+	newHeap = new int[iHNumberOfGen];
+	
+	for (int i = 0; i < iHNumberOfGen; i++)
+	{
+		newHeap[i] = rand();
+		iHSize++;
+		HeapifyUp();
+	}
+
+	auto o2 = chrono::high_resolution_clock::now();
+
+	outcomeHeap.tMOutcome(o1, o2);
+
+	shH.done();
 }
 
 void Heap::popElement()
@@ -226,7 +251,21 @@ void Heap::popElement()
 
 void Heap::clearAll()
 {
+	if (iHSize != 0)
+	{
+		auto o1 = chrono::high_resolution_clock::now();
+		delete[] newHeap;
+		iHSize = 0;
+		auto o2 = chrono::high_resolution_clock::now();
 
+		outcomeHeap.tMOutcome(o1, o2);
+	}
+	else
+	{
+		shH.empty();
+	}
+
+	shH.done();
 }
 
 void Heap::displayAll()
@@ -261,7 +300,17 @@ void Heap::HeapifyDown()
 
 void Heap::HeapifyUp()
 {
-
+	if (iHSize > 0)
+	{
+		int x = iHSize - 1;
+		while (x != 0 && newHeap[getParent(x)] < newHeap[x])
+		{
+			int tempValue = newHeap[getParent(x)];
+			newHeap[getParent(x)] = newHeap[x];
+			newHeap[x] = tempValue;
+			x = getParent(x);
+		}
+	}
 }
 
 int Heap::getLeft(int x)
@@ -276,5 +325,5 @@ int Heap::getRight(int x)
 
 int Heap::getParent(int x)
 {
-	return ((x - 1) / 2);
+	return floor((x - 1) / 2);
 }
