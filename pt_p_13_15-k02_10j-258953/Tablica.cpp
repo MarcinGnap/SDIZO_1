@@ -539,7 +539,7 @@ void Tablica::displayAll()
 	}
 	else
 	{
-		cout << "Struktura nie ma zawartosci..." << endl;
+		shT.empty();
 	}
 	shT.done();
 }

@@ -46,5 +46,5 @@ void SH::noFile()
 
 void SH::empty()
 {
-	cout << "Struktura nie ma elementow do usuniecia..." << endl;
+	cout << "Struktura nie ma zawartosci..." << endl;
 }

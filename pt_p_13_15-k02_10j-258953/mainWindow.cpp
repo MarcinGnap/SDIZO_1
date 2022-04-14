@@ -19,7 +19,7 @@ void mainWindow::mainMenu()
 {
 	Tablica nowaTablica;
 	Lista nowaLista;
-	//Heap nowyKopiec;
+	Heap nowyKopiec;
 	//Tree noweDrzewo;
 
 	short sMChoice;
@@ -45,7 +45,7 @@ void mainWindow::mainMenu()
 		}
 		case 3:
 		{
-			//nowyKopiec.heapMenu();
+			nowyKopiec.heapMenu();
 			break;
 		}
 		case 4:

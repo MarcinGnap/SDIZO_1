@@ -1,11 +1,15 @@
-/*#pragma once
+#pragma once
 #include "timeMeasurement.h"
 #include "SH.h"
 
 class Heap {
 public:
 
-	kopiec iHTab[];
+	short sHChoiceHeapMenu;
+	int iHSize;
+	int *newHeap = nullptr;
+	SH shH;
+	timeMeasurement outcomeHeap;
 
 	Heap();
 	~Heap();
@@ -14,17 +18,24 @@ public:
 
 private:
 
-	int checkLeft(int i);
-	int checkRight(int i);
-	int checkParent(int i);
-	unsigned int getSize();
-	bool isEmpty();
+	void pushMenu();
+	void popMenu();
+	void displayMenu();
 
 	void pushElement();
-	void popElement();
+	void readFromFileH();
+	void generateElements();
 
-	void HeapifyDown();
-	void HeapifyUp(int i);
+	void popElement();
+	void clearAll();
 
 	void displayAll();
-};*/
+	void displayOne();
+
+	void HeapifyDown();
+	void HeapifyUp();
+
+	int getLeft(int x);
+	int getRight(int x);
+	int getParent(int x);
+};

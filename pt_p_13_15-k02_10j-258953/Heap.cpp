@@ -1,11 +1,19 @@
-/*#include "Heap.h"
+#include "Heap.h"
 
 #include <iostream>
+#include <stdlib.h>
+#include <fstream>
+#include <string>
+#include <time.h>
+#include <chrono>
+#include <ratio>
 
 using namespace std;
 
-Heap::Heap() {
-
+Heap::Heap() 
+{
+	iHSize = 0;
+	newHeap = new int[iHSize];
 }
 
 Heap::~Heap()
@@ -19,26 +27,26 @@ void Heap::heapMenu()
 
 	for (;;)
 	{
-		system("CLS");
+		shH.cls();
 
-		cout << "Prosze wybrac:" << endl << "1.Dodanie elementu." << endl << "2.Usuniecie elementu." << endl << "3.Wyswietlenie struktury." << endl << "4.Powrot" << endl;
+		cout << "Prosze wybrac:" << endl << "1.Menu dodawania." << endl << "2.Menu odejmowania." << endl << "3.Menu wyswietlania." << endl << "4.Powrot" << endl;
 		cin >> sHChoiceHeapMenu;
 
 		switch (sHChoiceHeapMenu)
 		{
 		case 1:
 		{
-			pushElement();
+			pushMenu();
 			break;
 		}
 		case 2:
 		{
-			popElement();
+			popMenu();
 			break;
 		}
 		case 3:
 		{
-			displayAll();
+			displayMenu();
 			break;
 		}
 		case 4:
@@ -48,53 +56,202 @@ void Heap::heapMenu()
 		}
 		default:
 		{
-			cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
+			shH.noOption();
 			break;
 		}
 		}
 	}
 }
 
-int Heap::checkLeft(int i)
+void Heap::pushMenu()
 {
-	return (i * 2 + 1);
+	for (;;)
+	{
+		shH.cls();
+
+		short sHChoicePushMenu;
+
+		cout << "Prosze wybrac:" << endl << "1.Dodanie elementu." << endl << "2.Wczytanie danych z pliku tekstowego." << endl << "3.Wygenerowanie okreslonej ilosci elementow." << endl << "4.Powrot." << endl;
+		cin >> sHChoicePushMenu;
+
+		switch (sHChoicePushMenu)
+		{
+		case 1:
+		{
+			pushElement();
+			break;
+		}
+		case 2:
+		{
+			readFromFileH();
+			break;
+		}
+		case 3:
+		{
+			generateElements();
+			break;
+		}
+		case 4:
+		{
+			return;
+			break;
+		}
+		default:
+		{
+			shH.noOption();
+			break;
+		}
+		}
+	}
 }
 
-int Heap::checkRight(int i)
+void Heap::popMenu()
 {
-	return (i * 2 + 2);
+	short sHChoicePopMenu;
+
+	for (;;)
+	{
+		shH.cls();
+
+		cout << "Prosze wybrac:" << endl << "1.Usuniecie elementu ze strultury." << endl << "2.Usuniecie wszystkich elementow ze struktury." << endl << "3.Powrót." << endl;
+		cin >> sHChoicePopMenu;
+
+		switch (sHChoicePopMenu)
+		{
+		case 1:
+		{
+			popElement();
+			break;
+		}
+		case 2:
+		{
+			clearAll();
+			break;
+		}
+		case 3:
+		{
+			return;
+			break;
+		}
+		default:
+		{
+			shH.noOption();
+			break;
+		}
+		}
+	}
 }
 
-int Heap::checkParent(int i)
+void Heap::displayMenu()
 {
-	return (i - 1) / 2;
-}
+	short sHChoiceDisplayMenu;
 
-unsigned int Heap::getSize()
-{
-	return (0);
-}
+	for (;;)
+	{
+		shH.cls();
 
-bool Heap::isEmpty()
-{
-	return getSize() == 0;
+		cout << "Prosze wybrac:" << endl << "1.Wyswietlenie calej zawartosci struktury." << endl << "2.Wyswietlenie okreslonego elementu struktury." << endl << "3.Powrot." << endl;
+		cin >> sHChoiceDisplayMenu;
+
+		switch (sHChoiceDisplayMenu)
+		{
+		case 1:
+		{
+			displayAll();
+			break;
+		}
+		case 2:
+		{
+			displayOne();
+			break;
+		}
+		case 3:
+		{
+			return;
+			break;
+		}
+		default:
+		{
+			shH.noOption();
+			break;
+		}
+		}
+	}
 }
 
 void Heap::pushElement()
 {
-	unsigned int uiIndex = getSize() - 1;
-	int iNewElement;
-	cout << "Podaj wartosc jaka chcesz dodac do kopca:" << endl;
-	cin >> iNewElement;
+	int iHNewEndElement;
 
-	iHTab[uiIndex] = iNewElement;
+	cout << "Podaj liczbe jaka ma byc dodana do kopca: " << endl;
+	cin >> iHNewEndElement;
 
-	HeapifyUp(uiIndex);
+	auto o1 = chrono::high_resolution_clock::now();
+
+	auto tempHeap = new int[iHSize + 1];
+
+	tempHeap[iHSize] = iHNewEndElement;
+	if (iHSize != 0)
+	{
+		for (int i = 0; i < iHSize; i++)
+		{
+			tempHeap[i] = newHeap[i];
+		}
+	}
+	delete[] newHeap;
+	newHeap = tempHeap;
+	tempHeap = nullptr;
+	iHSize++;
+	auto o2 = chrono::high_resolution_clock::now();
+
+	outcomeHeap.tMOutcome(o1, o2);
+
+	shH.done();
+}
+
+void Heap::readFromFileH()
+{
+
+}
+
+void Heap::generateElements()
+{
+
 }
 
 void Heap::popElement()
 {
-	iHTab[0] = iHTab[getSize() - 1];
+
+}
+
+void Heap::clearAll()
+{
+
+}
+
+void Heap::displayAll()
+{
+	if (iHSize != 0)
+	{
+		auto o1 = chrono::high_resolution_clock::now();
+		for (int i = 0; i < iHSize; i++)
+		{
+			cout << "Element nr " << i + 1 << " = " << newHeap[i] << endl;
+		}
+		auto o2 = chrono::high_resolution_clock::now();
+
+		outcomeHeap.tMOutcome(o1, o2);
+	}
+	else
+	{
+		shH.empty();
+	}
+	shH.done();
+}
+
+void Heap::displayOne()
+{
+
 }
 
 void Heap::HeapifyDown()
@@ -102,12 +259,22 @@ void Heap::HeapifyDown()
 
 }
 
-void Heap::HeapifyUp(int i)
+void Heap::HeapifyUp()
 {
 
 }
 
-void Heap::displayAll()
+int Heap::getLeft(int x)
 {
+	return (x * 2 + 1);
+}
 
-}*/
+int Heap::getRight(int x)
+{
+	return (x * 2 + 2);
+}
+
+int Heap::getParent(int x)
+{
+	return ((x - 1) / 2);
+}
