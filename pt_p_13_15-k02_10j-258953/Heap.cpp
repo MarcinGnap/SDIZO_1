@@ -202,7 +202,7 @@ void Heap::pushElement()
 	newHeap = tempHeap;
 	tempHeap = nullptr;
 	iHSize++;
-
+	
 	HeapifyUp();
 
 	auto o2 = chrono::high_resolution_clock::now();
@@ -214,7 +214,46 @@ void Heap::pushElement()
 
 void Heap::readFromFileH()
 {
+	ifstream ifHFile("dane.txt", ios::in);
+	if (ifHFile.good())
+	{
+		shH.opened();
 
+		auto o1 = chrono::high_resolution_clock::now();
+		string sHLineCountBuffer;
+		getline(ifHFile, sHLineCountBuffer);
+		int iHLineCount = stoi(sHLineCountBuffer);
+		cout << "Ilosc elementow przekazanych do struktury: " << iHLineCount << endl;
+
+		auto tempHeap = new int[iHSize];
+
+		for (int i = 1; i <= iHLineCount; i++)
+		{
+			string sHLineValueBuffer;
+			getline(ifHFile, sHLineValueBuffer);
+
+			int iHLineValue = stoi(sHLineValueBuffer);
+
+			tempHeap[i - 1] = iHLineValue;
+			iHSize++;
+			HeapifyUp();
+		}
+		delete[] newHeap;
+		newHeap = tempHeap;
+		tempHeap = nullptr;
+
+		ifHFile.close();
+
+		auto o2 = chrono::high_resolution_clock::now();
+
+		outcomeHeap.tMOutcome(o1, o2);
+
+		shH.done();
+	}
+	else
+	{
+		shH.noFile();
+	}
 }
 
 void Heap::generateElements()
