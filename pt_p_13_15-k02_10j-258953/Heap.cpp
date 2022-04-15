@@ -246,7 +246,33 @@ void Heap::generateElements()
 
 void Heap::popElement()
 {
+	if (iHSize != 0)
+	{
+		auto o1 = chrono::high_resolution_clock::now();
+		auto tempHeap = new int[iHSize - 1];
 
+		tempHeap[0] = newHeap[iHSize - 1];
+		for (int i = 1; i < iHSize - 1; i++)
+		{
+			tempHeap[i] = newHeap[i];
+		}
+		delete[] newHeap;
+		newHeap = tempHeap;
+		tempHeap = nullptr;
+		iHSize--;
+
+		HeapifyDown();
+
+		auto o2 = chrono::high_resolution_clock::now();
+
+		outcomeHeap.tMOutcome(o1, o2);
+	}
+	else
+	{
+		shH.empty();
+	}
+
+	shH.done();
 }
 
 void Heap::clearAll()
@@ -290,12 +316,55 @@ void Heap::displayAll()
 
 void Heap::displayOne()
 {
+	if (iHSize != 0)
+	{
+		int iHChoiceDisplay;
 
+		cout << "Wybierz element, ktory chcesz wyswietlic: " << endl;
+		cin >> iHChoiceDisplay;
+
+		auto o1 = chrono::high_resolution_clock::now();
+
+		for (int i = 0; i<iHSize; i++)
+		{
+			if (iHChoiceDisplay == newHeap[i])
+			{
+				cout << "Wybrany element " << iHChoiceDisplay << " znajduje sie w strukturze." << endl;
+				goto displayed;
+			}
+		}
+		cout << "Wybranego elementu nie ma w strukturze." << endl;
+		displayed:
+		auto o2 = chrono::high_resolution_clock::now();
+
+		outcomeHeap.tMOutcome(o1, o2);
+	}
+	else
+	{
+		shH.empty();
+	}
+	shH.done();
 }
 
 void Heap::HeapifyDown()
 {
-
+	int x = 0;
+	while (x < iHSize && (newHeap[x] < newHeap[getLeft(x)] || newHeap[x] < newHeap[getRight(x)]))
+	{
+		int tempParent = newHeap[x];
+		if (newHeap[getLeft(x)] >= newHeap[getRight(x)])
+		{
+			newHeap[x] = newHeap[getLeft(x)];
+			newHeap[getLeft(x)] = tempParent;
+			x = getLeft(x);
+		}
+		else if (newHeap[getLeft(x)] < newHeap[getRight(x)])
+		{
+			newHeap[x] = newHeap[getRight(x)];
+			newHeap[getRight(x)] = tempParent;
+			x = getRight(x);
+		}
+	}
 }
 
 void Heap::HeapifyUp()
