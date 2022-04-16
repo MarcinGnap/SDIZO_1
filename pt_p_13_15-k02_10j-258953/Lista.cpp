@@ -21,11 +21,11 @@ Lista::~Lista()
 
 }
 
-void Lista::listMenu()
+void Lista::listMenu()									//	Menu g³ówne listy dwukierunkowej.
 {
 	for (;;)
 	{
-		shL.cls();
+		shL.cls();										//	"Wyczyszczenie" konsoli.
 
 		short sLChoiceListMenu;
 
@@ -40,17 +40,17 @@ void Lista::listMenu()
 		{
 		case 1:
 		{
-			pushMenu();
+			pushMenu();									//	Menu dodawania elementów do listy.
 			break;
 		}
 		case 2:
 		{
-			popMenu();
+			popMenu();									//	Menu usuwania elementów z listy.
 			break;
 		}
 		case 3:
 		{
-			displayMenu();
+			displayMenu();								//	Menu Wyœwietlania zawartoœci listy.
 			break;
 		}
 		case 4:
@@ -60,18 +60,18 @@ void Lista::listMenu()
 		}
 		default:
 		{
-			shL.noOption();
+			shL.noOption();								//	Wyœwietlenie komunikatu o wybraniu nieistniej¹cej opcji.
 			break;
 		}
 		}
 	}
 }
 
-void Lista::pushMenu()
+void Lista::pushMenu()									//	Menu dodawania elementów do listy.
 {
 	for (;;)
 	{
-		shL.cls();
+		shL.cls();										//	"Wyczyszczenie" konsoli.
 
 		short sLChoicePushMenu;
 
@@ -88,27 +88,27 @@ void Lista::pushMenu()
 		{
 		case 1:
 		{
-			pushFront();
+			pushFront();								//	Dodanie elementu na pocz¹tek listy.
 			break;
 		}
 		case 2:
 		{
-			pushEnd();
+			pushEnd();									//	Dodanie elementu na koniec listy.
 			break;
 		}
 		case 3:
 		{
-			pushMiddle();
+			pushMiddle();								//	Dodanie elementu w okreœlone miejsce listy.
 			break;
 		}
 		case 4:
 		{
-			readFromFileL();
+			readFromFileL();							//	Wczytanie elementów z pliku tekstowego.
 			break;
 		}
 		case 5:
 		{
-			generateElements();
+			generateElements();							//	Wygenerowanie okreœlonej liczby elementów.
 			break;
 		}
 		case 6:
@@ -118,18 +118,18 @@ void Lista::pushMenu()
 		}
 		default:
 		{
-			shL.noOption();
+			shL.noOption();								//	Wyœwietlenie komunikatu o wybraniu nieistniej¹cej opcji.
 			break;
 		}
 		}
 	}
 }
 
-void Lista::popMenu()
+void Lista::popMenu()									//	Menu usuwania elementów z listy.
 {
 	for (;;)
 	{
-		shL.cls();
+		shL.cls();										//	"Wyczyzczenie" konsoli.
 
 		short sLChoicePopMenu;
 
@@ -145,22 +145,22 @@ void Lista::popMenu()
 		{
 		case 1:
 		{
-			popFront();
+			popFront();									//	Usuniêcie g³owy listy.
 			break;
 		}
 		case 2:
 		{
-			popEnd();
+			popEnd();									//	Usuniêcie ogona listy.
 			break;
 		}
 		case 3:
 		{
-			popMiddle();
+			popMiddle();								//	Usuniêcie wskazanego elementu listy.
 			break;
 		}
 		case 4:
 		{
-			clearAll();
+			clearAll();									//	Usuniêcie wszystkich elementów listy.
 			break;
 		}
 		case 5:
@@ -170,18 +170,18 @@ void Lista::popMenu()
 		}
 		default:
 		{
-			shL.noOption();
+			shL.noOption();								//	Wyœwietlenie kounikatu o wybraniu nieistniej¹cej opcji.
 			break;
 		}
 		}
 	}
 }
 
-void Lista::displayMenu()
+void Lista::displayMenu()								//	Menu wyœwiatlania.
 {
 	for (;;)
 	{
-		shL.cls();
+		shL.cls();										//	"Wyczyszczenie" ekranu.
 
 		short sLChoiceDisplayMenu;
 
@@ -195,12 +195,12 @@ void Lista::displayMenu()
 		{
 		case 1:
 		{
-			displayAll();
+			displayAll();								//	Wyœwietlenie ca³ej zawartoœci listy.
 			break;
 		}
 		case 2:
 		{
-			displayOne();
+			displayOne();								//	Wyœwietlenie okreœlonego elementu listy.
 			break;
 		}
 		case 3:
@@ -210,232 +210,233 @@ void Lista::displayMenu()
 		}
 		default:
 		{
-			shL.noOption();
+			shL.noOption();								//	Wyœwietlenie komunikatu o wybraniu nieistniej¹cej opcji.
 			break;
 		}
 		}
 	}
 }
 
-void Lista::pushFront()
+void Lista::pushFront()									//	Dodanie elementu na pocz¹tek listy.
 {
 	int iLNewFrontElement;
 
 	cout << "Podaj liczbe jaka ma byc dodana do listy:\n";
-	cin >> iLNewFrontElement;
+	cin >> iLNewFrontElement;							//	Wybranie wartoœci dodawanego elementu.
 
-	auto o1 = chrono::high_resolution_clock::now();
-	Node *newNode = new Node(iLNewFrontElement);
+	auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
+	Node *newNode = new Node(iLNewFrontElement);		//	Stworzenie nowej "komórki" listy dla dodawanego elementu.
 
-	if (nHead != NULL)
+	if (nHead != NULL)									//	Sprawdzenie czy listy jest pusta.
 	{
-		newNode->nNext = nHead;
-		nHead = newNode;
+		newNode->nNext = nHead;							//	WskaŸnik nowej komórki na nastêpny element zostaje przypisany poprzedniej g³owie.
+		nHead->nPrev = newNode;							//	WskaŸnik poprzedniej g³owy na poprzedni element zostaje przypisany nowemu elementowi.
+		nHead = newNode;								//	Zmiana g³owy na nowy element.
 	}
 	else
 	{
-		nHead = newNode;
-		nTail = newNode;
+		nHead = newNode;								//	Przypisanie nowego elementu jako g³owy.
+		nTail = newNode;								//	Przypisanie nowego elementu jako ogona.
 	}
-	auto o2 = chrono::high_resolution_clock::now();
+	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 	
-	outcomeList.tMOutcome(o1, o2);
+	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
 
-	shL.done();
+	shL.done();											//	Wyœwietlenie komunikatu zakoñczenia wykonywania operacji.
 }
 
-void Lista::pushEnd()
+void Lista::pushEnd()									//	Dodanie elementu na koniec listy.
 {
 	int iLNewEndElement;
 
 	cout << "Podaj liczbe jaka ma byc dodana do listy:\n";
-	cin >> iLNewEndElement;
+	cin >> iLNewEndElement;								//	Wybór wartoœci dodawanego elementu.
 
-	auto o1 = chrono::high_resolution_clock::now();
+	auto o1 = chrono::high_resolution_clock::now();		//	Poimar czasu w momencie rozpoczêcia operacji.
 	
-	Node *newNode = new Node(iLNewEndElement);
-	if (nHead != NULL)
+	Node *newNode = new Node(iLNewEndElement);			//	Stworzenie nowej komórki z wybran¹ wartoœci¹.
+	if (nHead != NULL)									//	Sprawdzenie czy lista jest pusta.
 	{
-		newNode->nPrev = nTail;
-		nTail->nNext = newNode;
-		nTail = newNode;
+		newNode->nPrev = nTail;							//	WskaŸnik nowej koórki na element poprzedni zostaje przypisany do ogona.
+		nTail->nNext = newNode;							//	WskaŸnik ogona na nastêpny element zostaje przypisany do nowej komórki.
+		nTail = newNode;								//	Przypisanie nowego elementu jako ogona.
 	}
 	else
 	{
-		nHead = newNode;
-		nTail = newNode;
+		nHead = newNode;								//	Przypisanie nowego elementu jako g³owy.
+		nTail = newNode;								//	Przypisanie nowego elementu jako ogona.
 	}
-	auto o2 = chrono::high_resolution_clock::now();
+	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia wykonywania operacji.
 
-	outcomeList.tMOutcome(o1, o2);
+	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
 
-	shL.done();
+	shL.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania zadania.
 }
 
-void Lista::pushMiddle()
+void Lista::pushMiddle()								//	Dodanie elementu w okreœlone miejsce w liœcie.
 {
-	Node *tempNode = nHead;
+	Node *tempNode = nHead;								//	Stworzenie tyczasowego wskaŸnika przechowuj¹cego adres g³owy.
 	int iLPushPosition, iLPushElement;
 	cout << "Wybierz, po ktorym elemencie ma zostac wstawiony twoj element:\n";
-	cin >> iLPushPosition;
+	cin >> iLPushPosition;								//	Wybranie po jakim elemencie ma zostaæ wstawiony nowy element.
 	cout << "Wybierz wartosc wstawianego elementu:\n";
-	cin >> iLPushElement;
+	cin >> iLPushElement;								//	Wybranie wartoœci wstawianego elementu.
 	cout << "Wybrany element zostanie wstawiony po elemencie: " << iLPushPosition << " i bedzie mial wartosc: " << iLPushElement << ".\n";
 
-	auto o1 = chrono::high_resolution_clock::now();
+	auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia wykonywania operacji,
 
-	if (nHead != NULL)
+	if (nHead != NULL)									//	Sprawdzenie czy lista jest pusta.
 	{
-		while (tempNode->nNext != NULL)
+		while (tempNode->nNext != NULL)					//	Pêtla wykonuj¹ca siê od pocz¹tkowego elementu listy do ostatniego.
 		{
-			if (tempNode->iNData == iLPushPosition)
+			if (tempNode->iNData == iLPushPosition)		//	Sprawdzenie czy wartoœæ elementu zgadza siê z elementem, po którym u¿ytkownik chce wstawiæ nowy element.
 			{
-				Node *newNode = new Node(iLPushElement);
-				if (tempNode == nTail)
+				Node *newNode = new Node(iLPushElement);//	Stworzenie nowego elementu.
+				if (tempNode == nTail)					//	Sprawdzenie czy znaleŸiony element jest ogonem.
 				{
-					newNode->nPrev = nTail;
-					nTail->nNext = newNode;
-					nTail = newNode;
+					newNode->nPrev = nTail;				//	WskaŸnik nowej komórki na poprzedni element zostaje przypisany do porzedniego ogona.
+					nTail->nNext = newNode;				//	WskaŸnik poprzedniego ogona na nastêpny element zostaje przypisany do nowej komórki.
+					nTail = newNode;					//	Przypisanie nowego elementu jako ogona.
 				}
 				else
 				{
-					tempNode->nNext->nPrev = newNode;
-					newNode->nNext = tempNode->nNext;
-					newNode->nPrev = tempNode;
-					tempNode->nNext = newNode;
+					tempNode->nNext->nPrev = newNode;	//	WskaŸnik nastêpnego elementu po znaleŸionej komórce na poprzedni element zostaje przypisany do nowej komórki.
+					newNode->nNext = tempNode->nNext;	//	WskaŸnik nowej komórki na nastêpny element zostaje przypisany do nastêpnej komórki po znaleŸionej.
+					newNode->nPrev = tempNode;			//	WskaŸnik nowej komórki na porzedni element zostaje przypisany do znaleŸionej komórki.
+					tempNode->nNext = newNode;			//	WskaŸnik znaleŸionej komórki na nastêpny element zostaje przypisany do nowej komórki.
 				}
-				goto pushed;
+				goto pushed;							//	Etykieta, dziêki Której program wychodzi z pêtli po znaleŸieniu odpowiedniej wartoœæi.
 			}
-			tempNode = tempNode->nNext;
+			tempNode = tempNode->nNext;					//	Przypisanie tymczasowego elementu do nastêpnego.
 		}
 	}
 	else
 	{
-		shL.empty();
+		shL.empty();									//	Wyœwietlenie komunikatu o braku zawartoœci struktury.
 	}
-pushed:
-	auto o2 = chrono::high_resolution_clock::now();
+pushed:													//	Etykieta.
+	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 
-	outcomeList.tMOutcome(o1, o2);
-	shL.done();
+	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
+	shL.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
 }
 
-void Lista::readFromFileL()
+void Lista::readFromFileL()								//	Odczytanie i zapisanie elementów z pliku tekstowego.
 {
-	ifstream ifLFile("dane.txt", ios::in);
-	if (ifLFile.good())
+	ifstream ifLFile("dane.txt", ios::in);				//	Otworzenie pliku tekstowego o nazwie "dane.txt" w trybie odczytu.
+	if (ifLFile.good())									//	Sprawdzenie czy plik zosta³ pomyœlnie otwarty.
 	{
-		shL.opened();
+		shL.opened();									//	Wyœwietlenie komunikatu o pomyœlnym otwarciu pliku tekstowego.
 
-		auto o1 = chrono::high_resolution_clock::now();
+		auto o1 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie rozpoczêcia operacji.
 
 		string sLLineCountBuffer;
-		getline(ifLFile, sLLineCountBuffer);
-		int iLLineCount = stoi(sLLineCountBuffer);
+		getline(ifLFile, sLLineCountBuffer);			//	Odczytanie pierwszej linii do wczeœniej utworzonej zmiennej. Docelowo linia ta ma przechowywaæ iloœæ elementów odczytywanych z pliku.
+		int iLLineCount = stoi(sLLineCountBuffer);		//	Zmienienie typu odczytanej zmiennej na typ ca³kowyti 4-bajtowy.
 		cout << "Ilosc elementow przekazanych do struktury: " << iLLineCount << endl;
 
 		string sLFileHead;
-		getline(ifLFile, sLFileHead);
-		int iLFileHead = stoi(sLFileHead);
-		Node *tempNode = new Node(iLFileHead);
-		nHead = tempNode;
+		getline(ifLFile, sLFileHead);					//	Odczytanie pierwszego elementu z pliku tekstowego.
+		int iLFileHead = stoi(sLFileHead);				//	Zmienienie typu odczytanej zmiennej na typ ca³kowyti 4-bajtowy.
+		Node *tempNode = new Node(iLFileHead);			//	Stworzenie nowego elementu.
+		nHead = tempNode;								//	Przypisanie nowego elemtnu jako g³owy.
 
-		for (int i = 1; i <= iLLineCount - 2; i++)
+		for (int i = 1; i <= iLLineCount - 2; i++)		//	Pêtla wykonuj¹ca siê od drugiego elementu odczytanego do przedostatniego.
 		{
 			string sLLineValueBuffer;
-			getline(ifLFile, sLLineValueBuffer);
-			int iLLineValue = stoi(sLLineValueBuffer);
+			getline(ifLFile, sLLineValueBuffer);		//	Odczytanie elementu.
+			int iLLineValue = stoi(sLLineValueBuffer);	//	Zmienienie typu odczytanej zmiennej na typ ca³kowyti 4-bajtowy.
 
-			Node *newNode = new Node(iLLineValue);
-			tempNode->nNext = newNode;
-			newNode->nPrev = tempNode;
-			tempNode = newNode;
+			Node *newNode = new Node(iLLineValue);		//	Stworzenie nowego elemntu z odczytan¹ wartoœci¹.
+			tempNode->nNext = newNode;					//	WskaŸnik porpzedniego elementu na nastêpny element zostaje przypisany do nowego elementu.
+			newNode->nPrev = tempNode;					//	WskaŸnik nowego elementu na poprzedni element zostaje przypisany do porzedniego elementu.
+			tempNode = newNode;							//	Nowy element zostaje uznany za tymczasowy element.
 		}
 		string sLFileTail;
-		getline(ifLFile, sLFileTail);
-		int iLFileTail = stoi(sLFileTail);
-		Node *newNode = new Node(iLFileTail);
-		tempNode->nNext = newNode;
-		newNode->nPrev = tempNode;
-		nTail = newNode;
+		getline(ifLFile, sLFileTail);					//	Odczytanie ostatniego elementu.
+		int iLFileTail = stoi(sLFileTail);				//	Zmienienie typu odczytanej zmiennej na typ ca³kowyti 4-bajtowy.
+		Node *newNode = new Node(iLFileTail);			//	Stworzenie nowego elementu z odczytanymi danymi.
+		tempNode->nNext = newNode;						//	WskaŸnik porpzedniego elementu na nastêpny element zostaje przypisany do nowego elementu.
+		newNode->nPrev = tempNode;						//	WskaŸnik nowego elementu na poprzedni element zostaje przypisany do porzedniego elementu.
+		nTail = newNode;								//	Przypisanie nowego elementu jako ogona.
 
-		ifLFile.close();
+		ifLFile.close();								//	Zamkniêcie pliku.
 
-		auto o2 = chrono::high_resolution_clock::now();
+		auto o2 = chrono::high_resolution_clock::now();	//	Pomiaer czasu w momencie zakoñczenia operacji.
 
-		outcomeList.tMOutcome(o1, o2);
+		outcomeList.tMOutcome(o1, o2);					//	Wyœwietlenie czasu wykonywania operacji.
 
-		shL.done();
+		shL.done();										//	Wyœwietlenie komuniaktu o wykonaniu operacji.
 	}
 	else
 	{
-		shL.noFile();
+		shL.noFile();									//	Wyœwietlenie komunikatu o problemie z plikiem.
 	}
 }
 
-void Lista::generateElements()
+void Lista::generateElements()							//	Wygenerowanie okreœlonej liczby elemetów do listy.
 {
 	int iLNumberOfGen;
 	cout << "Ile elementow ma zostac wygenerowanych?\n";
-	cin >> iLNumberOfGen;
+	cin >> iLNumberOfGen;								//	Wybór iloœci wylosowanych elementów.
 
-	auto o1 = chrono::high_resolution_clock::now();
+	auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
 
 	srand(time(0));
 
-	int iLGeneratedHead = rand();
-	Node *tempNode = new Node(iLGeneratedHead);
-	nHead = tempNode;
+	int iLGeneratedHead = rand();						//	Pseudo wylosowanie elementu.
+	Node *tempNode = new Node(iLGeneratedHead);			//	Stworzenie nowego elementu z nowymi danymi.
+	nHead = tempNode;									//	Przypisanie nowego elementu jako g³owy.
 
-	for (int i = 0; i < iLNumberOfGen - 2; i++)
+	for (int i = 0; i < iLNumberOfGen - 2; i++)			//	Pêtla wykonuj¹ca siê od drugiego do przedostatniego elementu.
 	{
-		int iLGenerated = rand();
-		Node *newNode = new Node(iLGenerated);
-		tempNode->nNext = newNode;
-		newNode->nPrev = tempNode;
-		tempNode = newNode;
+		int iLGenerated = rand();						//	Pseudo wylosowanie nowej wartoœci.
+		Node *newNode = new Node(iLGenerated);			//	Stworzenie nowego elementu z now¹ wartoœci¹.
+		tempNode->nNext = newNode;						//	WskaŸnik tymczasowego elementu na nastêpny element zostaje przypisany do nowego elementu.
+		newNode->nPrev = tempNode;						//	WskaŸnik nowego elementu na poprzedni element zostaje przypisany do tymczasowego elementu.
+		tempNode = newNode;								//	Nowy element zostaje przypisany jako tymczasowy element.
 	}
-	int iLGeneratedTail = rand();
-	Node *newNode = new Node(iLGeneratedTail);
-	tempNode->nNext = newNode;
-	newNode->nPrev = tempNode;
-	nTail = newNode;
+	int iLGeneratedTail = rand();						//	Pseudo wylosowanie nowej wartoœci.
+	Node *newNode = new Node(iLGeneratedTail);			//	Stworzenie nowej komórki z now¹ wartoœci¹.
+	tempNode->nNext = newNode;							//	WskaŸnik tymczasowej komórki na nastêpny element zostaje przypisany do nowego elementu.
+	newNode->nPrev = tempNode;							//	WskaŸnik nowego elementu na poprzedni element zostaje przypisany do tymczasowego elementu.
+	nTail = newNode;									//	Nowy element zostaje przypisany jako ogon.
 
-	auto o2 = chrono::high_resolution_clock::now();
+	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia wykonywania operacji.
 
-	outcomeList.tMOutcome(o1, o2);
+	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
 
-	shL.done();
+	shL.done();											//	Wyœwietlenie komuniaktu o zakoñczeniu wykonywania operacji.
 }
 
-void Lista::popFront()
+void Lista::popFront()									//	Usuniêcie elementu z pocz¹tki listy.
 {
-	auto o1 = chrono::high_resolution_clock::now();
-	if (nHead != NULL)
+	auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
+	if (nHead != NULL)									//	Sprawdzenie czy lista jest pusta.
 	{
-		if (nHead->nNext != NULL)
+		if (nHead->nNext != NULL)						//	Sprawdzenie czy lista jest jedno elementowa.
 		{
-			Node *tempNode = nHead->nNext;
-			delete nHead;
-			nHead = tempNode;
+			Node *tempNode = nHead->nNext;				//	Stworzenie nowego wskaŸnika na nastêpny element po g³owie.
+			delete nHead;								//	Usuniêcie g³owy.
+			nHead = tempNode;							//	Przypisanie nastêpnego eleentu jako g³owy.
 		}
 		else
 		{
-			delete nHead;
+			delete nHead;								//	Usuniêcie g³owy.
 		}
 	}
 	else
 	{
-		shL.empty();
+		shL.empty();									//	Wyœwietlenie kounikatu o braku zawartoœci listy.
 	}
-	auto o2 = chrono::high_resolution_clock::now();
+	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 
-	outcomeList.tMOutcome(o1, o2);
+	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
 
-	shL.done();
+	shL.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
 }
 
-void Lista::popEnd()
+void Lista::popEnd()									//	Usuniêcie elementu z koñca listy.
 {
 	auto o1 = chrono::high_resolution_clock::now();
 	if (nHead != NULL)
