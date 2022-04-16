@@ -29,7 +29,11 @@ void Lista::listMenu()
 
 		short sLChoiceListMenu;
 
-		cout << "Prosze wybrac:" << endl << "1.Menu dodawania." << endl << "2.Menu odejmowania." << endl << "3.Menu wyswietlania." << endl << "4.Powrot" << endl;
+		cout << "Prosze wybrac:\n"
+				"\t1.Menu dodawania.\n"
+				"\t2.Menu odejmowania.\n"
+				"\t3.Menu wyswietlania.\n"
+				"\t4.Powrot.\n";
 		cin >> sLChoiceListMenu;
 
 		switch (sLChoiceListMenu)
@@ -71,7 +75,13 @@ void Lista::pushMenu()
 
 		short sLChoicePushMenu;
 
-		cout << "Prosze wybrac:" << endl << "1.Dodanie na poczatek struktury." << endl << "2.Dodanie na koniec struktury." << endl << "3.Dodanie w okreslonie miejsce w strukturze." << endl << "4.Odczytanie danych z pliku tekstowego." << endl << "5.Wygenerowanie okreslonej ilosci danej do struktury." << endl << "6.Powrot" << endl;
+		cout << "Prosze wybrac:\n"
+				"\t1.Dodanie na poczatek struktury.\n"
+				"\t2.Dodanie na koniec struktury.\n"
+				"\t3.Dodanie w okreslonie miejsce w strukturze.\n"
+				"\t4.Odczytanie danych z pliku tekstowego.\n"
+				"\t5.Wygenerowanie okreslonej ilosci danej do struktury.\n"
+				"\t6.Powrot.\n";
 		cin >> sLChoicePushMenu;
 
 		switch (sLChoicePushMenu)
@@ -123,7 +133,12 @@ void Lista::popMenu()
 
 		short sLChoicePopMenu;
 
-		cout << "Prosze wybrac:" << endl << "1.Usuniecie elementu z poczatku struktury." << endl << "2.Usuniecie elementu z konca struktury." << endl << "3.Usuniecie elementu z okreslonego miejsca w struktury." << endl << "4.Usuniecie wszytkich elementow w strukturze." << endl << "5.Powrot" << endl;
+		cout << "Prosze wybrac:\n"
+				"\t1.Usuniecie elementu z poczatku struktury.\n"
+				"\t2.Usuniecie elementu z konca struktury.\n"
+				"\t3.Usuniecie elementu z okreslonego miejsca w struktury.\n"
+				"\t4.Usuniecie wszytkich elementow w strukturze.\n"
+				"\t5.Powrot.\n";
 		cin >> sLChoicePopMenu;
 
 		switch (sLChoicePopMenu)
@@ -170,7 +185,10 @@ void Lista::displayMenu()
 
 		short sLChoiceDisplayMenu;
 
-		cout << "Prosze wybrac:" << endl << "1.Wyswietlenie calej zawartosci struktury." << endl << "2.Wyswietlenie okreslonego elementu struktury." << endl << "3.Powrot." << endl;
+		cout << "Prosze wybrac:\n"
+				"\t1.Wyswietlenie calej zawartosci struktury.\n"
+				"\t2.Wyswietlenie okreslonego elementu struktury.\n"
+				"\t3.Powrot.\n";
 		cin >> sLChoiceDisplayMenu;
 
 		switch (sLChoiceDisplayMenu)
@@ -203,7 +221,7 @@ void Lista::pushFront()
 {
 	int iLNewFrontElement;
 
-	cout << "Podaj liczbe jaka ma byc dodana do listy: " << endl;
+	cout << "Podaj liczbe jaka ma byc dodana do listy:\n";
 	cin >> iLNewFrontElement;
 
 	auto o1 = chrono::high_resolution_clock::now();
@@ -230,7 +248,7 @@ void Lista::pushEnd()
 {
 	int iLNewEndElement;
 
-	cout << "Podaj liczbe jaka ma byc dodana do listy: " << endl;
+	cout << "Podaj liczbe jaka ma byc dodana do listy:\n";
 	cin >> iLNewEndElement;
 
 	auto o1 = chrono::high_resolution_clock::now();
@@ -258,11 +276,11 @@ void Lista::pushMiddle()
 {
 	Node *tempNode = nHead;
 	int iLPushPosition, iLPushElement;
-	cout << "Wybierz, po ktorym elemencie ma zostac wstawiony twoj element: " << endl;
+	cout << "Wybierz, po ktorym elemencie ma zostac wstawiony twoj element:\n";
 	cin >> iLPushPosition;
-	cout << "Wybierz wartosc wstawianego elementu: " << endl;
+	cout << "Wybierz wartosc wstawianego elementu:\n";
 	cin >> iLPushElement;
-	cout << "Wybrany element zostanie wstawiony po elemencie: " << iLPushPosition << " i bedzie mial wartosc: " << iLPushElement << "." << endl;
+	cout << "Wybrany element zostanie wstawiony po elemencie: " << iLPushPosition << " i bedzie mial wartosc: " << iLPushElement << ".\n";
 
 	auto o1 = chrono::high_resolution_clock::now();
 
@@ -358,7 +376,7 @@ void Lista::readFromFileL()
 void Lista::generateElements()
 {
 	int iLNumberOfGen;
-	cout << "Ile elementow ma zostac wygenerowanych?" << endl;
+	cout << "Ile elementow ma zostac wygenerowanych?\n";
 	cin >> iLNumberOfGen;
 
 	auto o1 = chrono::high_resolution_clock::now();
@@ -448,7 +466,7 @@ void Lista::popMiddle()
 {
 	Node *tempNode = nHead;
 	int iLPopChoice;
-	cout << "Wybierz, ktory element ma zostac usuniety: " << endl;
+	cout << "Wybierz, ktory element ma zostac usuniety:\n";
 	cin >> iLPopChoice;
 	cout << "Wybrany element: " << iLPopChoice << endl;
 
@@ -512,7 +530,7 @@ void Lista::displayAll()
 	{
 		int i = 1;
 		Node *tempNode = nHead;
-		cout << "Zawartosc listy (od glowy): \n";
+		cout << "Zawartosc listy (od glowy):\n";
 		while (tempNode != NULL)
 		{
 			cout << "Element nr " << i << " ma wartosc rowna: " << tempNode->iNData << endl;
@@ -536,7 +554,7 @@ void Lista::displayOne()
 	Node *tempNode = nHead;
 	int iLDisplayChoice;
 	int i = 0;
-	cout << "Wybierz, ktory element ma zostac wyswietlony: " << endl;
+	cout << "Wybierz, ktory element ma zostac wyswietlony:\n";
 	cin >> iLDisplayChoice;
 
 	auto o1 = chrono::high_resolution_clock::now();

@@ -29,7 +29,11 @@ void Heap::heapMenu()
 	{
 		shH.cls();
 
-		cout << "Prosze wybrac:" << endl << "1.Menu dodawania." << endl << "2.Menu odejmowania." << endl << "3.Menu wyswietlania." << endl << "4.Powrot" << endl;
+		cout << "Prosze wybrac:\n"
+				"\t1.Menu dodawania.\n"
+				"\t2.Menu odejmowania.\n"
+				"\t3.Menu wyswietlania.\n"
+				"\t4.Powrot.\n";
 		cin >> sHChoiceHeapMenu;
 
 		switch (sHChoiceHeapMenu)
@@ -71,7 +75,11 @@ void Heap::pushMenu()
 
 		short sHChoicePushMenu;
 
-		cout << "Prosze wybrac:" << endl << "1.Dodanie elementu." << endl << "2.Wczytanie danych z pliku tekstowego." << endl << "3.Wygenerowanie okreslonej ilosci elementow." << endl << "4.Powrot." << endl;
+		cout << "Prosze wybrac:\n"
+				"\t1.Dodanie elementu.\n"
+				"\t2.Wczytanie danych z pliku tekstowego.\n"
+				"\t3.Wygenerowanie okreslonej ilosci elementow.\n"
+				"\t4.Powrot.\n";
 		cin >> sHChoicePushMenu;
 
 		switch (sHChoicePushMenu)
@@ -113,7 +121,10 @@ void Heap::popMenu()
 	{
 		shH.cls();
 
-		cout << "Prosze wybrac:" << endl << "1.Usuniecie elementu ze strultury." << endl << "2.Usuniecie wszystkich elementow ze struktury." << endl << "3.Powrot." << endl;
+		cout << "Prosze wybrac:\n"
+				"\t1.Usuniecie elementu ze strultury.\n"
+				"\t2.Usuniecie wszystkich elementow ze struktury.\n"
+				"\t3.Powrot.\n";
 		cin >> sHChoicePopMenu;
 
 		switch (sHChoicePopMenu)
@@ -150,7 +161,10 @@ void Heap::displayMenu()
 	{
 		shH.cls();
 
-		cout << "Prosze wybrac:" << endl << "1.Wyswietlenie calej zawartosci struktury." << endl << "2.Wyswietlenie okreslonego elementu struktury." << endl << "3.Powrot." << endl;
+		cout << "Prosze wybrac:\n"
+				"\t1.Wyswietlenie calej zawartosci struktury.\n"
+				"\t2.Wyswietlenie okreslonego elementu struktury.\n"
+				"\t3.Powrot.\n";
 		cin >> sHChoiceDisplayMenu;
 
 		switch (sHChoiceDisplayMenu)
@@ -183,7 +197,7 @@ void Heap::pushElement()
 {
 	int iHNewEndElement;
 
-	cout << "Podaj liczbe jaka ma byc dodana do kopca: " << endl;
+	cout << "Podaj liczbe jaka ma byc dodana do kopca:\n";
 	cin >> iHNewEndElement;
 
 	auto o1 = chrono::high_resolution_clock::now();
@@ -259,7 +273,7 @@ void Heap::readFromFileH()
 void Heap::generateElements()
 {
 	int iHNumberOfGen;
-	cout << "Ile elementow ma zostac wygenerowanych?" << endl;
+	cout << "Ile elementow ma zostac wygenerowanych?\n";
 	cin >> iHNumberOfGen;
 
 	auto o1 = chrono::high_resolution_clock::now();
@@ -359,7 +373,7 @@ void Heap::displayOne()
 	{
 		int iHChoiceDisplay;
 
-		cout << "Wybierz element, ktory chcesz wyswietlic: " << endl;
+		cout << "Wybierz element, ktory chcesz wyswietlic:\n";
 		cin >> iHChoiceDisplay;
 
 		auto o1 = chrono::high_resolution_clock::now();
@@ -368,11 +382,11 @@ void Heap::displayOne()
 		{
 			if (iHChoiceDisplay == newHeap[i])
 			{
-				cout << "Wybrany element " << iHChoiceDisplay << " znajduje sie w strukturze." << endl;
+				cout << "Wybrany element " << iHChoiceDisplay << " znajduje sie w strukturze.\n";
 				goto displayed;
 			}
 		}
-		cout << "Wybranego elementu nie ma w strukturze." << endl;
+		cout << "Wybranego elementu nie ma w strukturze.\n";
 		displayed:
 		auto o2 = chrono::high_resolution_clock::now();
 
