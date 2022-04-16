@@ -10,9 +10,9 @@ int main()
 	getchar();
 	system("CLS");
 
-	mainWindow noweOkno;
+	mainWindow noweOkno;	//Tworzenie obiektu obs³uguj¹cego wzystkie struktury.
 
-	noweOkno.mainMenu();
+	noweOkno.mainMenu();	//Wywo³anie metody g³ównego menu.
 
 	return 0;
 }

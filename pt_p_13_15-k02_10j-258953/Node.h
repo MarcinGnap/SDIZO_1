@@ -1,3 +1,8 @@
+/*
+	Klasa, której zadaniem jest tworzenie pojedyñczych
+	"komórek" w liœcie dwukierunkowej.
+*/
+
 #pragma once
 class Node
 {

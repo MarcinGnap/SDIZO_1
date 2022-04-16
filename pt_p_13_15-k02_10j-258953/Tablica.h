@@ -1,3 +1,7 @@
+/*
+	Klasa obs³uguj¹ca tablicê dynamiczn¹ i wszystkie metody z ni¹ zwi¹zane.
+*/
+
 #pragma once
 #include "timeMeasurement.h"
 #include "SH.h"

@@ -1,3 +1,9 @@
+/*
+	Klasa, której celem jest zmniejszenie objêtoœci kodu.
+	Nie zmienia ona dzia³ania programu, a jedynie skraca proces pisania
+	i wygl¹d wizualny kodu.
+*/
+
 #pragma once
 
 class SH

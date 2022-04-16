@@ -1,3 +1,7 @@
+/*
+	Klasa wykonuj¹ca pomiar czasu przy wykonywaniu operacji.
+*/
+
 #pragma once
 #include <chrono>
 

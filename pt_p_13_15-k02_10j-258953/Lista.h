@@ -1,3 +1,7 @@
+/*
+	Klasa obs³uguj¹ca listê dwukierunkow¹ i wszystkie metody z ni¹ zwi¹zane.
+*/
+
 #pragma once
 #include "Node.h"
 #include "timeMeasurement.h"

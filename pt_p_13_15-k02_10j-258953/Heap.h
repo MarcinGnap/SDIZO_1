@@ -1,3 +1,7 @@
+/*
+	Klasa obs³uguj¹ca kopiec maksymalny i wszystkie metody z nim zwi¹zane.
+*/
+
 #pragma once
 #include "timeMeasurement.h"
 #include "SH.h"
