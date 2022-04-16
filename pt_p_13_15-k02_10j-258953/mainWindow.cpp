@@ -17,52 +17,52 @@ mainWindow::~mainWindow()
 
 void mainWindow::mainMenu()
 {
-	Tablica nowaTablica;
-	Lista nowaLista;
-	Heap nowyKopiec;
-	//Tree noweDrzewo;
+	Tablica nowaTablica;		//
+	Lista nowaLista;			//	Tworzenie obiektów struktur.
+	Heap nowyKopiec;			//
 
 	short sMChoice;
 
-	for (;;) 
+	for (;;)					//	Pêtla, w której dzia³a g³ówne menu.
 	{
 		system("CLS");
 
-		cout << "Prosze wybrac:" << endl << "1.Tablica." << endl << "2.Lista dwukierunkowa." << endl << "3.Kopiec binarny(maksymalny)." << endl << "4.Drzewo czerwono-czarne" << endl << "5.Wyjscie." << endl;
+		cout << "Prosze wybrac: \n"
+				"\t1.Dynamiczna tablica. \n"
+				"\t2.Lista dwukierunkowa.\n"
+				"\t3.Kopiec binarny(maksymalny).\n"
+				"\t4.Wyjscie.\n";
 		cin >> sMChoice;
 
 		switch (sMChoice)
 		{
 		case 1:
 		{
-			nowaTablica.tableMenu();
+			nowaTablica.tableMenu();	//	Wywo³anie metody odpowiadaj¹cej za menu dynamicznej tablicy.
 			break;
 		}
 		case 2:
 		{
-			nowaLista.listMenu();
+			nowaLista.listMenu();		//	Wywo³anie metody odpowiadaj¹cej za menu listy dwukierunkowej.
 			break;
 		}
 		case 3:
 		{
-			nowyKopiec.heapMenu();
+			nowyKopiec.heapMenu();		//	Wywo³anie metody odpowiadaj¹cej za menu kopca maksymalnego.
 			break;
 		}
 		case 4:
 		{
-			//noweDrzewo.treeMenu();
-			break;
-		}
-		case 5:
-		{
-			exit(0);
+			exit(0);					//	Wyjœcie z programu.
 			break;
 		}
 		default:
 		{
-			cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
-			getchar();
-			break;
+			cout << "Nie ma takiej opcji...\n"
+					"Prosze wybrac cos innego...\n";
+			getchar();		//	Po wybraniu innej opcji ni¿ jest to przewidziane wyœwietla siê komunikat 
+			getchar();		//	oraz program "czeka" na naciœniêcie klawisza "enter".
+			break;			//	Wystêpuje tu podwójny getchar() ze wzglêdu na to, i¿ pojedyñczy nie wykonuje swojego zadania.
 		}
 		}
 	}

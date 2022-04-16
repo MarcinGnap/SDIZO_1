@@ -1,50 +1,60 @@
+/*
+	Klasa, której celem jest zmniejszenie objêtoœci kodu.
+	Nie zmienia ona dzia³ania programu, a jedynie skraca proces pisania
+	i wygl¹d wizualny kodu.
+*/
+
 #include "SH.h"
 
 #include <iostream>
 
 using namespace std;
 
-void SH::cls()
+void SH::cls()			//	Metoda, która "czyœci" ekran.
 {
 	system("CLS");
 }
 
-void SH::done()
+						//	Metoda oczekuj¹ca klawisza z klawiatury.
+void SH::done()			//	G³ównie wykorzystywana do "pokazania", ¿e operacja zosta³a wykonana.
 {
-	cout << "Operacja wykonana." << endl << "Nacisnij Enter, zeby kontynuwac..." << endl;
-	getchar();
-	getchar();
-	system("CLS");
-}
-
-void SH::noOption()
-{
-	cout << "Nie ma takiej opcji..." << endl << "Prosze wybrac cos innego..." << endl;
-	getchar();
-	getchar();
-}
-
-void SH::away()
-{
-	cout << "Wybrana pozycja znajduje sie poza struktura..." << endl << "Wybierz inna pozycje..." << endl;
-}
-
-void SH::opened()
-{
-	cout << "Plik pomyslnie otwarto..." << endl;
-	getchar();
-	getchar();
-}
-
-void SH::noFile()
-{
-	cout << "Nie udalo sie otworzyc pliku..." << endl;
+	cout << "Operacja wykonana.\n"
+			"Nacisnij Enter, zeby kontynuwac...\n";
 	getchar();
 	getchar();
 	system("CLS");
 }
 
-void SH::empty()
+void SH::noOption()		//	Metoda mówi¹ca u¿ytkownikowi, ¿e wybra³ nieistniej¹c¹ opcjê.
 {
-	cout << "Struktura nie ma zawartosci..." << endl;
+	cout << "Nie ma takiej opcji...\n"
+			"Prosze wybrac cos innego...\n";
+	getchar();
+	getchar();
+}
+
+void SH::away()			//	Metoda mówi¹ca u¿ytkownikowi, ¿e wybrany element znajduje siê poza struktur¹.
+{
+	cout << "Wybrana pozycja znajduje sie poza struktura...\n"
+			"Wybierz inna pozycje...\n";
+}
+
+void SH::opened()		//	Metoda daj¹ca komunikat, ¿e plik zosta³ otwarty poyœlnie.
+{
+	cout << "Plik pomyslnie otwarto...\n";
+	getchar();
+	getchar();
+}
+
+void SH::noFile()		//	Metoda daj¹ca komunikat, ¿e plik nie zosta³ otwarty poyœlnie.
+{
+	cout << "Nie udalo sie otworzyc pliku...\n";
+	getchar();
+	getchar();
+	system("CLS");
+}
+
+void SH::empty()		//	Metoda mówi¹ca u¿ytkownikowi, ¿e struktura nie ma zawartoœci.
+{
+	cout << "Struktura nie ma zawartosci...\n";
 }

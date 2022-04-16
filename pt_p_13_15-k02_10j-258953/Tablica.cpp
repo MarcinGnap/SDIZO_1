@@ -29,7 +29,11 @@ void Tablica::tableMenu()
 	{
 		shT.cls();
 
-		cout << "Prosze wybrac:" << endl << "1.Menu dodawania." << endl << "2.Menu odejmowania." << endl << "3.Menu wyswietlania." << endl << "4.Menu pomiarow i losowania elementow." << endl << "5.Powrot" << endl;
+		cout << "Prosze wybrac:\n"
+				"\t1.Menu dodawania.\n"
+				"\t2.Menu odejmowania.\n"
+				"\t3.Menu wyswietlania.\n"
+				"\t4.Powrot\n";
 		cin >> sTChoiceTableMenu;
 
 		switch (sTChoiceTableMenu)
@@ -51,11 +55,6 @@ void Tablica::tableMenu()
 		}
 		case 4:
 		{
-			testMenu();
-			break;
-		}
-		case 5:
-		{
 			return;
 			break;
 		}
@@ -76,7 +75,13 @@ void Tablica::pushMenu()
 	{
 		system("CLS");
 
-		cout << "Prosze wybrac:" << endl << "1.Dodanie na poczatek struktury." << endl << "2.Dodanie na koniec struktury." << endl << "3.Dodanie w okreslonie miejsce w strukturze." << endl << "4.Wczytanie danych z pliku tekstowego do struktury." << endl << "5.Wylosowanie okreslonej liczby elementow do struktury." << endl << "6.Powrot" << endl;
+		cout << "Prosze wybrac:\n"
+				"\t1.Dodanie na poczatek struktury.\n"
+				"\t2.Dodanie na koniec struktury.\n"
+				"\t3.Dodanie w okreslonie miejsce w strukturze.\n"
+				"\t4.Wczytanie danych z pliku tekstowego do struktury.\n"
+				"\t5.Wylosowanie okreslonej liczby elementow do struktury.\n"
+				"\t6.Powrot.\n";
 		cin >> sTChoicePushMenu;
 
 		switch (sTChoicePushMenu)
@@ -128,7 +133,12 @@ void Tablica::popMenu()
 	{
 		shT.cls();
 
-		cout << "Prosze wybrac:" << endl << "1.Usuniecie elementu z poczatku struktury." << endl << "2.Usuniecie elementu z konca struktury." << endl << "3.Usuniecie elementu z okreslonego miejsca w struktury." << endl << "4.Usuniecie wszystkich elementow ze struktury." << endl << "5.Powrot" << endl;
+		cout << "Prosze wybrac:\n"
+				"\t1.Usuniecie elementu z poczatku struktury.\n"
+				"\t2.Usuniecie elementu z konca struktury.\n"
+				"\t3.Usuniecie elementu z okreslonego miejsca w struktury.\n"
+				"\t4.Usuniecie wszystkich elementow ze struktury.\n"
+				"\t5.Powrot.\n";
 		cin >> sTChoicePopMenu;
 
 		switch (sTChoicePopMenu)
@@ -175,7 +185,10 @@ void Tablica::displayMenu()
 	{
 		shT.cls();
 
-		cout << "Prosze wybrac:" << endl << "1.Wyswietlenie calej zawartosci struktury." << endl << "2.Wyswietlenie okreslonego elementu struktury." << endl << "3.Powrot." << endl;
+		cout << "Prosze wybrac:\n"
+				"\t1.Wyswietlenie calej zawartosci struktury.\n"
+				"\t2.Wyswietlenie okreslonego elementu struktury.\n"
+				"\t3.Powrot.\n";
 		cin >> sTChoiceDisplayMenu;
 
 		switch (sTChoiceDisplayMenu)
@@ -204,48 +217,11 @@ void Tablica::displayMenu()
 	}
 }
 
-void Tablica::testMenu()
-{
-	short sTChoiceTestMenu;
-
-	for (;;)
-	{
-		shT.cls();
-
-		cout << "Prosze wybrac:" << endl;
-		cin >> sTChoiceTestMenu;
-
-		switch (sTChoiceTestMenu)
-		{
-		case 1:
-		{
-			
-			break;
-		}
-		case 2:
-		{
-			
-			break;
-		}
-		case 3:
-		{
-			return;
-			break;
-		}
-		default:
-		{
-			shT.noOption();
-			break;
-		}
-		}
-	}
-}
-
 void Tablica::pushFront()
 {
 	int iTNewFrontElement;
 	
-	cout << "Podaj liczbe jaka ma byc dodana do tablicy: " << endl;
+	cout << "Podaj liczbe jaka ma byc dodana do tablicy:\n";
 	cin >> iTNewFrontElement;
 	
 	auto o1 = chrono::high_resolution_clock::now();
@@ -276,7 +252,7 @@ void Tablica::pushEnd()
 {
 	int iTNewEndElement;
 
-	cout << "Podaj liczbe jaka ma byc dodana do tablicy: " << endl;
+	cout << "Podaj liczbe jaka ma byc dodana do tablicy:\n";
 	cin >> iTNewEndElement;
 
 	auto o1 = chrono::high_resolution_clock::now();
@@ -307,14 +283,14 @@ void Tablica::pushMiddle()
 	int iTNewMidElement;
 	int iTPushPosition;
 
-	cout << "Podaj pozycje, na ktora ma zostac dodany element (zakladamy ze numeracja zaczyna sie od 1): " << endl;
+	cout << "Podaj pozycje, na ktora ma zostac dodany element (zakladamy ze numeracja zaczyna sie od 1):\n";
 	cin >> iTPushPosition;
 
 	int iTRightPush = iTPushPosition - 1;
 
 	if (iTRightPush >= 0 && iTRightPush <= iTSize)
 	{
-		cout << "Podaj liczbe jaka ma byc dodana do tablicy: " << endl;
+		cout << "Podaj liczbe jaka ma byc dodana do tablicy:\n";
 		cin >> iTNewMidElement;
 
 		auto o1 = chrono::high_resolution_clock::now();
@@ -390,7 +366,7 @@ void Tablica::readFromFileT()
 void Tablica::generateElements()
 {
 	int iTNumberOfGen;
-	cout << "Ile elementow ma zostac wygenerowanych?" << endl;
+	cout << "Ile elementow ma zostac wygenerowanych?\n";
 	cin >> iTNumberOfGen;
 
 	auto o1 = chrono::high_resolution_clock::now();
@@ -472,7 +448,7 @@ void Tablica::popMiddle()
 {
 	int iTPopPosition;
 
-	cout << "Podaj pozycje, z ktorej ma zostac usuniety element (zakladamy ze numeracja zaczyna sie od 1): " << endl;
+	cout << "Podaj pozycje, z ktorej ma zostac usuniety element (zakladamy ze numeracja zaczyna sie od 1):\n";
 	cin >> iTPopPosition;
 
 	int iTRightPop = iTPopPosition - 1;
@@ -518,7 +494,7 @@ void Tablica::clearAllT()
 	}
 	else
 	{
-		cout << "Tablica nie ma elementow do usuniecia..." << endl;
+		shT.empty();
 	}
 
 	shT.done();
