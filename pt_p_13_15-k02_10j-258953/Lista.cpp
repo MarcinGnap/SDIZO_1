@@ -552,33 +552,33 @@ void Lista::displayAll()								//	Wyœwietlenie ca³ej zawartoœci listy.
 
 void Lista::displayOne()								//	Wyœwitlenie wybranego elementu listy.
 {
-	Node *tempNode = nHead;
+	Node *tempNode = nHead;								//	Stworzenie nowego wskaŸnika i przypisanie do niego g³owy.
 	int iLDisplayChoice;
 	int i = 0;
 	cout << "Wybierz, ktory element ma zostac wyswietlony:\n";
-	cin >> iLDisplayChoice;
+	cin >> iLDisplayChoice;								//	Wybór wartoœci, która ma zostaæ wyœwietlona.
 
-	auto o1 = chrono::high_resolution_clock::now();
+	auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
 	
-	if (nHead != NULL)
+	if (nHead != NULL)									//	Sprawdzenie czy lista ma zawartoœæ.
 	{
-		cout << "Wybrany element: " << iLDisplayChoice << endl;
-		while (tempNode->nNext != NULL)
+		cout << "Wybrany element: " << iLDisplayChoice << endl;		//	Wyœwietlenie wybranej wartoœci.
+		while (tempNode != NULL)						//	Pêtla wykonuj¹ca siê od pocz¹tkowego do ostatniego elementu listy.
 		{
-			i++;
-			if (tempNode->iNData == iLDisplayChoice)
+			i++;										//	Iteracja ziennej odpowiadaj¹cej za numer pozycji od g³owy.
+			if (tempNode->iNData == iLDisplayChoice)	//	Sprawdzenie czy wartoœæ aktualnie "przegl¹danej" komórki jest taka sama jak wybrana wartoœæ.
 			{
-				cout << "Ilosc pozycji od glowy: " << i << endl;
+				cout << "Ilosc pozycji od glowy: " << i << endl;	//	Wyœwietlenie, na której pozycji od g³owy "le¿y" wybrana wartoœæ.
 			}
-			tempNode = tempNode->nNext;
+			tempNode = tempNode->nNext;					//	Przypisanie wskaŸnikowi tyczasowej komórki adresu elementu nastêpnego.
 		}
 	}
 	else
 	{
-		shL.empty();
+		shL.empty();									//	Wyœwietlenie komunikatu o braku zawartoœci listy.
 	}
-	auto o2 = chrono::high_resolution_clock::now();
+	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 
-	outcomeList.tMOutcome(o1, o2);
-	shL.done();
+	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonania operacji.
+	shL.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
 }
