@@ -438,119 +438,119 @@ void Lista::popFront()									//	Usuniêcie elementu z pocz¹tki listy.
 
 void Lista::popEnd()									//	Usuniêcie elementu z koñca listy.
 {
-	auto o1 = chrono::high_resolution_clock::now();
-	if (nHead != NULL)
+	auto o1 = chrono::high_resolution_clock::now();		//	Poiar czasu w momencie rozpoczêcia operacji.
+	if (nHead != NULL)									//	Sprawdzenie czy lista ma zawartoœæ.
 	{
-		if (nTail->nPrev != NULL)
+		if (nTail->nPrev != NULL)						//	Sprawdzenie czy lista nie jest jednoelementowa.
 		{
-			Node *tempNode = nTail->nPrev;
-			delete nTail;
-			nTail = tempNode;
+			Node *tempNode = nTail->nPrev;				//	Stworzenie nowego tyczasowego wskaŸnika i przypisanie do niego element poprzedni od ogona.
+			delete nTail;								//	Usuniêcie ogona.
+			nTail = tempNode;							//	Przypisanie nowego ogona do tymczasowego elementu.
 		}
 		else
 		{
-			delete nTail;
+			delete nTail;								//	Uusniêcie ogona.
 		}
 	}
 	else
 	{
-		shL.empty();
+		shL.empty();									//	Wyœwietlenie kounikatu o braku zawartoœci listy.
 	}
-	auto o2 = chrono::high_resolution_clock::now();
+	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 
-	outcomeList.tMOutcome(o1, o2);
+	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
 
-	shL.done();
+	shL.done();											//	Wyœwietlenie komunikatu i zakoñczeniu wykonywania operacji.
 }
 
-void Lista::popMiddle()
+void Lista::popMiddle()									//	Usuniêcie wskazanego elementu.
 {
-	Node *tempNode = nHead;
+	Node *tempNode = nHead;								//	Stworzenie nowego wskaŸnika i przypisanie do niego g³owy.
 	int iLPopChoice;
 	cout << "Wybierz, ktory element ma zostac usuniety:\n";
-	cin >> iLPopChoice;
-	cout << "Wybrany element: " << iLPopChoice << endl;
+	cin >> iLPopChoice;									//	Wybranie usuwanej wartoœci.
+	cout << "Wybrany element: " << iLPopChoice << endl;	//	Wyœwietlenie wybranej wartoœci.
 
-	auto o1 = chrono::high_resolution_clock::now();
+	auto o1 = chrono::high_resolution_clock::now();		//	Poiar czasu w momencie rozpoczêcia operacji.
 
-	if (nHead != NULL)
+	if (nHead != NULL)									//	Sprawdzenie czy lista nie jest pusta.
 	{
-		while (tempNode->nNext != NULL)
+		while (tempNode->nNext != NULL)					//	Pêtla wykonuj¹ca siê od pierwszego do ostatniego elementu listy.
 		{
-			if (tempNode->iNData == iLPopChoice)
+			if (tempNode->iNData == iLPopChoice)		//	Sprawdzenie czy wartoœæ przechowywana przez komórkê jest identyczna jak wartoœæ wybrana.
 			{
-				tempNode->nNext->nPrev = tempNode->nPrev;
-				tempNode->nPrev->nNext = tempNode->nNext;
-				delete tempNode;
-				goto poped;
+				tempNode->nNext->nPrev = tempNode->nPrev;	//	WskaŸnik komórki nastêpnej po elemencie tymczasowym na element nastêpny zostaje przypisany do wskaŸnika komórki tymczasowej na komórkê poprzedni¹ od nastêpnej.
+				tempNode->nPrev->nNext = tempNode->nNext;	//	WskaŸnik komórki poprzedniej od elementu usuwanego na komórkê nastêpn¹ zostaje przypisany do wskaŸnika usuwanej komórki na element nastêpny.
+				delete tempNode;						//	Usuniêcie elementu.
+				goto poped;								//	Etykieta przerywaj¹ca pêtlê w momencie usuniêcia wartoœci.
 			}
-			tempNode = tempNode->nNext;
+			tempNode = tempNode->nNext;					//	Zmienienie wskaŸnika komórki tymczasowej na element nastêpny.
 		}
 	}
 	else
 	{
-		shL.empty();
+		shL.empty();									//	Wyœwietlenie komunikatu o braku zawartoœci listy.
 	}
 	poped:
-	auto o2 = chrono::high_resolution_clock::now();
+	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 
-	outcomeList.tMOutcome(o1, o2);
-	shL.done();
+	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
+	shL.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
 }
 
-void Lista::clearAll()
+void Lista::clearAll()									//	Usuniêcie wszystkich elementów listy.
 {
-	auto o1 = chrono::high_resolution_clock::now();
+	auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
 
-	Node *tempNode = nHead;
+	Node *tempNode = nHead;								//	Stworzenie tymczasowego wskaŸnika i przypisanie do niego g³owy.
 
-	if (nHead != NULL)
+	if (nHead != NULL)									//	Sprawdzenie czy lista nie jest pusta.
 	{
-		while (nHead != NULL)
+		while (nHead != NULL)							//	Pêtla wykonuj¹ca siê dopóki g³owa ma wartoœæ.
 		{
-			tempNode = nHead->nNext;
-			delete nHead;
-			nHead = tempNode->nNext;
+			tempNode = nHead->nNext;					//	Przypisanie do wskaŸnika tymczasowego elementu nastêpnego po g³owie.
+			delete nHead;								//	Usuniêcie g³owy.
+			nHead = tempNode;							//	Przypisanie do g³owy nastêpnej komórki.
 		}
 	}
 	else
 	{
-		shL.empty();
+		shL.empty();									//	Wyœwietlenie komunikatu o braku zawartoœci listy.
 	}
-	auto o2 = chrono::high_resolution_clock::now();
+	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 
-	outcomeList.tMOutcome(o1, o2);
-	shL.done();
+	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
+	shL.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
 }
 
-void Lista::displayAll()
+void Lista::displayAll()								//	Wyœwietlenie ca³ej zawartoœci listy.
 {
-	auto o1 = chrono::high_resolution_clock::now();
+	auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
 
-	if (nHead != NULL)
+	if (nHead != NULL)									//	Sprawdzenie czy lista nie jest pusta.
 	{
 		int i = 1;
-		Node *tempNode = nHead;
+		Node *tempNode = nHead;							//	Stworzenie tyczasowego wskaŸnika i przypisanie do niego g³owy.
 		cout << "Zawartosc listy (od glowy):\n";
-		while (tempNode != NULL)
+		while (tempNode != NULL)						//	Pêtla wykonuj¹ca siê dopóki wartoœæ tyczasowego wskaŸnika nie jest pusta.
 		{
-			cout << "Element nr " << i << " ma wartosc rowna: " << tempNode->iNData << endl;
-			tempNode = tempNode->nNext;
-			i++;
+			cout << "Element nr " << i << " ma wartosc rowna: " << tempNode->iNData << endl;	//	Wyœwietlenie zawartoœci komórki.
+			tempNode = tempNode->nNext;					//	Przypisanie do wskaŸnika tyczasowej komórki element nastêpny po danej komórce.
+			i++;										//	Iteracja ziennej odpowiadaj¹cej za wyœwietlanie "numeru" elementu.
 		}
-		cout << "Head = " << nHead->iNData << endl << "Tail = " << nTail->iNData << endl;
+		cout << "Head = " << nHead->iNData << endl << "Tail = " << nTail->iNData << endl;	//	Wyœwietlenie wartoœci g³owy i ogona.
 	}
 	else
 	{
-		shL.empty();
+		shL.empty();									//	Wyœwietlenie komunikatu o braku zawartoœci listy.
 	}
-	auto o2 = chrono::high_resolution_clock::now();
+	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 
-	outcomeList.tMOutcome(o1, o2);
-	shL.done();
+	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywanie operacji.
+	shL.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
 }
 
-void Lista::displayOne()
+void Lista::displayOne()								//	Wyœwitlenie wybranego elementu listy.
 {
 	Node *tempNode = nHead;
 	int iLDisplayChoice;
