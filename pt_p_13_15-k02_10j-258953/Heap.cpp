@@ -239,22 +239,23 @@ void Heap::readFromFileH()								//	Odczytanie i skopiowanie wartoœci z pliku t
 		int iHLineCount = stoi(sHLineCountBuffer);
 		cout << "Ilosc elementow przekazanych do struktury: " << iHLineCount << endl;
 
-		auto tempHeap = new int[iHSize];
+		auto tempHeap = new int[iHLineCount];
 
-		for (int i = 1; i <= iHLineCount; i++)
+		for (int i = 0; i < iHLineCount; i++)
 		{
 			string sHLineValueBuffer;
 			getline(ifHFile, sHLineValueBuffer);
 
 			int iHLineValue = stoi(sHLineValueBuffer);
 
-			tempHeap[i - 1] = iHLineValue;
-			iHSize++;
+			tempHeap[i] = iHLineValue;
+			
 			HeapifyUp();
 		}
 		delete[] newHeap;
 		newHeap = tempHeap;
 		tempHeap = nullptr;
+		iHSize = iHLineCount;
 
 		ifHFile.close();
 
