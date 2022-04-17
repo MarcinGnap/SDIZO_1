@@ -21,31 +21,31 @@ Heap::~Heap()
 
 }
 
-void Heap::heapMenu()
+void Heap::heapMenu()									//	Menu g³ówne kopca.
 {
 	short sHChoiceHeapMenu;
 
 	for (;;)
 	{
-		shH.cls();
+		shH.cls();										//	"Wyczyszczenie" ekranu u¿ytkowanika.
 
 		cout << "Prosze wybrac:\n"
 				"\t1.Menu dodawania.\n"
 				"\t2.Menu odejmowania.\n"
 				"\t3.Menu wyswietlania.\n"
 				"\t4.Powrot.\n";
-		cin >> sHChoiceHeapMenu;
+		cin >> sHChoiceHeapMenu;						//	Wybór opcji.
 
 		switch (sHChoiceHeapMenu)
 		{
 		case 1:
 		{
-			pushMenu();
+			pushMenu();									//	Menu dodawania.
 			break;
 		}
 		case 2:
 		{
-			popMenu();
+			popMenu();									//	Menu usuwania z kopca.
 			break;
 		}
 		case 3:
