@@ -569,14 +569,17 @@ void Lista::displayOne()								//	Wyœwitlenie wybranego elementu listy.
 			if (tempNode->iNData == iLDisplayChoice)	//	Sprawdzenie czy wartoœæ aktualnie "przegl¹danej" komórki jest taka sama jak wybrana wartoœæ.
 			{
 				cout << "Ilosc pozycji od glowy: " << i << endl;	//	Wyœwietlenie, na której pozycji od g³owy "le¿y" wybrana wartoœæ.
+				goto displayed;
 			}
 			tempNode = tempNode->nNext;					//	Przypisanie wskaŸnikowi tyczasowej komórki adresu elementu nastêpnego.
 		}
+		cout << "Wybranego elementu nie ma w liscie.\n";
 	}
 	else
 	{
 		shL.empty();									//	Wyœwietlenie komunikatu o braku zawartoœci listy.
 	}
+	displayed:
 	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 
 	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonania operacji.
