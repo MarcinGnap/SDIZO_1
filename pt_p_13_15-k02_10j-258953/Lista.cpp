@@ -495,9 +495,10 @@ void Lista::popEnd()									//	Usuniêcie elementu z koñca listy.
 	{
 		if (nTail->nPrev != NULL)						//	Sprawdzenie czy lista nie jest jednoelementowa.
 		{
-			Node *tempNode = nTail->nPrev;				//	Stworzenie nowego tyczasowego wskaŸnika i przypisanie do niego element poprzedni od ogona.
-			delete nTail;								//	Usuniêcie ogona.
-			nTail = tempNode;							//	Przypisanie nowego ogona do tymczasowego elementu.
+			nTail = nTail->nPrev;						//	Zmiana ogona na element poprzedni.
+
+			delete nTail->nNext;						//	Usuniêcie starego ogona.
+			nTail->nNext = nullptr;						//	Wyzerowanie wskaŸnika na nastêpny element po nowym ogonie.
 		}
 		else
 		{
@@ -866,9 +867,10 @@ void Lista::popEndTest()
 {
 	auto o1 = chrono::high_resolution_clock::now();
 	
-	Node *tempNode = nTail->nPrev;
-	delete nTail;
-	nTail = tempNode;
+	nTail = nTail->nPrev;
+
+	delete nTail->nNext;
+	nTail->nNext = nullptr;
 
 	auto o2 = chrono::high_resolution_clock::now();
 	
