@@ -33,7 +33,8 @@ void Lista::listMenu()									//	Menu g³ówne listy dwukierunkowej.
 				"\t1.Menu dodawania.\n"
 				"\t2.Menu odejmowania.\n"
 				"\t3.Menu wyswietlania.\n"
-				"\t4.Powrot.\n";
+				"\t4.Menu testow.\n"
+				"\t5.Powrot.\n";
 		cin >> sLChoiceListMenu;
 
 		switch (sLChoiceListMenu)
@@ -54,6 +55,11 @@ void Lista::listMenu()									//	Menu g³ówne listy dwukierunkowej.
 			break;
 		}
 		case 4:
+		{
+			testMenu();
+			break;
+		}
+		case 5:
 		{
 			return;
 			break;
@@ -211,6 +217,52 @@ void Lista::displayMenu()								//	Menu wyœwiatlania.
 		default:
 		{
 			shL.noOption();								//	Wyœwietlenie komunikatu o wybraniu nieistniej¹cej opcji.
+			break;
+		}
+		}
+	}
+}
+
+void Lista::testMenu()
+{
+	for (;;)
+	{
+		shL.cls();								
+
+		short sLChoiceTestMenu;
+
+		cout << "Prosze wybrac:\n"
+			"\t1.Testy dodawania.\n"
+			"\t2.Testy usuwania.\n"
+			"\t3.Testy wyswietlania.\n"
+			"\t4.Powrot.\n";
+		cin >> sLChoiceTestMenu;
+
+		switch (sLChoiceTestMenu)
+		{
+		case 1:
+		{
+			testPush();
+			break;
+		}
+		case 2:
+		{
+			testPop();
+			break;
+		}
+		case 3:
+		{
+			testSearch();
+			break;
+		}
+		case 4:
+		{
+			return;
+			break;
+		}
+		default:
+		{
+			shL.noOption();
 			break;
 		}
 		}
@@ -584,4 +636,284 @@ void Lista::displayOne()								//	Wyœwitlenie wybranego elementu listy.
 
 	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonania operacji.
 	shL.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+}
+
+void Lista::testPush()
+{
+	int iLTPuChoice;
+	cout << "Dla ilu elementow maja zostac przeprowadzone testy?";
+	cin >> iLTPuChoice;
+
+	srand(time(0));
+
+	cout << "------------------------------------------\n"
+		"Dodawanie na poczatek:\n";
+	for (int i = 0; i < 100; i++)
+	{
+		generateElementsTest(iLTPuChoice);
+
+		pushFrontTest();
+
+		clearAllTTest();
+	}
+	cout << "------------------------------------------\n"
+		"Dodawanie na koniec:\n";
+	for (int i = 0; i < 100; i++)
+	{
+		generateElementsTest(iLTPuChoice);
+
+		pushEndTest();
+
+		clearAllTTest();
+	}
+	cout << "------------------------------------------\n"
+		"Dodawanie w srodek:\n";
+	for (int i = 0; i < 100; i++)
+	{
+		generateElementsTest(iLTPuChoice);
+
+		pushMiddleTest(iLTPuChoice);
+
+		clearAllTTest();
+	}
+
+	shL.done();
+}
+
+void Lista::testPop()
+{
+	int iLTPoChoice;
+	cout << "Dla ilu elementow maja zostac przeprowadzone testy?";
+	cin >> iLTPoChoice;
+
+	srand(time(0));
+
+	cout << "------------------------------------------\n"
+		"Usuwanie z poczatku:\n";
+	for (int i = 0; i < 100; i++)
+	{
+		generateElementsTest(iLTPoChoice);
+
+		popFrontTest();
+
+		clearAllTTest();
+	}
+	cout << "------------------------------------------\n"
+		"Usuwanie z konca:\n";
+	for (int i = 0; i < 100; i++)
+	{
+		generateElementsTest(iLTPoChoice);
+
+		popEndTest();
+
+		clearAllTTest();
+	}
+	cout << "------------------------------------------\n"
+		"Usuwanie ze srodka:\n";
+	for (int i = 0; i < 100; i++)
+	{
+		generateElementsTest(iLTPoChoice);
+
+		popMiddleTest(iLTPoChoice);
+
+		clearAllTTest();
+	}
+
+	shL.done();
+}
+
+void Lista::testSearch()
+{
+	int iLTDChoice;
+	cout << "Dla ilu elementow maja zostac przeprowadzone testy?";
+	cin >> iLTDChoice;
+
+	srand(time(0));
+
+	cout << "------------------------------------------\n"
+		"Szukanie elementu:\n";
+	for (int i = 0; i < 100; i++)
+	{
+		generateElementsTest(iLTDChoice);
+
+		searchTest(iLTDChoice);
+
+		clearAllTTest();
+	}
+	shL.done();
+}
+
+void Lista::generateElementsTest(int iLTest)
+{	
+	srand(time(0));
+
+	int iLGeneratedHead = rand();						
+	Node *tempNode = new Node(iLGeneratedHead);			
+	nHead = tempNode;									
+
+	for (int i = 0; i < iLTest - 2; i++)		
+	{
+		int iLGenerated = rand();						
+		Node *newNode = new Node(iLGenerated);			
+		tempNode->nNext = newNode;						
+		newNode->nPrev = tempNode;						
+		tempNode = newNode;								
+	}
+	int iLGeneratedTail = rand();						
+	Node *newNode = new Node(iLGeneratedTail);			
+	tempNode->nNext = newNode;							
+	newNode->nPrev = tempNode;							
+	nTail = newNode;
+}
+
+void Lista::clearAllTTest()
+{
+	Node *tempNode = nHead;								
+	if (nHead != NULL)							
+	{
+		while (nHead != NULL)							
+		{
+			tempNode = nHead->nNext;				
+			delete nHead;								
+			nHead = tempNode;							
+		}
+	}
+}
+
+void Lista::pushFrontTest()
+{
+	int iLNewFrontElement = rand();						
+
+	auto o1 = chrono::high_resolution_clock::now();		
+	Node *newNode = new Node(iLNewFrontElement);		
+
+	newNode->nNext = nHead;							
+	nHead->nPrev = newNode;						
+	nHead = newNode;								
+	auto o2 = chrono::high_resolution_clock::now();		
+
+	outcomeList.tMShort(o1, o2);
+}
+
+void Lista::pushEndTest()
+{
+	int iLNewEndElement = rand();						
+
+	auto o1 = chrono::high_resolution_clock::now();		
+
+	Node *newNode = new Node(iLNewEndElement);			
+	
+	newNode->nPrev = nTail;							
+	nTail->nNext = newNode;							
+	nTail = newNode;								
+	
+	auto o2 = chrono::high_resolution_clock::now();		
+
+	outcomeList.tMShort(o1, o2);
+}
+
+void Lista::pushMiddleTest(int iLTPuTest)
+{
+	Node *tempNode = nHead;								
+	int iLPushPosition = rand();
+	int iLPushElement = rand();
+	auto o1 = chrono::high_resolution_clock::now();		
+
+	while (tempNode->nNext != NULL)					
+	{
+		if (tempNode->iNData == iLPushPosition)		
+		{
+			Node *newNode = new Node(iLPushElement);
+			if (tempNode == nTail)					
+			{
+				newNode->nPrev = nTail;				
+				nTail->nNext = newNode;				
+				nTail = newNode;					
+			}
+			else
+			{
+				tempNode->nNext->nPrev = newNode;	
+				newNode->nNext = tempNode->nNext;	
+				newNode->nPrev = tempNode;			
+				tempNode->nNext = newNode;			
+			}
+			goto pushed;							
+		}
+		tempNode = tempNode->nNext;					
+	}	
+	pushed:
+	auto o2 = chrono::high_resolution_clock::now();		
+
+	outcomeList.tMShort(o1, o2);
+}
+
+void Lista::popFrontTest()
+{
+	auto o1 = chrono::high_resolution_clock::now();		
+	if (nHead->nNext != NULL)						
+	{
+		Node *tempNode = nHead->nNext;				
+		delete nHead;								
+		nHead = tempNode;							
+	}
+	else
+	{
+		delete nHead;								
+	}
+	auto o2 = chrono::high_resolution_clock::now();		
+
+	outcomeList.tMShort(o1, o2);
+}
+
+void Lista::popEndTest()
+{
+	auto o1 = chrono::high_resolution_clock::now();		
+	Node *tempNode = nTail->nPrev;				
+	delete nTail;								
+	nTail = tempNode;
+	auto o2 = chrono::high_resolution_clock::now();		
+	outcomeList.tMShort(o1, o2);					
+}
+
+void Lista::popMiddleTest(int iLTPoTest)
+{
+	Node *tempNode = nHead;						
+	int iLPopChoice = rand();
+	auto o1 = chrono::high_resolution_clock::now();		
+	while (tempNode->nNext != NULL)					
+	{
+		if (tempNode->iNData == iLPopChoice)		
+		{
+			tempNode->nNext->nPrev = tempNode->nPrev;	
+			tempNode->nPrev->nNext = tempNode->nNext;	
+			delete tempNode;						
+			goto poped;							
+		}
+		tempNode = tempNode->nNext;					
+	}
+poped:
+	auto o2 = chrono::high_resolution_clock::now();		
+
+	outcomeList.tMShort(o1, o2);
+}
+
+void Lista::searchTest(int iLTSearch)
+{
+	Node *tempNode = nHead;		
+	int iLDisplayChoice = rand();		
+
+	auto o1 = chrono::high_resolution_clock::now();		
+
+	while (tempNode != NULL)						
+	{									
+		if (tempNode->iNData == iLDisplayChoice)	
+		{
+			goto displayed;
+		}
+		tempNode = tempNode->nNext;				
+	}
+displayed:
+	auto o2 = chrono::high_resolution_clock::now();	
+
+	outcomeList.tMShort(o1, o2);
 }

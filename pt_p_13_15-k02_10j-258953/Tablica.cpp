@@ -33,7 +33,8 @@ void Tablica::tableMenu()			//	G³ówne menu tablicy.
 				"\t1.Menu dodawania.\n"
 				"\t2.Menu odejmowania.\n"
 				"\t3.Menu wyswietlania.\n"
-				"\t4.Powrot\n";
+				"\t4.Test menu\n"
+				"\t5.Powrot\n";
 		cin >> sTChoiceTableMenu;
 
 		switch (sTChoiceTableMenu)
@@ -54,6 +55,11 @@ void Tablica::tableMenu()			//	G³ówne menu tablicy.
 			break;
 		}
 		case 4:
+		{
+			testMenu();
+			break;
+		}
+		case 5:
 		{
 			return;
 			break;
@@ -204,6 +210,52 @@ void Tablica::displayMenu()			//	Menu wyœwietlania.
 			break;
 		}
 		case 3:
+		{
+			return;
+			break;
+		}
+		default:
+		{
+			shT.noOption();
+			break;
+		}
+		}
+	}
+}
+
+void Tablica::testMenu()
+{
+	short sTChoiceTestMenu;
+
+	for (;;)
+	{
+		shT.cls();
+
+		cout << "Prosze wybrac:\n"
+			"\t1.Testy dodawania.\n"
+			"\t2.Testy usuwania.\n"
+			"\t3.Testy wyswietlania.\n"
+			"\t4.Powrot.\n";
+		cin >> sTChoiceTestMenu;
+
+		switch (sTChoiceTestMenu)
+		{
+		case 1:
+		{
+			testPush();
+			break;
+		}
+		case 2:
+		{
+			testPop();
+			break;
+		}
+		case 3:
+		{
+			testSearch();
+			break;
+		}
+		case 4:
 		{
 			return;
 			break;
@@ -487,6 +539,7 @@ void Tablica::clearAllT()										//	Usuniêcie wszystkich elementów z tablicy.
 	{
 		auto o1 = chrono::high_resolution_clock::now();			//	Pomiar czasu w momencie rozpoczêcia operacji.
 		delete [] newTable;										//	Usuniêcie zawartoœci u¿ywanej w programie tablicy.
+		newTable = nullptr;
 		iTSize = 0;												//	Wyzerowanie zmiennej zawieraj¹cej rozmiar tablicy.
 		auto o2 = chrono::high_resolution_clock::now();			//	Pomiar czasu w momencie zakoñczenia operacji.
 
@@ -548,4 +601,287 @@ void Tablica::displayOne()										//	Wyœwietlenie elementu z wybranej pozycji.
 		cout << "Struktura nie ma zawartosci...\n";
 	}
 	shT.done();													//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+}
+
+void Tablica::testPush()
+{
+	int iTTPuChoice;
+	cout << "Dla ilu elementow maja zostac przeprowadzone testy?";
+	cin >> iTTPuChoice;
+
+	srand(time(0));
+
+	cout << "------------------------------------------\n"
+			"Dodawanie na poczatek:\n";
+	for (int i = 0; i < 100; i++)
+	{
+		generateElementsTest(iTTPuChoice);
+		
+		pushFrontTest();
+
+		clearAllTTest();
+	}
+	cout << "------------------------------------------\n"
+			"Dodawanie na koniec:\n";
+	for (int i = 0; i < 100; i++)
+	{
+		generateElementsTest(iTTPuChoice);
+
+		pushEndTest();
+
+		clearAllTTest();
+	}
+	cout << "------------------------------------------\n"
+			"Dodawanie w srodek:\n";
+	for (int i = 0; i < 100; i++)
+	{
+		generateElementsTest(iTTPuChoice);
+
+		pushMiddleTest(iTTPuChoice);
+
+		clearAllTTest();
+	}
+
+	shT.done();
+}
+
+void Tablica::testPop()
+{
+	int iTTPoChoice;
+	cout << "Dla ilu elementow maja zostac przeprowadzone testy?";
+	cin >> iTTPoChoice;
+
+	srand(time(0));
+
+	cout << "------------------------------------------\n"
+		"Usuwanie z poczatku:\n";
+	for (int i = 0; i < 100; i++)
+	{
+		generateElementsTest(iTTPoChoice);
+
+		popFrontTest();
+
+		clearAllTTest();
+	}
+	cout << "------------------------------------------\n"
+		"Usuwanie z konca:\n";
+	for (int i = 0; i < 100; i++)
+	{
+		generateElementsTest(iTTPoChoice);
+
+		popEndTest();
+
+		clearAllTTest();
+	}
+	cout << "------------------------------------------\n"
+		"Usuwanie ze srodka:\n";
+	for (int i = 0; i < 100; i++)
+	{
+		generateElementsTest(iTTPoChoice);
+
+		popMiddleTest(iTTPoChoice);
+
+		clearAllTTest();
+	}
+
+	shT.done();
+}
+
+void Tablica::testSearch()
+{
+	int iTTDChoice;
+	cout << "Dla ilu elementow maja zostac przeprowadzone testy?";
+	cin >> iTTDChoice;
+
+	srand(time(0));
+
+	cout << "------------------------------------------\n"
+		"Szukanie elementu:\n";
+	for (int i = 0; i < 100; i++)
+	{
+		generateElementsTest(iTTDChoice);
+
+		searchTest(iTTDChoice);
+
+		clearAllTTest();
+	}
+	shT.done();
+}
+
+void Tablica::generateElementsTest(int iTTPuChoice)
+{
+	auto *tempTable = new int[iTTPuChoice];
+
+	
+
+	for (int z = 0; z < iTTPuChoice; z++)
+	{							
+		tempTable[z] = rand();
+	}
+	delete[] this->newTable;											
+	this->newTable = tempTable;										
+	tempTable = nullptr;										
+	this->iTSize = iTTPuChoice;						
+}
+
+void Tablica::clearAllTTest()
+{		
+	delete[] this->newTable;										
+	this->iTSize = 0;
+	this->newTable = nullptr;
+}
+
+void Tablica::pushFrontTest()
+{
+	auto o1 = chrono::high_resolution_clock::now();				
+
+	int iTTempSize = iTSize + 1;
+	auto tempTable = new int[iTSize + 1];						
+
+	tempTable[0] = rand();
+	if (iTSize != 0)
+	{
+		for (int i = iTTempSize; i >= 1; i--)					
+		{
+			tempTable[i] = newTable[i - 1];						
+		}
+	}
+	delete[] newTable;											
+	newTable = tempTable;										
+	tempTable = nullptr;										
+	iTSize++;													
+	auto o2 = chrono::high_resolution_clock::now();			
+
+	outcomeTable.tMShort(o1, o2);						
+
+}
+
+void Tablica::pushEndTest()
+{
+	auto o1 = chrono::high_resolution_clock::now();				
+
+	auto tempTable = new int[iTSize + 1];						
+
+	tempTable[iTSize] = rand();						
+	if (iTSize != 0)
+	{
+		for (int i = 0; i < iTSize; i++)						
+		{
+			tempTable[i] = newTable[i];							
+		}
+	}
+	delete[] newTable;											
+	newTable = tempTable;										
+	tempTable = nullptr;										
+	iTSize++;													
+	auto o2 = chrono::high_resolution_clock::now();				
+
+	outcomeTable.tMShort(o1, o2);								
+
+}
+
+void Tablica::pushMiddleTest(int iTTPuChoice)
+{
+	int iTNewMidElement = rand();
+										
+	int iTRightPush = ((rand() % iTTPuChoice) + 0);
+								
+
+	auto o1 = chrono::high_resolution_clock::now();			
+	auto tempTable = new int[iTSize + 1];					
+	tempTable[iTRightPush] = iTNewMidElement;				
+	for (int i = 0; i < iTRightPush; i++)					
+	{
+		tempTable[i] = newTable[i];							
+	}
+	for (int i = iTRightPush + 1; i < iTSize + 1; i++)		
+	{
+		tempTable[i] = newTable[i - 1];						
+	}
+	delete[] newTable;										
+	newTable = tempTable;									
+	tempTable = nullptr;									
+	iTSize++;												
+	auto o2 = chrono::high_resolution_clock::now();			
+	outcomeTable.tMShort(o1, o2);						
+}
+
+void Tablica::popFrontTest()
+{
+	auto o1 = chrono::high_resolution_clock::now();			
+	auto tempTable = new int[iTSize - 1];					
+
+	for (int i = iTSize - 1; i >= 0; i--)				
+	{
+		tempTable[i] = newTable[i + 1];						
+	}
+	delete[] newTable;										
+	newTable = tempTable;									
+	tempTable = nullptr;									
+	iTSize--;												
+	auto o2 = chrono::high_resolution_clock::now();			
+
+	outcomeTable.tMShort(o1, o2);
+}
+
+void Tablica::popEndTest()
+{
+	auto o1 = chrono::high_resolution_clock::now();			
+	auto tempTable = new int[iTSize - 1];					
+
+	for (int i = 0; i < iTSize - 1; i++)					
+	{
+		tempTable[i] = newTable[i];							
+	}
+	delete[] newTable;										
+	newTable = tempTable;									
+	tempTable = nullptr;									
+	iTSize--;												
+	auto o2 = chrono::high_resolution_clock::now();			
+
+	outcomeTable.tMShort(o1, o2);
+
+}
+
+void Tablica::popMiddleTest(int iTTPoChoice)
+{
+	int iTRightPop = ((rand() % iTTPoChoice) + 0);
+
+	auto o1 = chrono::high_resolution_clock::now();			
+	auto tempTable = new int[iTSize - 1];					
+
+	for (int i = 0; i < iTRightPop; i++)					
+	{
+		tempTable[i] = newTable[i];							
+	}
+	for (int i = iTRightPop; i < iTSize; i++)				
+	{
+		tempTable[i] = newTable[i + 1];						
+	}
+	delete[] newTable;										
+	newTable = tempTable;									 
+	tempTable = nullptr;									
+	iTSize--;												
+	auto o2 = chrono::high_resolution_clock::now();			
+
+	outcomeTable.tMShort(o1, o2);
+}
+
+void Tablica::searchTest(int iTTDChoicev)
+{
+	int iTChoiceDisplay = rand();
+								
+	auto o1 = chrono::high_resolution_clock::now();			
+
+	for (int s = 0; s < iTTDChoicev; s++)
+	{
+		if (newTable[s] == iTChoiceDisplay)
+		{
+			goto searched;
+		}
+	}
+	searched:
+	auto o2 = chrono::high_resolution_clock::now();			
+
+	outcomeTable.tMShort(o1, o2);
 }

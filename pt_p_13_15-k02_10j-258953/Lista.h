@@ -27,6 +27,7 @@ private:
 	void pushMenu();
 	void popMenu();
 	void displayMenu();
+	void testMenu();
 
 	void pushFront();
 	void pushEnd();
@@ -41,4 +42,21 @@ private:
 
 	void displayAll();
 	void displayOne();
+
+	void testPush();
+	void testPop();
+	void testSearch();
+
+	void generateElementsTest(int);
+	void clearAllTTest();
+
+	void pushFrontTest();
+	void pushEndTest();
+	void pushMiddleTest(int);
+
+	void popFrontTest();
+	void popEndTest();
+	void popMiddleTest(int);
+
+	void searchTest(int);
 };

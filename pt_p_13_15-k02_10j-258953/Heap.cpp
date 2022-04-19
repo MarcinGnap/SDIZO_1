@@ -33,7 +33,8 @@ void Heap::heapMenu()									//	Menu g³ówne kopca.
 				"\t1.Menu dodawania.\n"
 				"\t2.Menu odejmowania.\n"
 				"\t3.Menu wyswietlania.\n"
-				"\t4.Powrot.\n";
+				"\t4.Menu testow.\n"
+				"\t5.Powrot.\n";
 		cin >> sHChoiceHeapMenu;						//	Wybór opcji.
 
 		switch (sHChoiceHeapMenu)
@@ -54,6 +55,11 @@ void Heap::heapMenu()									//	Menu g³ówne kopca.
 			break;
 		}
 		case 4:
+		{
+			testMenu();
+			break;
+		}
+		case 5:
 		{
 			return;
 			break;
@@ -187,6 +193,52 @@ void Heap::displayMenu()								//	Menu wyœwietlania.
 		default:
 		{
 			shH.noOption();								//	Wyœwietlenie komunikatu o wybraniu nieistniej¹cej opcji.
+			break;
+		}
+		}
+	}
+}
+
+void Heap::testMenu()
+{
+	short sHChoiceTestMenu;
+
+	for (;;)
+	{
+		shH.cls();
+
+		cout << "Prosze wybrac:\n"
+			"\t1.Testy dodawania.\n"
+			"\t2.Testy usuwania.\n"
+			"\t3.Testy wyswietlania.\n"
+			"\t4.Powrot.\n";
+		cin >> sHChoiceTestMenu;
+
+		switch (sHChoiceTestMenu)
+		{
+		case 1:
+		{
+			testPush();
+			break;
+		}
+		case 2:
+		{
+			testPop();
+			break;
+		}
+		case 3:
+		{
+			testSearch();
+			break;
+		}
+		case 4:
+		{
+			return;
+			break;
+		}
+		default:
+		{
+			shH.noOption();
 			break;
 		}
 		}
@@ -334,6 +386,7 @@ void Heap::clearAll()									//	Usuniêcie wszystkich elementów kopca.
 	{
 		auto o1 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie rozpoczêcia operacji.
 		delete[] newHeap;								//	Usuniêcie zawartoœci kopca.
+		newHeap = nullptr;
 		iHSize = 0;										//	Wyzerowanie zmiennej przechowuj¹cej rozmiar kopca.
 		auto o2 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie zakoñczenia operacji.
 
@@ -448,4 +501,158 @@ int Heap::getRight(int x)								//	Zwrócenie indeksu prawego potomka.
 int Heap::getParent(int x)								//	Zwrócenie indeksu rodzica.
 {
 	return floor((x - 1) / 2);
+}
+
+void Heap::testPush()
+{
+	int iHTPuChoice;
+	cout << "Dla ilu elementow maja zostac przeprowadzone testy?";
+	cin >> iHTPuChoice;
+
+	srand(time(0));
+
+	cout << "------------------------------------------\n"
+		"Dodawanie:\n";
+	for (int i = 0; i < 100; i++)
+	{
+		generateElementsTest(iHTPuChoice);
+
+		pushTest();
+
+		clearAllTTest();
+	}
+
+	shH.done();
+}
+
+void Heap::testPop()
+{
+	int iHTPoChoice;
+	cout << "Dla ilu elementow maja zostac przeprowadzone testy?";
+	cin >> iHTPoChoice;
+
+	srand(time(0));
+
+	cout << "------------------------------------------\n"
+		"Usuwanie:\n";
+	for (int i = 0; i < 100; i++)
+	{
+		generateElementsTest(iHTPoChoice);
+
+		popTest();
+
+		clearAllTTest();
+	}
+
+	shH.done();
+}
+
+void Heap::testSearch()
+{
+	int iHTDChoice;
+	cout << "Dla ilu elementow maja zostac przeprowadzone testy?";
+	cin >> iHTDChoice;
+
+	srand(time(0));
+
+	cout << "------------------------------------------\n"
+		"Szukanie elementu:\n";
+	for (int i = 0; i < 100; i++)
+	{
+		generateElementsTest(iHTDChoice);
+
+		searchTest(iHTDChoice);
+
+		clearAllTTest();
+	}
+	shH.done();
+}
+
+void Heap::generateElementsTest(int iHTPuChoice)
+{
+	auto *tempHeap = new int[iHTPuChoice];
+
+	for (int z = 0; z < iHTPuChoice; z++)
+	{
+		tempHeap[z] = rand();
+		HeapifyUp();
+	}
+	delete[] this->newHeap;
+	this->newHeap = tempHeap;
+	tempHeap = nullptr;
+	this->iHSize = iHTPuChoice;
+}
+
+void Heap::clearAllTTest()
+{
+	delete[] this->newHeap;
+	this->iHSize = 0;
+	this->newHeap = nullptr;
+}
+
+void Heap::pushTest()
+{
+	int iHNewEndElement = rand();
+
+	auto o1 = chrono::high_resolution_clock::now();		
+
+	auto tempHeap = new int[iHSize + 1];				
+
+	tempHeap[iHSize] = iHNewEndElement;					
+	if (iHSize != 0)									
+	{
+		for (int i = 0; i < iHSize; i++)				
+		{
+			tempHeap[i] = newHeap[i];					
+		}
+	}
+	delete[] newHeap;									
+	newHeap = tempHeap;									
+	tempHeap = nullptr;									
+	iHSize++;											
+
+	HeapifyUp();										
+
+	auto o2 = chrono::high_resolution_clock::now();		
+
+	outcomeHeap.tMShort(o1, o2);
+}
+
+void Heap::popTest()
+{
+	auto o1 = chrono::high_resolution_clock::now();	
+	auto tempHeap = new int[iHSize - 1];			
+
+	tempHeap[0] = newHeap[iHSize - 1];				
+	for (int i = 1; i < iHSize - 1; i++)			
+	{
+		tempHeap[i] = newHeap[i];					
+	}
+	delete[] newHeap;								
+	newHeap = tempHeap;								
+	tempHeap = nullptr;							
+	iHSize--;			
+
+	HeapifyDown();	
+
+	auto o2 = chrono::high_resolution_clock::now();	
+	outcomeHeap.tMShort(o1, o2);
+}
+
+void Heap::searchTest(int iHTDChoicev)
+{
+	int iHChoiceDisplay = rand();
+	auto o1 = chrono::high_resolution_clock::now();
+
+	for (int i = 0; i < iHTDChoicev; i++)
+	{
+		if (iHChoiceDisplay == newHeap[i])			
+		{
+			goto displayed;							
+		}
+	}
+displayed:
+	auto o2 = chrono::high_resolution_clock::now();
+
+	outcomeHeap.tMShort(o1, o2);
 }

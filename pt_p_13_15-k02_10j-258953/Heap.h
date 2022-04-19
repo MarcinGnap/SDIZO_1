@@ -25,6 +25,7 @@ private:
 	void pushMenu();
 	void popMenu();
 	void displayMenu();
+	void testMenu();
 
 	void pushElement();
 	void readFromFileH();
@@ -42,4 +43,17 @@ private:
 	int getLeft(int);
 	int getRight(int);
 	int getParent(int);
+
+	void testPush();
+	void testPop();
+	void testSearch();
+
+	void generateElementsTest(int);
+	void clearAllTTest();
+
+	void pushTest();
+
+	void popTest();
+
+	void searchTest(int);
 };
