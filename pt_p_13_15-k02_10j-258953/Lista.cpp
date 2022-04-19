@@ -768,15 +768,12 @@ void Lista::generateElementsTest(int iLTest)
 
 void Lista::clearAllTTest()
 {
-	Node *tempNode = nHead;								
-	if (nHead != NULL)							
+	Node *tempNode = nHead;
+	while (nHead != NULL)
 	{
-		while (nHead != NULL)							
-		{
-			tempNode = nHead->nNext;				
-			delete nHead;								
-			nHead = tempNode;							
-		}
+		tempNode = nHead->nNext;
+		delete nHead;
+		nHead = tempNode;
 	}
 }
 
@@ -867,12 +864,15 @@ void Lista::popFrontTest()
 
 void Lista::popEndTest()
 {
-	auto o1 = chrono::high_resolution_clock::now();		
-	Node *tempNode = nTail->nPrev;				
-	delete nTail;								
+	auto o1 = chrono::high_resolution_clock::now();
+	
+	Node *tempNode = nTail->nPrev;
+	delete nTail;
 	nTail = tempNode;
-	auto o2 = chrono::high_resolution_clock::now();		
-	outcomeList.tMShort(o1, o2);					
+
+	auto o2 = chrono::high_resolution_clock::now();
+	
+	outcomeList.tMShort(o1, o2);
 }
 
 void Lista::popMiddleTest(int iLTPoTest)
