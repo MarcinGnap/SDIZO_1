@@ -334,6 +334,8 @@ void Heap::generateElements()
 	srand(time(0));
 
 	delete[] newHeap;
+	newHeap = nullptr;
+	iHSize = 0;
 	newHeap = new int[iHNumberOfGen];
 	
 	for (int i = 0; i < iHNumberOfGen; i++)
@@ -405,10 +407,34 @@ void Heap::displayAll()									//	Wyœwietlenie wszystkich elementów kopca.
 	if (iHSize != 0)									//	Sprawdzenie czy kopiec ma zawartoœæ.
 	{
 		auto o1 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie rozpoczêcia operacji.
-		for (int i = 0; i < iHSize; i++)				//	Pêtla wykonuj¹ca siê od pierwszego do ostatniego elementu kopca.
+
+		bool outOfBound = false;
+		int first = 0;
+		int last = 1;
+
+		int space = pow(2, floor(log2(iHSize)) + 1) - 1;	//	Obliczenie maksymalnej iloœci elementów w warstwie.
+
+		while (!outOfBound)
 		{
-			cout << "Element nr " << i + 1 << " = " << newHeap[i] << endl;	//	Wyœwietlenie elementu.
+			cout << string(space / 2 * 3, ' ');				//	Wydrukowanie znaku spacji przed ka¿d¹ warstw¹ kopca.
+
+			for (int i = first; i < last; i++)				//	Wydrukowanie elementów na danej warstwie.
+			{
+				if (i >= iHSize)
+				{
+					outOfBound = true;
+					break;
+				}
+				cout << '[' << newHeap[i] << ']' << string(space * 3, ' ');
+			}
+			cout << "\n\n";
+
+			first = last;									//	Zmiana parametrów pierwszej i ostatniej komórki w warstwie.
+			last = 2 * last + 1;
+
+			space = space / 2;								//	Zmiana przestrzeni miêdzy elementami.
 		}
+
 		auto o2 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie zakoñczenia operacji.
 
 		outcomeHeap.tMOutcome(o1, o2);					//	Wyœwietlenie czasu wykonywania operacji.
