@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <chrono>
+#include <fstream>
 
 using namespace std;
 
@@ -21,4 +22,11 @@ void timeMeasurement::tMShort(chrono::high_resolution_clock::time_point o1, chro
 {
 	chrono::nanoseconds time_span = chrono::duration_cast<chrono::nanoseconds> (o2 - o1);
 	cout << "* " << time_span.count() << " nanosekund" << endl;
+	fstream fTMTests("fTMTests.txt", ios::app | ios::out);
+	if (fTMTests.good())
+	{
+		fTMTests << time_span.count() << endl;
+		fTMTests.flush();
+	}
+	fTMTests.close();
 }
