@@ -37,7 +37,7 @@ private:
 	void displayAll();
 	void displayOne();
 
-	void HeapifyDown();
+	void HeapifyDown(int);
 	void HeapifyUp();
 
 	int getLeft(int);

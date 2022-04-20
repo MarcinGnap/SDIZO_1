@@ -367,7 +367,7 @@ void Heap::popElement()									//	Usuniêcie elementu z kopca.
 		tempHeap = nullptr;								//	Usuniêcie zawartoœci tymczasowego kopca.
 		iHSize--;										//	Dekrementacja zimennej przechowuj¹cej rozmiar kopca.
 
-		HeapifyDown();									//	Posortowanie elementów w dó³.
+		HeapifyDown(0);									//	Posortowanie elementów w dó³.
 
 		auto o2 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie zakoñczenia operacji.
 
@@ -452,24 +452,27 @@ void Heap::displayOne()									//	Wyœwietlenie wybranego elementu.
 	shH.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
 }
 
-void Heap::HeapifyDown()								//	Posortowanie kopca w dó³.
+void Heap::HeapifyDown(int index)								//	Posortowanie kopca w dó³.
 {
-	int x = 0;
-	while (x < iHSize && (newHeap[x] < newHeap[getLeft(x)] || newHeap[x] < newHeap[getRight(x)]))
+	int left = getLeft(index);
+	int right = getRight(index);
+	int parent = index;
+
+	if (left < iHSize && newHeap[left] > newHeap[parent])
 	{
-		int tempParent = newHeap[x];
-		if (newHeap[getLeft(x)] >= newHeap[getRight(x)])
-		{
-			newHeap[x] = newHeap[getLeft(x)];
-			newHeap[getLeft(x)] = tempParent;
-			x = getLeft(x);
-		}
-		else if (newHeap[getLeft(x)] < newHeap[getRight(x)])
-		{
-			newHeap[x] = newHeap[getRight(x)];
-			newHeap[getRight(x)] = tempParent;
-			x = getRight(x);
-		}
+		parent = left;
+	}
+	if (right < iHSize && newHeap[right] > newHeap[parent])
+	{
+		parent = right;
+	}
+	if (parent != index)
+	{
+		auto tmp = newHeap[parent];
+		newHeap[parent] = newHeap[index];
+		newHeap[index] = tmp;
+
+		HeapifyDown(parent);
 	}
 }
 
@@ -620,22 +623,23 @@ void Heap::pushTest()
 
 void Heap::popTest()
 {
-	auto o1 = chrono::high_resolution_clock::now();	
-	auto tempHeap = new int[iHSize - 1];			
+	auto o1 = chrono::high_resolution_clock::now();
+	auto tempHeap = new int[iHSize - 1];
 
-	tempHeap[0] = newHeap[iHSize - 1];				
-	for (int i = 1; i < iHSize - 1; i++)			
+	tempHeap[0] = newHeap[iHSize - 1];
+	for (int i = 1; i < iHSize - 1; i++)
 	{
-		tempHeap[i] = newHeap[i];					
+		tempHeap[i] = newHeap[i];
 	}
-	delete[] newHeap;								
-	newHeap = tempHeap;								
-	tempHeap = nullptr;							
-	iHSize--;			
+	delete[] newHeap;
+	newHeap = tempHeap;
+	tempHeap = nullptr;
+	iHSize--;
 
-	HeapifyDown();	
+	HeapifyDown(0);
 
-	auto o2 = chrono::high_resolution_clock::now();	
+	auto o2 = chrono::high_resolution_clock::now();
+	
 	outcomeHeap.tMShort(o1, o2);
 }
 
