@@ -291,7 +291,7 @@ void Lista::popMenu()									//	Menu usuwania elementów z listy.
 			int iTRightPop = iLPopIndex - 1;					//	Zmienna zawieraj¹ca poprawn¹ pozycjê usuwanego elementu.
 			auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
 
-			if (popMiddleValue(iTRightPop) == true)				//	Usuniêcie wskazanego elementu listy.
+			if (popMiddleIndex(iTRightPop) == true)				//	Usuniêcie wskazanego elementu listy.
 			{
 				cout << "Wybrany element zostal usuniety ze struktury.\n";
 			}
@@ -675,13 +675,15 @@ void Lista::popFront()									//	Usuniêcie elementu z pocz¹tki listy.
 	{
 		if (nHead->nNext != NULL)						//	Sprawdzenie czy lista jest jedno elementowa.
 		{
-			Node *tempNode = nHead->nNext;				//	Stworzenie nowego wskaŸnika na nastêpny element po g³owie.
-			delete nHead;								//	Usuniêcie g³owy.
-			nHead = tempNode;							//	Przypisanie nastêpnego eleentu jako g³owy.
+			nHead = nHead->nNext;						//	Zmiana g³owy na element poprzedni.
+			delete nHead->nPrev;						//	Usuniêcie starej g³owy.
+			nHead->nPrev = nullptr;						//	Wyzerowanie wskaŸnika na poprzedni element przed now¹ g³ow¹.
 		}
 		else
 		{
 			delete nHead;								//	Usuniêcie g³owy.
+			nTail = nullptr;
+			nHead = nullptr;
 		}
 	}
 	else
@@ -704,6 +706,8 @@ void Lista::popEnd()									//	Usuniêcie elementu z koñca listy.
 		else
 		{
 			delete nTail;								//	Uusniêcie ogona.
+			nTail = nullptr;
+			nHead = nullptr;
 		}
 	}
 	else
