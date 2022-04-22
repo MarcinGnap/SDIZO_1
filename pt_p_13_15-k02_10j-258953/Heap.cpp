@@ -264,7 +264,7 @@ void Heap::displayMenu()									//	Menu wyœwietlania.
 
 			auto o2 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie zakoñczenia operacji.
 			outcomeHeap.tMOutcome(o1, o2);					//	Wyœwietlenie czasu wykonywania operacji.
-			shH.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+			shH.done();										//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
 			break;
 		}
 		case 4:

@@ -104,8 +104,8 @@ void Tablica::pushMenu()										//	Menu dodawania do tablicy.
 
 			auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia programu.
 			outcomeTable.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonania operacji.
-			shT.done();											//	Wyœwietlenie komunikatu o zakoñczeniu zadania oraz czekanie na naciœniêcie klawisza przez u¿ytkownika.
 			displayAll();
+			shT.done();											//	Wyœwietlenie komunikatu o zakoñczeniu zadania oraz czekanie na naciœniêcie klawisza przez u¿ytkownika.
 
 			break;
 		}
