@@ -35,7 +35,7 @@ private:
 	void popFront();
 	void popEnd();
 	void popMiddleIndex(int);
-	void popMiddleValue(int);
+	bool popMiddleValue(int);
 	void clearAllT();
 
 	void displayAll();

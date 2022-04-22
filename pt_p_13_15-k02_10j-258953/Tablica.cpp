@@ -258,8 +258,14 @@ void Tablica::popMenu()											//	Menu usuwania.
 			cin >> iTPopValue;									//	Wybór pozycji, z której ma zostaæ usuniêty element.
 			auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
 
-			popMiddleValue(iTPopValue);							//	Usuniêcie elementu z podanej pozycji.
-
+			if (popMiddleValue(iTPopValue) == true)				//	Usuniêcie wskazanego elementu listy.
+			{
+				cout << "Wybrany element zostal usuniety ze struktury.\n";
+			}
+			else
+			{
+				shT.noIn();
+			}
 			auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 			outcomeTable.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
 			displayAll();
@@ -330,7 +336,6 @@ void Tablica::displayMenu()										//	Menu wyœwietlania.
 			cin >> iTValueDisplay;								//	Wybór wartoœci, jaka ma zostaæ znaleziona w strukturze.
 			auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momecie rozpoczêcia operacji.
 
-			//displayOneValue(iTValueDisplay);					//	Wyœwietlenie elementu o wybranej wartoœci.
 			if (displayOneValue(iTValueDisplay) == true)
 			{
 				cout << "Wybrany element " << iTValueDisplay << " znajduje sie w strukturze.\n";	//	Wyœwietlenie wybranego elementu.
@@ -606,7 +611,7 @@ void Tablica::popMiddleIndex(int iTPopPosition)					//	Usuniêcie elementu z wybr
 	}
 }
 
-void Tablica::popMiddleValue(int iTPopValue)
+bool Tablica::popMiddleValue(int iTPopValue)
 {
 	if (iTSize != 0)											//	Sprawdzenie czy kopiec ma zawartoœæ.
 	{
@@ -628,16 +633,15 @@ void Tablica::popMiddleValue(int iTPopValue)
 				tempTable = nullptr;							//	Usuniêcie zawartoœci tymczasowej tablicy.
 				iTSize--;										//	Dekrementacja zmiennej przechowuj¹cej rozmiar tablicy.
 
-				goto displayed;									//	Etykieta umo¿liwiaj¹ca wyjœcie z pêtli po znalezieniu poszukiwanego elementu.
+				return true;
 			}
 		}
-		shT.noIn();												//	Wyœwietlenie inforamcji, ¿e podanego elementu nie ma w strukturze.
-	displayed:
 	}
 	else
 	{
 		shT.empty();											//	Wyœwietlenie komunikatu o braku zawartoœci kopca.
 	}
+	return false;
 }
 
 void Tablica::clearAllT()										//	Usuniêcie wszystkich elementów z tablicy.
@@ -680,13 +684,12 @@ bool Tablica::displayOneValue(int iTValueDisplay)
 				return true;
 			}
 		}
-		return false;
 	}
 	else
 	{
 		shT.empty();											//	Wyœwietlenie komunikatu o braku zawartoœci kopca.
-		return false;
 	}
+	return false;
 }
 
 void Tablica::displayOneIndex(int iTChoiceDisplay)				//	Wyœwietlenie elementu z wybranej pozycji.
