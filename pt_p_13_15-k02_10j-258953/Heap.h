@@ -27,15 +27,16 @@ private:
 	void displayMenu();
 	void testMenu();
 
-	void pushElement();
+	void pushElement(int);
 	void readFromFileH();
-	void generateElements();
+	void generateElements(int);
 
 	void popElement();
 	void clearAll();
 
 	void displayAll();
-	void displayOne();
+	bool displayOneValue(int);
+	void displayOneIndex(int);
 
 	void HeapifyDown(int);
 	void HeapifyUp();
@@ -47,13 +48,4 @@ private:
 	void testPush();
 	void testPop();
 	void testSearch();
-
-	void generateElementsTest(int);
-	void clearAllTTest();
-
-	void pushTest();
-
-	void popTest();
-
-	void searchTest(int);
 };

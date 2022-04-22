@@ -92,17 +92,49 @@ void Heap::pushMenu()									//	Menu dodawania.
 		{
 		case 1:
 		{
-			pushElement();								//	Dodanie elementu.
+			int iHNewEndElement;
+
+			cout << "Podaj liczbe jaka ma byc dodana do kopca:\n";
+			cin >> iHNewEndElement;							//	Wybór wartoœci jaka ma zostaæ dodana do kopca.
+
+			auto o1 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie rozpoczêcia operacji.
+
+			pushElement(iHNewEndElement);					//	Dodanie elementu.
+
+			auto o2 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie zakoñczenia operacji.
+
+			outcomeHeap.tMOutcome(o1, o2);					//	Wyœwietlenie czasu wykonania operacji.
+
+			displayAll();
+			shH.done();										//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
 			break;
 		}
 		case 2:
 		{
-			readFromFileH();							//	Odczytanie i przypisanie wartoœci z pliku tekstowego.
+			readFromFileH();								//	Odczytanie i przypisanie wartoœci z pliku tekstowego.
+
+			displayAll();
+			shH.done();										//	Wyœwieltenie komunikatu o zakoñczeniu wykonywania operacji.
 			break;
 		}
 		case 3:
 		{
-			generateElements();							//	Wygenerowanie okreœlonej iloœci elementów.
+			int iHNumberOfGen;
+			cout << "Ile elementow ma zostac wygenerowanych?\n";
+			cin >> iHNumberOfGen;							//	Wybranie iloœci generowanych elementów.
+
+			auto o1 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie rozpoczêcia operacji.
+
+			srand(time(0));
+
+			generateElements(iHNumberOfGen);								//	Wygenerowanie okreœlonej iloœci elementów.
+
+			auto o2 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie zakoñczenia operacji.
+
+			outcomeHeap.tMOutcome(o1, o2);					//	Wyœwietlenie czasu wykonywania operacji.
+
+			displayAll();
+			shH.done();										//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
 			break;
 		}
 		case 4:
@@ -119,30 +151,44 @@ void Heap::pushMenu()									//	Menu dodawania.
 	}
 }
 
-void Heap::popMenu()									//	Menu usuwania z kopca.
+void Heap::popMenu()										//	Menu usuwania z kopca.
 {
 	short sHChoicePopMenu;
 
 	for (;;)
 	{
-		shH.cls();										//	"Wyczyszczenie" ekranu u¿ytkownika.
+		shH.cls();											//	"Wyczyszczenie" ekranu u¿ytkownika.
 
 		cout << "Prosze wybrac:\n"
 				"\t1.Usuniecie elementu ze strultury.\n"
 				"\t2.Usuniecie wszystkich elementow ze struktury.\n"
 				"\t3.Powrot.\n";
-		cin >> sHChoicePopMenu;							//	Wybór opcji.
+		cin >> sHChoicePopMenu;								//	Wybór opcji.
 
 		switch (sHChoicePopMenu)
 		{
 		case 1:
 		{
-			popElement();								//	Usuniêcie pojedyñczego elementu.
+			auto o1 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie ropzoczêcia operacji.
+
+			popElement();									//	Usuniêcie pojedyñczego elementu.
+
+			auto o2 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie zakoñczenia operacji.
+			outcomeHeap.tMOutcome(o1, o2);					//	Wyœwietlenie czasu wykonywania operacji.
+			displayAll();
+			shH.done();										//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
 			break;
 		}
 		case 2:
 		{
-			clearAll();									//	Usuniêcie za³ej zawartoœci kopca.
+			auto o1 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie ropzoczêcia operacji.
+
+			clearAll();										//	Usuniêcie za³ej zawartoœci kopca.
+
+			auto o2 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie zakoñczenia operacji.
+			outcomeHeap.tMOutcome(o1, o2);					//	Wyœwietlenie czasu wykonywania operacji.
+			displayAll();
+			shH.done();										//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
 			break;
 		}
 		case 3:
@@ -152,47 +198,83 @@ void Heap::popMenu()									//	Menu usuwania z kopca.
 		}
 		default:
 		{
-			shH.noOption();								//	Wyœwietlenie komunikatu o wybraniu nieistniej¹cej opcji.
+			shH.noOption();									//	Wyœwietlenie komunikatu o wybraniu nieistniej¹cej opcji.
 			break;
 		}
 		}
 	}
 }
 
-void Heap::displayMenu()								//	Menu wyœwietlania.
+void Heap::displayMenu()									//	Menu wyœwietlania.
 {
 	short sHChoiceDisplayMenu;
 
 	for (;;)
 	{
-		shH.cls();										//	"Wyczyszczenie" ekranu u¿ytkownika.
+		shH.cls();											//	"Wyczyszczenie" ekranu u¿ytkownika.
 
 		cout << "Prosze wybrac:\n"
 				"\t1.Wyswietlenie calej zawartosci struktury.\n"
-				"\t2.Wyswietlenie okreslonego elementu struktury.\n"
-				"\t3.Powrot.\n";
-		cin >> sHChoiceDisplayMenu;						//	Wybór opcji.
+				"\t2.Wyswietlenie elementu o okreslonej wartosci ze struktury.\n"
+				"\t3.Wyswietlenie elementu z okreslonej pozycji ze struktury.\n"
+				"\t4.Powrot.\n";
+		cin >> sHChoiceDisplayMenu;							//	Wybór opcji.
 
 		switch (sHChoiceDisplayMenu)
 		{
 		case 1:
 		{
-			displayAll();								//	Wyœwietlenie wszystkich elementów kopca.
+			auto o1 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie rozpoczêcia operacji.
+
+			displayAll();									//	Wyœwietlenie wszystkich elementów kopca.
+
+			auto o2 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie zakoñczenia operacji.
+			outcomeHeap.tMOutcome(o1, o2);					//	Wyœwietlenie czasu wykonywania operacji.
+			shH.done();										//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
 			break;
 		}
 		case 2:
 		{
-			displayOne();								//	Wyœwietlenie okreœlonego elementu.
+			int iHChoiceValue;
+			cout << "Wybierz element, ktory chcesz wyswietlic:\n";
+			cin >> iHChoiceValue;							//	Wybór wyœwietlanego elementu.
+			auto o1 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie rozpoczêcia operacji.
+
+			if (displayOneValue(iHChoiceValue) == true)
+			{
+				cout << "Wybrany element znajduje sie w strukturze.\n";
+			}
+			else
+			{
+				shH.noIn();
+			}
+
+			auto o2 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie zakoñczenia operacji.
+			outcomeHeap.tMOutcome(o1, o2);					//	Wyœwietlenie czasu wykonywania operacji.
+			shH.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+			break;
+		}case 3:
+		{
+			int iHChoiceIndex;
+			cout << "Wybierz element, ktory chcesz wyswietlic (licz od 1):\n";
+			cin >> iHChoiceIndex;							//	Wybór wyœwietlanego elementu.
+			auto o1 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie rozpoczêcia operacji.
+
+			displayOneIndex(iHChoiceIndex);
+
+			auto o2 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie zakoñczenia operacji.
+			outcomeHeap.tMOutcome(o1, o2);					//	Wyœwietlenie czasu wykonywania operacji.
+			shH.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
 			break;
 		}
-		case 3:
+		case 4:
 		{
 			return;
 			break;
 		}
 		default:
 		{
-			shH.noOption();								//	Wyœwietlenie komunikatu o wybraniu nieistniej¹cej opcji.
+			shH.noOption();									//	Wyœwietlenie komunikatu o wybraniu nieistniej¹cej opcji.
 			break;
 		}
 		}
@@ -245,15 +327,8 @@ void Heap::testMenu()									//	Menu testowania operacji kopca.
 	}
 }
 
-void Heap::pushElement()								//	Dodanie elementu do kopca.
+void Heap::pushElement(int iHNewEndElement)				//	Dodanie elementu do kopca.
 {
-	int iHNewEndElement;
-
-	cout << "Podaj liczbe jaka ma byc dodana do kopca:\n";
-	cin >> iHNewEndElement;								//	Wybór wartoœci jaka ma zostaæ dodana do kopca.
-
-	auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
-
 	auto tempHeap = new int[iHSize + 1];				//	Stworzenie tyczasowego kopca z powiêkszon¹ iloœci¹ elementów.
 
 	tempHeap[iHSize] = iHNewEndElement;					//	Przypisanie wybranej wartoœci do komórki z najwiêkszym indeksem.
@@ -270,13 +345,6 @@ void Heap::pushElement()								//	Dodanie elementu do kopca.
 	iHSize++;											//	Iteracja zmiennej przechowuj¹cej rozmiar kopca.
 	
 	HeapifyUp();										//	Sortowanie kopca w górê zaczynaj¹c od dodanego elementu.
-
-	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
-
-	outcomeHeap.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonania operacji.
-	 
-	shH.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
-	displayAll();
 }
 
 void Heap::readFromFileH()								//	Odczytanie i skopiowanie wartoœci z pliku tekstowego do kopca.
@@ -315,9 +383,6 @@ void Heap::readFromFileH()								//	Odczytanie i skopiowanie wartoœci z pliku t
 		auto o2 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie zakoñczenia operacji.
 
 		outcomeHeap.tMOutcome(o1, o2);					//	Wyœwieltenie czasu wykonywania operacji.
-		 
-		shH.done();										//	Wyœwieltenie komunikatu o zakoñczeniu wykonywania operacji.
-		displayAll();
 	}
 	else
 	{
@@ -325,16 +390,8 @@ void Heap::readFromFileH()								//	Odczytanie i skopiowanie wartoœci z pliku t
 	}
 }
 
-void Heap::generateElements()
+void Heap::generateElements(int iHNumberOfGen)
 {
-	int iHNumberOfGen;
-	cout << "Ile elementow ma zostac wygenerowanych?\n";
-	cin >> iHNumberOfGen;								//	Wybranie iloœci generowanych elementów.
-
-	auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
-
-	srand(time(0));
-
 	delete[] newHeap;									//	Usuniêcie zawartoœci kopca u¿ywanego w programie.
 	newHeap = nullptr;
 	iHSize = 0;											//	Wyzerowanie zmiennej przechowuj¹cej rozmiar kopca.
@@ -346,20 +403,12 @@ void Heap::generateElements()
 		iHSize++;										//	Inkrementacja zmiennej przechowuj¹cej rozmiar kopca.
 		HeapifyUp();									//	Posortowanie po wygenerowaniu elementu.
 	}
-
-	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
-
-	outcomeHeap.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
-	 
-	shH.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
-	displayAll();
 }
 
 void Heap::popElement()									//	Usuniêcie elementu z kopca.
 {
 	if (iHSize != 0)									//	Sprawdzenie czy kopiec ma zawartoœæ.
 	{
-		auto o1 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie ropzoczêcia operacji.
 		auto tempHeap = new int[iHSize - 1];			//	Stworzenie nowego kopca z pomniejszon¹ iloœci¹ elementów.
 
 		tempHeap[0] = newHeap[iHSize - 1];				//	Przypisanie wartoœæ ostatniego elementu do pierwszego miejsca.
@@ -373,47 +422,31 @@ void Heap::popElement()									//	Usuniêcie elementu z kopca.
 		iHSize--;										//	Dekrementacja zimennej przechowuj¹cej rozmiar kopca.
 
 		HeapifyDown(0);									//	Posortowanie elementów w dó³.
-
-		auto o2 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie zakoñczenia operacji.
-
-		outcomeHeap.tMOutcome(o1, o2);					//	Wyœwietlenie czasu wykonywania operacji.
 	}
 	else
 	{
 		shH.empty();									//	Wyœwietlenie komunikatu o braku zawartoœci kopca.
 	}
-	 
-	shH.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
-	displayAll();
 }
 
 void Heap::clearAll()									//	Usuniêcie wszystkich elementów kopca.
 {
 	if (iHSize != 0)									//	Sprawdzenie czy kopiec ma zawartoœæ.
 	{
-		auto o1 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie rozpoczêcia operacji.
 		delete[] newHeap;								//	Usuniêcie zawartoœci kopca.
 		newHeap = nullptr;
 		iHSize = 0;										//	Wyzerowanie zmiennej przechowuj¹cej rozmiar kopca.
-		auto o2 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie zakoñczenia operacji.
-
-		outcomeHeap.tMOutcome(o1, o2);					//	Wyœwietlenie czasu wykonywania operacji.
 	}
 	else
 	{
 		shH.empty();									//	Wyœwietlenie komunikatu o braku zawartoœci kopca.
 	}
-	 
-	shH.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
-	displayAll();
 }
 
 void Heap::displayAll()									//	Wyœwietlenie wszystkich elementów kopca.
 {
 	if (iHSize != 0)									//	Sprawdzenie czy kopiec ma zawartoœæ.
 	{
-		auto o1 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie rozpoczêcia operacji.
-
 		bool outOfBound = false;
 		int first = 0;
 		int last = 1;
@@ -440,55 +473,56 @@ void Heap::displayAll()									//	Wyœwietlenie wszystkich elementów kopca.
 
 			space = space / 2;								//	Zmiana przestrzeni miêdzy elementami.
 		}
-
-		auto o2 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie zakoñczenia operacji.
-
-		outcomeHeap.tMOutcome(o1, o2);					//	Wyœwietlenie czasu wykonywania operacji.
 	}
 	else
 	{
 		shH.empty();									//	Wyœwietlenie komunikatu o braku zawartoœci kopca.
 	}
-	shH.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
 }
 
-void Heap::displayOne()									//	Wyœwietlenie wybranego elementu.
+bool Heap::displayOneValue(int iHChoiceValue)				//	Wyœwietlenie wybranego elementu.
 {
-	if (iHSize != 0)									//	Sprawdzenie czy kopiec ma zawartoœæ.
+	if (iHSize != 0)										//	Sprawdzenie czy kopiec ma zawartoœæ.
 	{
-		int iHChoiceDisplay;							
-
-		cout << "Wybierz element, ktory chcesz wyswietlic:\n";
-		cin >> iHChoiceDisplay;							//	Wybór wyœwietlanego elementu.
-
-		auto o1 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie rozpoczêcia operacji.
-
-		for (int i = 0; i<iHSize; i++)					//	Pêtla wykonuj¹ca siê od pierwszego do ostatniego elementu.
+		for (int i = 0; i<iHSize; i++)						//	Pêtla wykonuj¹ca siê od pierwszego do ostatniego elementu.
 		{
-			if (iHChoiceDisplay == newHeap[i])			//	Sprawdzenie czy wartoœæ elementu pokrywa siê z wybran¹ wartoœci¹.
+			if (iHChoiceValue == newHeap[i])				//	Sprawdzenie czy wartoœæ elementu pokrywa siê z wybran¹ wartoœci¹.
 			{
-				cout << "Wybrany element " << iHChoiceDisplay << " znajduje sie w strukturze.\n";	//	Wyœwietlenie wybranego elementu.
-				goto displayed;							//	Etykieta umo¿liwiaj¹ca wyjœcie z pêtli po znalezieniu poszukiwanego elementu.
+				return true;
 			}
 		}
-		cout << "Wybranego elementu nie ma w strukturze.\n";	//	Wyœwietlenie inforamcji, ¿e podanego elementu nie ma w strukturze.
-		displayed:
-		auto o2 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie zakoñczenia operacji.
-
-		outcomeHeap.tMOutcome(o1, o2);					//	Wyœwietlenie czasu wykonywania operacji.
 	}
 	else
 	{
-		shH.empty();									//	Wyœwietlenie komunikatu o braku zawartoœci kopca.
+		shH.empty();										//	Wyœwietlenie komunikatu o braku zawartoœci kopca.
 	}
-	shH.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+	return false;
 }
 
-void Heap::HeapifyDown(int index)						//	Posortowanie kopca w dó³.
+void Heap::displayOneIndex(int iHChoiceIndex)
 {
-	int left = getLeft(index);							//	Zwrócenie pozycji lewego potomka.
-	int right = getRight(index);						//	Zwrócenie pozycji prawego potomka.
-	int parent = index;									//	Zwrócenie pozycji aktualnie sortowanej komórki.
+	if (iHSize != 0)											//	Sprawdzenie czy struktura ma zawartoœæ.
+	{
+		if (iHChoiceIndex > 0 && iHChoiceIndex <= iHSize)		//	Sprawdzenie czy wybrana pozycja znajduje siê w tablicy.
+		{
+			cout << "Element nr " << iHChoiceIndex << " ma wartosc rowna: " << newHeap[iHChoiceIndex - 1] << endl;	//	Wyœwitlenie wartoœci komórki o wybranej pozycji.
+		}
+		else
+		{
+			shH.away();
+		}
+	}
+	else
+	{
+		shH.empty();
+	}
+}
+
+void Heap::HeapifyDown(int index)							//	Posortowanie kopca w dó³.
+{
+	int left = getLeft(index);								//	Zwrócenie pozycji lewego potomka.
+	int right = getRight(index);							//	Zwrócenie pozycji prawego potomka.
+	int parent = index;										//	Zwrócenie pozycji aktualnie sortowanej komórki.
 
 	if (left < iHSize && newHeap[left] > newHeap[parent])	//	Sprawdzenie czy pozycja lewego potomka mieœci siê w kopcu i czy jego wartoœæ jest wiêksza od wartoœci rodzica.
 	{
@@ -500,61 +534,67 @@ void Heap::HeapifyDown(int index)						//	Posortowanie kopca w dó³.
 	}
 	if (parent != index)									//	Sprawdzenie czy potomkowie okazali siê wiêksi od sortowanego elementu.
 	{
-		auto tmp = newHeap[parent];						//	Stworzenie tymczasowej zmiennej rpzechowuj¹cej wartoœæ rodzica w przypadku zamiany elementów.
-		newHeap[parent] = newHeap[index];				//	Zamiana wiêkszego elementu z sortowanym elementem.
+		auto tmp = newHeap[parent];							//	Stworzenie tymczasowej zmiennej rpzechowuj¹cej wartoœæ rodzica w przypadku zamiany elementów.
+		newHeap[parent] = newHeap[index];					//	Zamiana wiêkszego elementu z sortowanym elementem.
 		newHeap[index] = tmp;
 
-		HeapifyDown(parent);							//	Ponowne posortowanie elementu jeœli zosta³ zamieniony.
+		HeapifyDown(parent);								//	Ponowne posortowanie elementu jeœli zosta³ zamieniony.
 	}
 }
 
-void Heap::HeapifyUp()									//	Posortowanie w górê kopca zaczynaj¹c od elementu ostatnio dodanego.
+void Heap::HeapifyUp()										//	Posortowanie w górê kopca zaczynaj¹c od elementu ostatnio dodanego.
 {
-	if (iHSize > 0)										//	Sprawdzenie czy kopiec ma zawartoœæ.
+	if (iHSize > 0)											//	Sprawdzenie czy kopiec ma zawartoœæ.
 	{
-		int x = iHSize - 1;								//	Zmienna zawieraj¹ca indeks porównywanywanego elementu kopca.
+		int x = iHSize - 1;									//	Zmienna zawieraj¹ca indeks porównywanywanego elementu kopca.
 		while (x != 0 && newHeap[getParent(x)] < newHeap[x])	//	Pêtla wykonuj¹ca siê od ostatniego elementu dopóki rodzic bêdzie wiêkszy od porównywanego potomka.
 		{
-			int tempValue = newHeap[getParent(x)];		//	Tyczasowa zienna przechowuj¹ca rodzica zamienianego elementu.
-			newHeap[getParent(x)] = newHeap[x];			//	Zamiana rodzica elementu z komórk¹.
-			newHeap[x] = tempValue;						//	Zamiana elementu z rodzicem.
+			int tempValue = newHeap[getParent(x)];			//	Tyczasowa zienna przechowuj¹ca rodzica zamienianego elementu.
+			newHeap[getParent(x)] = newHeap[x];				//	Zamiana rodzica elementu z komórk¹.
+			newHeap[x] = tempValue;							//	Zamiana elementu z rodzicem.
 			x = getParent(x);
 		}
 	}
 }
 
-int Heap::getLeft(int x)								//	Zwrócenie indeksu lewego potomka.
+int Heap::getLeft(int x)									//	Zwrócenie indeksu lewego potomka.
 {
 	return (x * 2 + 1);
 }
 
-int Heap::getRight(int x)								//	Zwrócenie indeksu prawego potomka.
+int Heap::getRight(int x)									//	Zwrócenie indeksu prawego potomka.
 {
 	return (x * 2 + 2);
 }
 
-int Heap::getParent(int x)								//	Zwrócenie indeksu rodzica.
+int Heap::getParent(int x)									//	Zwrócenie indeksu rodzica.
 {
 	return floor((x - 1) / 2);
 }
 
-void Heap::testPush()									//	Testowanie dodawania.
+void Heap::testPush()										//	Testowanie dodawania.
 {
 	int iHTPuChoice;
 	cout << "Dla ilu elementow maja zostac przeprowadzone testy?";
-	cin >> iHTPuChoice;									//	Wybór iloœci daneych dla których maj¹ zostaæ przeprowadzone testy.
+	cin >> iHTPuChoice;										//	Wybór iloœci daneych dla których maj¹ zostaæ przeprowadzone testy.
 
 	srand(time(0));
 
 	cout << "------------------------------------------\n"
 		"Dodawanie:\n";
-	for (int i = 0; i < 100; i++)						//	Pêtla wykonuj¹ca siê 100 razy ze wzglêdu na 100 pomiarów.
+	for (int i = 0; i < 100; i++)							//	Pêtla wykonuj¹ca siê 100 razy ze wzglêdu na 100 pomiarów.
 	{
-		generateElementsTest(iHTPuChoice);				//	Wygenerowanie okreœlonej iloœci elementów.
+		generateElements(iHTPuChoice);					//	Wygenerowanie okreœlonej iloœci elementów.
 
-		pushTest();										//	Dodanie pseudo losowego elementu.
+		int iHTNewElement = rand();						//	Wygenerowanie nowej wartoœci.
+		auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
 
-		clearAllTTest();								//	Usuniêcie ca³ej zawartoœci struktury.
+		pushElement(iHTNewElement);											//	Dodanie pseudo losowego elementu.
+
+		auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
+		outcomeHeap.tMShort(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji i zapisanie go do pliku tekstowego.
+
+		clearAll();									//	Usuniêcie ca³ej zawartoœci struktury.
 	}
 
 	shH.done();
@@ -572,11 +612,16 @@ void Heap::testPop()
 		"Usuwanie:\n";
 	for (int i = 0; i < 100; i++)
 	{
-		generateElementsTest(iHTPoChoice);
+		generateElements(iHTPoChoice);
 
-		popTest();
+		auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
 
-		clearAllTTest();
+		popElement();
+
+		auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
+		outcomeHeap.tMShort(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji i zapisanie go do pliku tekstowego.
+
+		clearAll();
 	}
 
 	shH.done();
@@ -594,101 +639,17 @@ void Heap::testSearch()
 		"Szukanie elementu:\n";
 	for (int i = 0; i < 100; i++)
 	{
-		generateElementsTest(iHTDChoice);
+		generateElements(iHTDChoice);
 
-		searchTest(iHTDChoice);
+		int iHTSearchValue = rand();
+		auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
 
-		clearAllTTest();
+		displayOneValue(iHTDChoice);
+
+		auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
+		outcomeHeap.tMShort(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji i zapisanie go do pliku tekstowego.
+
+		clearAll();
 	}
 	shH.done();
-}
-
-void Heap::generateElementsTest(int iHTPuChoice)		//	Wygenerowanie psudo losowych wartoœci (wersja skrócona ze wzglêdu na testy).
-{
-	auto *tempHeap = new int[iHTPuChoice];				//	Stworzenie tymczasowego kopca z now¹ liczb¹ dancyh.
-
-	for (int z = 0; z < iHTPuChoice; z++)				//	Pêtla wykonuj¹ca siê okreœlon¹ iloœæ razy.
-	{
-		tempHeap[z] = rand();							//	Wygenerowanie elementu.
-		HeapifyUp();									//	Posortowanie kopca.
-	}
-	delete[] this->newHeap;								//	Usuniêcie zawartoœci kopca u¿ywanego w programie.
-	this->newHeap = tempHeap;							//	Skopiowanie zawartoœci tymczaswowego kopca do kopca u¿ywanego w programie.
-	tempHeap = nullptr;	
-	this->iHSize = iHTPuChoice;							//	Przypisanie do zmiennej przechowuj¹cej rozmiar nowej wartoœci.
-}
-
-void Heap::clearAllTTest()								//	Usuniêcie wszystkich elementów kopca (wersja skrócona ze wzglêdu na testy).
-{
-	delete[] this->newHeap;
-	this->iHSize = 0;
-	this->newHeap = nullptr;
-}
-
-void Heap::pushTest()									//	Testowe dodanie do kopca.
-{
-	int iHNewEndElement = rand();						//	Wygenerowanie nowej wartoœci.
-
-	auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
-
-	auto tempHeap = new int[iHSize + 1];				//	Stworzenie nowej tablicy o powiêkszonym rozmiarze.
-
-	tempHeap[iHSize] = iHNewEndElement;					//	Przypisanie nowego elementu do ostatniej komórki.
-	if (iHSize != 0)									//	Sprawdzenie czy struktura ma zawartoœæ.
-	{
-		for (int i = 0; i < iHSize; i++)				//	Pêtla wykonuj¹ca siê tyle razy ile kopiec ma elementów.
-		{
-			tempHeap[i] = newHeap[i];					//	Skopiowanie okreœlonej wartoœci z kopca tymczasowego do kopca u¿ywanego w programie.
-		}
-	}
-	delete[] newHeap;									//	Usuniêcie zawartoœci kopca u¿ywanego w programie.
-	newHeap = tempHeap;									//	Skopiowanie zawartoœci tymczasowego kopca do kopca u¿ywanego w programie.
-	tempHeap = nullptr;									
-	iHSize++;											//	Inkrementacja zmiennej zawieraj¹cej rozmiar kopca.
-
-	HeapifyUp();										//	Posortowanie kopca.
-
-	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
-
-	outcomeHeap.tMShort(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji i zapisanie go do pliku tekstowego.
-}
-
-void Heap::popTest()
-{
-	auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
-	auto tempHeap = new int[iHSize - 1];
-
-	tempHeap[0] = newHeap[iHSize - 1];
-	for (int i = 1; i < iHSize - 1; i++)				//	Pêtla wykonuj¹ca siê od pierwszego do przedostatniego elementu.
-	{
-		tempHeap[i] = newHeap[i];						//	Skopiowanie okreœlonej wartoœci z kopca tymczasowego do kopca u¿ywanego w programie.
-	}
-	delete[] newHeap;									//	Usuniêcie zawartoœci kopca u¿ywanego w programie.
-	newHeap = tempHeap;
-	tempHeap = nullptr;
-	iHSize--;											//	Dekrementacja zmiennej zawieraj¹cej rozmiar kopca.
-
-	HeapifyDown(0);										//	Posortowanie kopca.
-
-	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
-	
-	outcomeHeap.tMShort(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji i zapisanie go do pliku tekstowego.
-}
-
-void Heap::searchTest(int iHTDChoicev)
-{
-	int iHChoiceDisplay = rand();
-	auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
-
-	for (int i = 0; i < iHTDChoicev; i++)				//	
-	{
-		if (iHChoiceDisplay == newHeap[i])				//	Sprawdzenie czy wartoœæ elementu jest równa wyszukiwanemu elementowi.
-		{
-			goto displayed;								//	Etykieta umo¿liwiaj¹ca wyjœcie z pêtli po znalezieniu poszukiwanego elementu.
-		}
-	}
-displayed:
-	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
-
-	outcomeHeap.tMShort(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji i zapisanie go do pliku tekstowego.
 }

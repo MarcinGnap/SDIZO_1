@@ -993,7 +993,7 @@ void Lista::testSearch()
 	{
 		generateElements(iLTDChoice);
 
-		int iLTSearchValue = ((rand() % iLTDChoice) + 0);
+		int iLTSearchValue = rand();
 		auto o1 = chrono::high_resolution_clock::now();
 
 		displayOneValue(iLTSearchValue);
