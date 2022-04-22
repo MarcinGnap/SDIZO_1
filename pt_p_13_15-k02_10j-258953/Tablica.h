@@ -26,34 +26,23 @@ private:
 	void displayMenu();
 	void testMenu();
 
-	void pushFront();
-	void pushEnd();
-	void pushMiddle();
+	void pushFront(int);
+	void pushEnd(int);
+	void pushMiddle(int, int);
 	void readFromFileT();
-	void generateElements();
+	void generateElements(int);
 
 	void popFront();
 	void popEnd();
-	void popMiddle();
+	void popMiddleIndex(int);
+	void popMiddleValue(int);
 	void clearAllT();
 
 	void displayAll();
-	void displayOne();
+	bool displayOneValue(int);
+	void displayOneIndex(int);
 
 	void testPush();
 	void testPop();
 	void testSearch();
-
-	void generateElementsTest(int);
-	void clearAllTTest();
-
-	void pushFrontTest();
-	void pushEndTest();
-	void pushMiddleTest(int);
-
-	void popFrontTest();
-	void popEndTest();
-	void popMiddleTest(int);
-
-	void searchTest(int);
 };

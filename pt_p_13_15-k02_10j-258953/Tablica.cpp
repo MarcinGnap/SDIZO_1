@@ -12,7 +12,7 @@ using namespace std;
 
 Tablica::Tablica()
 {
-	iTSize = 0;						//	Na start strukturze dajey roziar 0.
+	iTSize = 0;													//	Na start strukturze dajey roziar 0.
 	newTable = new int[iTSize];
 }
 
@@ -21,9 +21,9 @@ Tablica::~Tablica()
 	
 }
 
-void Tablica::tableMenu()			//	G³ówne menu tablicy.
+void Tablica::tableMenu()										//	G³ówne menu tablicy.
 {
-	short sTChoiceTableMenu;		//	Zmienna potrzebna do instrukcji switch.
+	short sTChoiceTableMenu;									//	Zmienna potrzebna do instrukcji switch.
 
 	for (;;)
 	{
@@ -31,9 +31,9 @@ void Tablica::tableMenu()			//	G³ówne menu tablicy.
 
 		cout << "Prosze wybrac:\n"
 				"\t1.Menu dodawania.\n"
-				"\t2.Menu odejmowania.\n"
+				"\t2.Menu usuwania.\n"
 				"\t3.Menu wyswietlania.\n"
-				"\t4.Test menu\n"
+				"\t4.Menu testow.\n"
 				"\t5.Powrot\n";
 		cin >> sTChoiceTableMenu;
 
@@ -41,17 +41,17 @@ void Tablica::tableMenu()			//	G³ówne menu tablicy.
 		{
 		case 1:
 		{
-			pushMenu();				//	Menu dodawania do tablicy.
+			pushMenu();											//	Menu dodawania do tablicy.
 			break;
 		}
 		case 2:
 		{
-			popMenu();				//	Menu usuwania elementów z tablicy.
+			popMenu();											//	Menu usuwania elementów z tablicy.
 			break;
 		}
 		case 3:
 		{
-			displayMenu();			//	Menu wyœwietlania elementów tablicy.
+			displayMenu();										//	Menu wyœwietlania elementów tablicy.
 			break;
 		}
 		case 4:
@@ -73,9 +73,9 @@ void Tablica::tableMenu()			//	G³ówne menu tablicy.
 	}
 }
 
-void Tablica::pushMenu()			//	Menu dodawania do tablicy.
+void Tablica::pushMenu()										//	Menu dodawania do tablicy.
 {
-	short sTChoicePushMenu;			//	Menu dodawania.
+	short sTChoicePushMenu;										//	Menu dodawania.
 
 	for (;;)
 	{
@@ -94,27 +94,85 @@ void Tablica::pushMenu()			//	Menu dodawania do tablicy.
 		{
 		case 1:
 		{
-			pushFront();			//	Dodanie elementu na pocz¹tek.
+			int iTNewFrontElement;
+
+			cout << "Podaj liczbe jaka ma byc dodana do tablicy:\n";
+			cin >> iTNewFrontElement;							//	Wybór wartoœci dodawanego elementu.
+			auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
+
+			pushFront(iTNewFrontElement);						//	Dodanie elementu na pocz¹tek.
+
+			auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia programu.
+			outcomeTable.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonania operacji.
+			shT.done();											//	Wyœwietlenie komunikatu o zakoñczeniu zadania oraz czekanie na naciœniêcie klawisza przez u¿ytkownika.
+			displayAll();
+
 			break;
 		}
 		case 2:
 		{
-			pushEnd();				//	Dodanie elementu na koniec.
+			int iTNewEndElement;
+
+			cout << "Podaj liczbe jaka ma byc dodana do tablicy:\n";
+			cin >> iTNewEndElement;								//	Wybór dodawanej wartoœci.
+			auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
+
+			pushEnd(iTNewEndElement);							//	Dodanie elementu na koniec.
+
+			auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia wykonywania operacji.
+			outcomeTable.tMOutcome(o1, o2);						//	Wypisanie czasu wykonania operacji.
+			displayAll();
+			shT.done();											//	Wyœwietlenie komunikatu o zakoñczeniu zadania oraz czekanie na naciœniêcie klawisza przez u¿ytkownika.
+
 			break;
 		}
 		case 3:
 		{
-			pushMiddle();			//	Dodanie elementu w okreœlone miejsce.
+			int iTNewMidElement;
+			int iTPushPosition;
+
+			cout << "Podaj pozycje, na ktora ma zostac dodany element (zakladamy ze numeracja zaczyna sie od 1):\n";
+			cin >> iTPushPosition;								//	Wybór pozycji (pozycja + 1 ze wzglêdu na numeracjê komórek w tablicy), na któr¹ ma zostaæ wstawiony element.
+
+			cout << "Podaj liczbe jaka ma byc dodana do tablicy:\n";
+			cin >> iTNewMidElement;								//	Wybór wartoœci jaka ma zostaæ wpisana w okreœlone miejsce.
+			auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
+			int iTRightPush = iTPushPosition - 1;				//	Przypisanie do zmiennej prawdziwej pozycji w tablicy.
+
+			pushMiddle(iTRightPush, iTNewMidElement);		//	Dodanie elementu w okreœlone miejsce.
+
+			auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
+			outcomeTable.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
+			displayAll();
+			shT.done();											//	Wyœwietlenie kounikatu o wykonaniu operacji.
+
 			break;
 		}
 		case 4:
 		{
-			readFromFileT();		//	Odczytanie i wpisanie wartoœci z pliku tekstowego do tablicy.
+			readFromFileT();									//	Odczytanie i wpisanie wartoœci z pliku tekstowego do tablicy.
+			
+			displayAll();
+			shT.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+
 			break;
 		}
 		case 5:
 		{
-			generateElements();		//	Wygenerowanie danej liczby elementów.
+			int iTNumberOfGen;
+			cout << "Ile elementow ma zostac wygenerowanych?\n";
+			cin >> iTNumberOfGen;								//	Wybór iloœci generowanych elementów.
+			auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
+
+			srand(time(0));
+
+			generateElements(iTNumberOfGen);					//	Wygenerowanie danej liczby elementów.
+
+			auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
+			outcomeTable.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonania operacji.
+			displayAll();
+			shT.done();											//	Wyœwieltenie komunikatu o zakoñczeniu operacji.
+			
 			break;
 		}
 		case 6:
@@ -131,7 +189,7 @@ void Tablica::pushMenu()			//	Menu dodawania do tablicy.
 	}
 }
 
-void Tablica::popMenu()				//	Menu usuwania.
+void Tablica::popMenu()											//	Menu usuwania.
 {
 	short sTChoicePopMenu;
 
@@ -142,34 +200,87 @@ void Tablica::popMenu()				//	Menu usuwania.
 		cout << "Prosze wybrac:\n"
 				"\t1.Usuniecie elementu z poczatku struktury.\n"
 				"\t2.Usuniecie elementu z konca struktury.\n"
-				"\t3.Usuniecie elementu z okreslonego miejsca w struktury.\n"
-				"\t4.Usuniecie wszystkich elementow ze struktury.\n"
-				"\t5.Powrot.\n";
+				"\t3.Usuniecie elementu z okreslonego miejsca w struktury (szukajac po indeksie).\n"
+				"\t4.Usuniecie elementu z okreslonego miejsca w struktury (szukajac po wartosci).\n"
+				"\t5.Usuniecie wszystkich elementow ze struktury.\n"
+				"\t6.Powrot.\n";
 		cin >> sTChoicePopMenu;
 
 		switch (sTChoicePopMenu)
 		{
 		case 1:
 		{
-			popFront();				//	Usuniêcie elementu z pocz¹tku tablicy.
+			auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
+
+			popFront();											//	Usuniêcie elementu z pocz¹tku tablicy.
+
+			auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
+			outcomeTable.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonania operacji.
+			displayAll();
+			shT.done();											//	Wyœwieltenie komunikatu o zakoñczeniu operacji.
+
 			break;
 		}
 		case 2:
 		{
-			popEnd();				//	Usuniêcie elementu z koñca.
+			auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
+
+			popEnd();											//	Usuniêcie elementu z koñca.
+
+			auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
+			outcomeTable.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonania operacji.
+			displayAll();
+			shT.done();											//	Wyœwieltenie komunikatu o zakoñczeniu operacji.
+
 			break;
 		}
 		case 3:
 		{
-			popMiddle();			//	Usuniêcie elementu z podanej pozycji.
+			int iTPopPosition;
+
+			cout << "Podaj pozycje, z ktorej ma zostac usuniety element (zakladamy ze numeracja zaczyna sie od 1):\n";
+			cin >> iTPopPosition;								//	Wybór pozycji, z której ma zostaæ usuniêty element.
+			auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
+
+			popMiddleIndex(iTPopPosition);						//	Usuniêcie elementu z podanej pozycji.
+
+			auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
+			outcomeTable.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
+			displayAll();
+			shT.done();											//	Wyœwieltenie komunikatu o zakoñczeniu operacji.
+
 			break;
-		}
-		case 4:
+		}case 4:
 		{
-			clearAllT();			// Usuniêcie wszystkich elementów z tablicy.
+			int iTPopValue;
+
+			cout << "Podaj wartosc, jaka ma zostac usunieta z tablicy:\n";
+			cin >> iTPopValue;									//	Wybór pozycji, z której ma zostaæ usuniêty element.
+			auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
+
+			popMiddleValue(iTPopValue);							//	Usuniêcie elementu z podanej pozycji.
+
+			auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
+			outcomeTable.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
+			displayAll();
+			shT.done();											//	Wyœwieltenie komunikatu o zakoñczeniu operacji.
+
 			break;
 		}
 		case 5:
+		{
+			auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
+
+			clearAllT();										// Usuniêcie wszystkich elementów z tablicy.
+
+			auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
+			outcomeTable.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonania operacji.
+			displayAll();
+			shT.done();											//	Wyœwieltenie komunikatu o zakoñczeniu operacji.
+
+			break;
+		}
+		case 6:
 		{
 			return;
 			break;
@@ -183,7 +294,7 @@ void Tablica::popMenu()				//	Menu usuwania.
 	}
 }
 
-void Tablica::displayMenu()			//	Menu wyœwietlania.
+void Tablica::displayMenu()										//	Menu wyœwietlania.
 {
 	short sTChoiceDisplayMenu;
 
@@ -193,23 +304,62 @@ void Tablica::displayMenu()			//	Menu wyœwietlania.
 
 		cout << "Prosze wybrac:\n"
 				"\t1.Wyswietlenie calej zawartosci struktury.\n"
-				"\t2.Wyswietlenie okreslonego elementu struktury.\n"
-				"\t3.Powrot.\n";
+				"\t2.Wyswietlenie okreslonego elementu struktury po wartosci.\n"
+				"\t3.Wyswietlenie okreslonego elementu struktury po indeksie.\n"
+				"\t4.Powrot.\n";
 		cin >> sTChoiceDisplayMenu;
 
 		switch (sTChoiceDisplayMenu)
 		{
 		case 1:
 		{
-			displayAll();			//	Wyœwietlenie wszystkich elementów.
+			auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momecie rozpoczêcia operacji.
+
+			displayAll();										//	Wyœwietlenie wszystkich elementów.
+
+			auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
+			outcomeTable.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
+			shT.done();
 			break;
 		}
 		case 2:
 		{
-			displayOne();			// Wyœwietlenie elementu z wybranej pozycji.
+			int iTValueDisplay;
+
+			cout << "Wybierz element, ktory chcesz wyswietlic (zakladamy ze numeracja zaczyna sie od 1): " << endl;
+			cin >> iTValueDisplay;								//	Wybór wartoœci, jaka ma zostaæ znaleziona w strukturze.
+			auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momecie rozpoczêcia operacji.
+
+			//displayOneValue(iTValueDisplay);					//	Wyœwietlenie elementu o wybranej wartoœci.
+			if (displayOneValue(iTValueDisplay) == true)
+			{
+				cout << "Wybrany element " << iTValueDisplay << " znajduje sie w strukturze.\n";	//	Wyœwietlenie wybranego elementu.
+			}
+			else
+			{
+				shT.noIn();
+			}
+			auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
+			outcomeTable.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
+			shT.done();
 			break;
 		}
 		case 3:
+		{
+			int iTChoiceDisplay;
+
+			cout << "Wybierz element, ktory chcesz wyswietlic (zakladamy ze numeracja zaczyna sie od 1): " << endl;
+			cin >> iTChoiceDisplay;								//	Wybór pozycji, z której ma zostaæ wyœwietlony element.
+			auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia wykonywania operacji.
+
+			displayOneIndex(iTChoiceDisplay);					//	Wyœwietlenie elementu z wybranej pozycji.
+
+			auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
+			outcomeTable.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
+			shT.done();
+			break;
+		}
+		case 4:
 		{
 			return;
 			break;
@@ -234,7 +384,7 @@ void Tablica::testMenu()
 		cout << "Prosze wybrac:\n"
 			"\t1.Testy dodawania.\n"
 			"\t2.Testy usuwania.\n"
-			"\t3.Testy wyswietlania.\n"
+			"\t3.Testy wyszukiwania.\n"
 			"\t4.Powrot.\n";
 		cin >> sTChoiceTestMenu;
 
@@ -269,15 +419,8 @@ void Tablica::testMenu()
 	}
 }
 
-void Tablica::pushFront()			//	Dodanie elementu na pocz¹tek tablicy.
+void Tablica::pushFront(int iTNewFrontElement)					//	Dodanie elementu na pocz¹tek tablicy.
 {
-	int iTNewFrontElement;
-	
-	cout << "Podaj liczbe jaka ma byc dodana do tablicy:\n";
-	cin >> iTNewFrontElement;									//	Wybór wartoœci dodawanego elementu.
-	
-	auto o1 = chrono::high_resolution_clock::now();				//	Pomiar czasu w momencie rozpoczêcia operacji.
-
 	int iTTempSize = iTSize + 1;
 	auto tempTable = new int[iTSize + 1];						//	Tworzenie tymczasowej tablicy z nowym rozmiarem.
 	
@@ -293,23 +436,10 @@ void Tablica::pushFront()			//	Dodanie elementu na pocz¹tek tablicy.
 	newTable = tempTable;										//	Skopiowanie zawartoœci tymczasowej tablicy do poprzedniej tablicy, która u¿ywania jest w programie.
 	tempTable = nullptr;										//	Usuniêcie tymczasowej tablicy.
 	iTSize++;													//	Powiêkszenie rozmiaru tablicy o 1.
-	auto o2 = chrono::high_resolution_clock::now();				//	Pomiar czasu w momencie zakoñczenia programu.
-
-	outcomeTable.tMOutcome(o1, o2);								//	Wyœwietlenie czasu wykonania operacji.
-	 
-	shT.done();													//	Wyœwietlenie komunikatu o zakoñczeniu zadania oraz czekanie na naciœniêcie klawisza przez u¿ytkownika.
-	displayAll();
 }
 
-void Tablica::pushEnd()											//	Dodanie na koniec tablicy.
+void Tablica::pushEnd(int iTNewEndElement)						//	Dodanie na koniec tablicy.
 {
-	int iTNewEndElement;
-
-	cout << "Podaj liczbe jaka ma byc dodana do tablicy:\n";
-	cin >> iTNewEndElement;										//	Wybór dodawanej wartoœci.
-
-	auto o1 = chrono::high_resolution_clock::now();				// Pomiar czasu	w momencie rozpoczêcia operacji.
-
 	auto tempTable = new int[iTSize + 1];						//	Stworzenie tymczasowej tablicy z powiêkszonym rozmiarem.
 
 	tempTable[iTSize] = iTNewEndElement;						//	Przypisanie dodawanego elementu na ostatnie miejsce tymczasowej tablicy.
@@ -324,30 +454,12 @@ void Tablica::pushEnd()											//	Dodanie na koniec tablicy.
 	newTable = tempTable;										//	Skopiowanie zawartoœci tymczasowej tablicy do tablicy u¿uwanej w programie.
 	tempTable = nullptr;										//	Usuniêcie tymczasowej tablicy.
 	iTSize++;													//	Powiêkszenie rozmiaru o 1.
-	auto o2 = chrono::high_resolution_clock::now();				//	Pomiar czasu w momencie zakoñczenia wykonywania operacji.
-
-	outcomeTable.tMOutcome(o1, o2);								//	Wypisanie czasu wykonania operacji.
-	 
-	shT.done();													//	Wyœwietlenie komunikatu o zakoñczeniu zadania oraz czekanie na naciœniêcie klawisza przez u¿ytkownika.
-	displayAll();
 }
 
-void Tablica::pushMiddle()
+void Tablica::pushMiddle(int iTRightPush, int iTNewMidElement)
 {
-	int iTNewMidElement;
-	int iTPushPosition;
-
-	cout << "Podaj pozycje, na ktora ma zostac dodany element (zakladamy ze numeracja zaczyna sie od 1):\n";
-	cin >> iTPushPosition;										//	Wybór pozycji (pozycja + 1 ze wzglêdu na numeracjê komórek w tablicy), na któr¹ ma zostaæ wstawiony element.
-
-	int iTRightPush = iTPushPosition - 1;						//	Przypisanie do zmiennej prawdziwej pozycji w tablicy.
-
 	if (iTRightPush >= 0 && iTRightPush <= iTSize)				//	Sprawdzenie czy wybrana pozycja znajduje siê w tablicy.
 	{
-		cout << "Podaj liczbe jaka ma byc dodana do tablicy:\n";
-		cin >> iTNewMidElement;									//	Wybór wartoœci jaka ma zostaæ wpisana w okreœlone miejsce.
-
-		auto o1 = chrono::high_resolution_clock::now();			//	Pomiar czasu w momencie rozpoczêcia operacji.
 		auto tempTable = new int[iTSize + 1];					//	Stworzenie tymczasowej tablicy z powiêkszon¹ liczb¹ elementów.
 		tempTable[iTRightPush] = iTNewMidElement;				//	Przypisanie wybranej wartoœci na wybran¹ pozycjê w tablicy.
 		for (int i = 0; i < iTRightPush; i++)					//	Pêtla wykonuj¹ca siê od elementu pocz¹tkowego do pozycji, któr¹ wybra³ u¿ytkownik.
@@ -362,17 +474,11 @@ void Tablica::pushMiddle()
 		newTable = tempTable;									//	Skopiowanie zawartoœci tymczasowej tablicy do tablicy u¿ywanej w programie.
 		tempTable = nullptr;									//	Usuniêcie zawartoœci tymczasowej tablicy.
 		iTSize++;												//	Inkrementacja zmiennej przechowujêcej rozmiar tablicy.
-		auto o2 = chrono::high_resolution_clock::now();			//	Pomiar czasu w momencie zakoñczenia operacji.
-
-		outcomeTable.tMOutcome(o1, o2);							//	Wyœwietlenie czasu wykonywania operacji.
 	}
 	else
 	{
 		shT.away();												//	Wyœwietlenie komunikatu, ¿e wybrana pozycja znajduje siê poza tablic¹.
 	}
-	 
-	shT.done();													//	Wyœwietlenie kounikatu o wykonaniu operacji.
-	displayAll();
 }
 
 void Tablica::readFromFileT()									//	Odczyt i przypisanie wartoœci z pliku tekstowego do tablicy.
@@ -410,9 +516,6 @@ void Tablica::readFromFileT()									//	Odczyt i przypisanie wartoœci z pliku t
 		auto o2 = chrono::high_resolution_clock::now();			//	Pomiar czasu w momecie zakoñczenia operacji.
 
 		outcomeTable.tMOutcome(o1, o2);							//	Wyœwietlenie czasu wykonywania operacji.
-		 
-		shT.done();												//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
-		displayAll();
 	}
 	else
 	{
@@ -420,40 +523,24 @@ void Tablica::readFromFileT()									//	Odczyt i przypisanie wartoœci z pliku t
 	}
 }
 
-void Tablica::generateElements()								//	Wygenerowanie okreœlonej liczby elementów.
+void Tablica::generateElements(int iTNumberOfGen)				//	Wygenerowanie okreœlonej liczby elementów.
 {
-	int iTNumberOfGen;
-	cout << "Ile elementow ma zostac wygenerowanych?\n";
-	cin >> iTNumberOfGen;										//	Wybór iloœci generowanych elementów.
-
-	auto o1 = chrono::high_resolution_clock::now();				//	Pomiar czasu w momencie rozpoczêcia operacji.
-
 	auto tempTable = new int[iTNumberOfGen];					//	Stworzenie tymczasowej tablicy z wybran¹ iloœci¹ komórek.
-
-	srand(time(0));
 
 	for (int i = 0; i < iTNumberOfGen; i++)						//	Pêtla wykonuj¹ca siê wybran¹ iloœæ razy.
 	{
-		int iTGenerated = rand();								//	Pseudo wylosowanie elemntu i przypisanie go do zmiennej.
-		tempTable[i] = iTGenerated;								//	Skopiowanie elementu do okreœlonego miejsca w tablicy.
+		tempTable[i] = rand();									//	Pseudo wylosowanie elemntu i przypisanie go do zmiennej.
 	}
-	delete[] newTable;											//	Usuniêcie zawartoœci u¿ywanej w programie tablicy.
-	newTable = tempTable;										//	Skopiowanie zawartoœci tymczasowej tablicy do tablicy u¿ywanej w programie.
+	delete[] this->newTable;									//	Usuniêcie zawartoœci u¿ywanej w programie tablicy.
+	this->newTable = tempTable;									//	Skopiowanie zawartoœci tymczasowej tablicy do tablicy u¿ywanej w programie.
 	tempTable = nullptr;										//	Usuniêcie zawartoœci tymczasowej tablicy.
-	iTSize = iTNumberOfGen;										//	Skopiowanie numeru wygenerowanych elementów do zmiennej przechowuj¹cej rozmiar tablicy.
-	auto o2 = chrono::high_resolution_clock::now();				//	Pomiar czasu w momencie zakoñczenia operacji.
-
-	outcomeTable.tMOutcome(o1, o2);								//	Wyœwietlenie czasu wykonania operacji.
-	 
-	shT.done();													//	Wyœwieltenie komunikatu o zakoñczeniu operacji.
-	displayAll();
+	this->iTSize = iTNumberOfGen;								//	Skopiowanie numeru wygenerowanych elementów do zmiennej przechowuj¹cej rozmiar tablicy.
 }
 
 void Tablica::popFront()										//	Usuniêcie elementu na pierwszym miejscu tablicy.
 {
 	if (iTSize != 0)											//	Instrukcja warunkowa sprawdzaj¹ca czy w tablicy s¹ elementy do usuniêcia.
 	{
-		auto o1 = chrono::high_resolution_clock::now();			//	Pomiar czasu w momencie rozpoczêcia operacji.
 		auto tempTable = new int[iTSize - 1];					//	Stworzenie tymczasowej tablicy z now¹ iloœci¹ komórek.
 
 		for (int i = iTSize - 1; i >= 0; i--)					//	Pêtla wykonuj¹ca siê od ostatniego elementu tablicy do drugiego.
@@ -464,24 +551,17 @@ void Tablica::popFront()										//	Usuniêcie elementu na pierwszym miejscu tab
 		newTable = tempTable;									//	Skopiowanie zawartoœci tymczasowej tablicy do tablicy u¿ywanej w programie.
 		tempTable = nullptr;									//	Usuniêcie zawartoœci tymczasowej tablicy.
 		iTSize--;												//	Dekrementacja zmiennej przechowuj¹cej rozmiar tablicy.
-		auto o2 = chrono::high_resolution_clock::now();			//	Pomiar czasu w momencie zakoñczenia operacji.
-
-		outcomeTable.tMOutcome(o1, o2);							//	Wyœwietlenie czasu wykonania operacji.
 	}
 	else
 	{
 		shT.empty();											//	Jeœli tablica nie ma elementów wyœwietli siê komunikat o tym zdarzeniu.
 	}
-	 
-	shT.done();													//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
-	displayAll();
 }
 
 void Tablica::popEnd()											//	Usuniêcie ostatniego elementu z tablicy.
 {
 	if (iTSize != 0)											// Sprawdzenie czy tablica ma zawartoœæ.
 	{
-		auto o1 = chrono::high_resolution_clock::now();			//	Pomiar czasu w momencie rozpoczêcia operacji.
 		auto tempTable = new int[iTSize - 1];					//	Stworzenie tymczasowej tablicy z pomniejszon¹ liczb¹ elementów.
 
 		for (int i = 0; i < iTSize - 1; i++)					//	Pêtla wykonuj¹ca siê od pocz¹tkowego do przed ostatniego elementu tablicy.
@@ -492,31 +572,19 @@ void Tablica::popEnd()											//	Usuniêcie ostatniego elementu z tablicy.
 		newTable = tempTable;									//	Skopiowanie zawartoœci tymczasowej tablicy do tablicy u¿ywanej w programie.
 		tempTable = nullptr;									//	Usuniêcie zawartoœci tymczasowej tablicy.
 		iTSize--;												//	Dekrementacja zmiennej przechowuj¹cej rozmiar tablicy.
-		auto o2 = chrono::high_resolution_clock::now();			//	Pomiar czasu w momencie zakoñczenia operacji.
-
-		outcomeTable.tMOutcome(o1, o2);							//	Wyœwietlenie czasu wykonania operacji.
 	}
 	else
 	{
 		shT.empty();											//	Jeœli tablica nie ma elementów wyœwietli siê komunikat o tym zdarzeniu.
 	}
-	 
-	shT.done();													//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
-	displayAll();
 }
 
-void Tablica::popMiddle()										//	Usuniêcie elementu z wybranej pozycji tablicy.
+void Tablica::popMiddleIndex(int iTPopPosition)					//	Usuniêcie elementu z wybranej pozycji tablicy.
 {
-	int iTPopPosition;
-
-	cout << "Podaj pozycje, z ktorej ma zostac usuniety element (zakladamy ze numeracja zaczyna sie od 1):\n";
-	cin >> iTPopPosition;										//	Wybór pozycji, z której ma zostaæ usuniêty element.
-
 	int iTRightPop = iTPopPosition - 1;							//	Zmienna zawieraj¹ca poprawn¹ pozycjê usuwanego elementu.
 
 	if (iTRightPop >= 0 && iTRightPop < iTSize)					//	Sprawdzenie czy wybrana pozycja znajduje siê w tablicy.
 	{
-		auto o1 = chrono::high_resolution_clock::now();			//	Poiar czasu w momencie rozpoczêcia operacji.
 		auto tempTable = new int[iTSize - 1];					//	Stworzenie tymczasowej tablicy z pomniejszon¹ iloœci¹ elementów.
 
 		for (int i = 0; i < iTRightPop; i++)					//	Pêtla wykonuj¹ca siê od pierwszej do wybranej pozycji (wy³¹cznie) w tablicy.
@@ -531,88 +599,113 @@ void Tablica::popMiddle()										//	Usuniêcie elementu z wybranej pozycji tabl
 		newTable = tempTable;									//	Skopiowanie zawartoœci tymczasowej tablicy do tablicy u¿ywanej w programie.
 		tempTable = nullptr;									//	Usuniêcie zawartoœci tymczasowej tablicy.
 		iTSize--;												//	Dekrementacja zmiennej przechowuj¹cej rozmiar tablicy.
-		auto o2 = chrono::high_resolution_clock::now();			//	Pomiar czasu w momencie zakoñczenia operacji.
-
-		outcomeTable.tMOutcome(o1, o2);							//	Wyœwietlenie czasu wykonania operacji.
 	}
 	else
 	{
 		shT.away();												//	Wyœwietlenie komunikatu o braku wybranej pozycji w liœcie.
 	}
-	
-	shT.done();													//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
-	displayAll();
+}
+
+void Tablica::popMiddleValue(int iTPopValue)
+{
+	if (iTSize != 0)											//	Sprawdzenie czy kopiec ma zawartoœæ.
+	{
+		for (int i = 0; i < iTSize; i++)						//	Pêtla wykonuj¹ca siê od pierwszego do ostatniego elementu.
+		{
+			if (iTPopValue == newTable[i])						//	Sprawdzenie czy wartoœæ elementu pokrywa siê z wybran¹ wartoœci¹.
+			{
+				auto tempTable = new int[iTSize - 1];			//	Stworzenie tymczasowej tablicy z pomniejszon¹ iloœci¹ elementów.
+				for (int j = 0; j < i; j++)						//	Pêtla wykonuj¹ca siê od pierwszej do wybranej pozycji (wy³¹cznie) w tablicy.
+				{
+					tempTable[j] = newTable[j];					//	Skopiowanie okreœlonej wartoœci komórki z poprzedniej tablicy do tablicy tymczasowej.
+				}
+				for (int j = i; j < iTSize; j++)				//	Pêtla wykonuj¹ca siê od wybranej pozycji do ostatniej.
+				{
+					tempTable[j] = newTable[j + 1];				//	Skopiowanie okreœlonej wartoœci komórki z poprzedniej tablicy do komórki o indeksie o jeden mniejszy tablicy tymczasowej.
+				}
+				delete[] newTable;								//	Usuniêcie zawartoœci u¿ywanej w programie tablicy.
+				newTable = tempTable;							//	Skopiowanie zawartoœci tymczasowej tablicy do tablicy u¿ywanej w programie.
+				tempTable = nullptr;							//	Usuniêcie zawartoœci tymczasowej tablicy.
+				iTSize--;										//	Dekrementacja zmiennej przechowuj¹cej rozmiar tablicy.
+
+				goto displayed;									//	Etykieta umo¿liwiaj¹ca wyjœcie z pêtli po znalezieniu poszukiwanego elementu.
+			}
+		}
+		shT.noIn();												//	Wyœwietlenie inforamcji, ¿e podanego elementu nie ma w strukturze.
+	displayed:
+	}
+	else
+	{
+		shT.empty();											//	Wyœwietlenie komunikatu o braku zawartoœci kopca.
+	}
 }
 
 void Tablica::clearAllT()										//	Usuniêcie wszystkich elementów z tablicy.
 {
 	if (iTSize != 0)
 	{
-		auto o1 = chrono::high_resolution_clock::now();			//	Pomiar czasu w momencie rozpoczêcia operacji.
-		delete [] newTable;										//	Usuniêcie zawartoœci u¿ywanej w programie tablicy.
-		newTable = nullptr;
-		iTSize = 0;												//	Wyzerowanie zmiennej zawieraj¹cej rozmiar tablicy.
-		auto o2 = chrono::high_resolution_clock::now();			//	Pomiar czasu w momencie zakoñczenia operacji.
-
-		outcomeTable.tMOutcome(o1, o2);							//	Wyœwietlenie czasu wykonania operacji.
+		delete [] this->newTable;										//	Usuniêcie zawartoœci u¿ywanej w programie tablicy.
+		this->newTable = nullptr;
+		this->iTSize = 0;												//	Wyzerowanie zmiennej zawieraj¹cej rozmiar tablicy.
 	}
 	else
 	{
 		shT.empty();											//	Wyœwietlenie komunikatu o braku zawartoœci tablicy.
 	}
-	
-	shT.done();													//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
-	displayAll();
 }
 
 void Tablica::displayAll()										//	Wyœwietlenie wszystkich elementów tablicy.
 {
 	if (iTSize != 0)
 	{
-		auto o1 = chrono::high_resolution_clock::now();			//	Pomiar czasu w momecie rozpoczêcia operacji.
 		for (int i = 0; i < iTSize; i++)						//	Pêtla wykonuj¹ca siê od pierwszego do ostatniego elementu tablicy.
 		{
 			cout << "Element nr " << i + 1 << " = " << newTable[i] << endl;		//	Wyœwietlenie okreœlonego elementu talbicy.
 		}
-		auto o2 = chrono::high_resolution_clock::now();			//	Pomiar czasu w momencie zakoñczenia operacji.
-
-		outcomeTable.tMOutcome(o1,o2);							//	Wyœwietlenie czasu wykonywania operacji.
 	}
 	else
 	{
 		shT.empty();											//	Wyœwietlenie komunikatu o braku zawartoœci tablicy.
-	}
-	shT.done();													//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+	}											
 }
 
-void Tablica::displayOne()										//	Wyœwietlenie elementu z wybranej pozycji.
+bool Tablica::displayOneValue(int iTValueDisplay)
+{
+	if (iTSize != 0)											//	Sprawdzenie czy kopiec ma zawartoœæ.
+	{
+		for (int i = 0; i < iTSize; i++)						//	Pêtla wykonuj¹ca siê od pierwszego do ostatniego elementu.
+		{
+			if (iTValueDisplay == newTable[i])					//	Sprawdzenie czy wartoœæ elementu pokrywa siê z wybran¹ wartoœci¹.
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+	else
+	{
+		shT.empty();											//	Wyœwietlenie komunikatu o braku zawartoœci kopca.
+		return false;
+	}
+}
+
+void Tablica::displayOneIndex(int iTChoiceDisplay)				//	Wyœwietlenie elementu z wybranej pozycji.
 {
 	if (iTSize != 0)											//	Sprawdzenie czy struktura ma zawartoœæ.
 	{
-		int iTChoiceDisplay;
-
-		cout << "Wybierz element, ktory chcesz wyswietlic (zakladamy ze numeracja zaczyna sie od 1): " << endl;
-		cin >> iTChoiceDisplay;									//	Wybór pozycji, z której ma zostaæ wyœwietlony element.
-
-		auto o1 = chrono::high_resolution_clock::now();			//	Pomiar czasu w momencie rozpoczêcia wykonywania operacji.
-
 		if (iTChoiceDisplay >= 0 && iTChoiceDisplay < iTSize)	//	Sprawdzenie czy wybrana pozycja znajduje siê w tablicy.
 		{
 			cout << "Element nr " << iTChoiceDisplay << " ma wartosc rowna: " << newTable[iTChoiceDisplay - 1] << endl;		//	Wyœwitlenie wartoœci komórki o wybranej pozycji.
 		}
 		else
 		{
-			cout << "Wybranego elementu nie ma w strukturze.\n";
+			shT.away();
 		}
-		auto o2 = chrono::high_resolution_clock::now();			//	Pomiar czasu w momencie zakoñczenia operacji.
-
-		outcomeTable.tMOutcome(o1, o2);							//	Wyœwietlenie czasu wykonywania operacji.
 	}
 	else
 	{
-		cout << "Struktura nie ma zawartosci...\n";
+		shT.empty();
 	}
-	shT.done();													//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
 }
 
 void Tablica::testPush()
@@ -627,31 +720,50 @@ void Tablica::testPush()
 			"Dodawanie na poczatek:\n";
 	for (int i = 0; i < 100; i++)
 	{
-		generateElementsTest(iTTPuChoice);
-		
-		pushFrontTest();
+		generateElements(iTTPuChoice);
+		int iTTGenerated = rand();
 
-		clearAllTTest();
+		auto o1 = chrono::high_resolution_clock::now();
+
+		pushFront(iTTGenerated);
+
+		auto o2 = chrono::high_resolution_clock::now();
+		outcomeTable.tMShort(o1, o2);
+
+		clearAllT();
 	}
 	cout << "------------------------------------------\n"
 			"Dodawanie na koniec:\n";
 	for (int i = 0; i < 100; i++)
 	{
-		generateElementsTest(iTTPuChoice);
+		generateElements(iTTPuChoice);
+		int iTTGenerated = rand();
 
-		pushEndTest();
+		auto o1 = chrono::high_resolution_clock::now();
 
-		clearAllTTest();
+		pushEnd(iTTGenerated);
+
+		auto o2 = chrono::high_resolution_clock::now();
+		outcomeTable.tMShort(o1, o2);
+
+		clearAllT();
 	}
 	cout << "------------------------------------------\n"
 			"Dodawanie w srodek:\n";
 	for (int i = 0; i < 100; i++)
 	{
-		generateElementsTest(iTTPuChoice);
+		generateElements(iTTPuChoice);
+		int iTTPuPosition = ((rand() % iTTPuChoice) + 0);
+		int iTTNewMidElement = rand();
 
-		pushMiddleTest(iTTPuChoice);
+		auto o1 = chrono::high_resolution_clock::now();
 
-		clearAllTTest();
+		pushMiddle(iTTPuPosition, iTTNewMidElement);
+
+		auto o2 = chrono::high_resolution_clock::now();
+		outcomeTable.tMShort(o1, o2);
+
+		clearAllT();
 	}
 
 	shT.done();
@@ -669,33 +781,48 @@ void Tablica::testPop()
 		"Usuwanie z poczatku:\n";
 	for (int i = 0; i < 100; i++)
 	{
-		generateElementsTest(iTTPoChoice);
+		generateElements(iTTPoChoice);
 
-		popFrontTest();
+		auto o1 = chrono::high_resolution_clock::now();
 
-		clearAllTTest();
+		popFront();
+
+		auto o2 = chrono::high_resolution_clock::now();
+		outcomeTable.tMShort(o1, o2);
+
+		clearAllT();
 	}
 	cout << "------------------------------------------\n"
 		"Usuwanie z konca:\n";
 	for (int i = 0; i < 100; i++)
 	{
-		generateElementsTest(iTTPoChoice);
+		generateElements(iTTPoChoice);
 
-		popEndTest();
+		auto o1 = chrono::high_resolution_clock::now();
 
-		clearAllTTest();
+		popEnd();
+
+		auto o2 = chrono::high_resolution_clock::now();
+		outcomeTable.tMShort(o1, o2);
+
+		clearAllT();
 	}
 	cout << "------------------------------------------\n"
 		"Usuwanie ze srodka:\n";
 	for (int i = 0; i < 100; i++)
 	{
-		generateElementsTest(iTTPoChoice);
+		generateElements(iTTPoChoice);
 
-		popMiddleTest(iTTPoChoice);
+		int iTTPopValue = ((rand() % iTTPoChoice) + 0);
+		auto o1 = chrono::high_resolution_clock::now();
 
-		clearAllTTest();
+		popMiddleValue(iTTPopValue);
+
+		auto o2 = chrono::high_resolution_clock::now();
+		outcomeTable.tMShort(o1, o2);
+
+		clearAllT();
 	}
-
 	shT.done();
 }
 
@@ -711,189 +838,17 @@ void Tablica::testSearch()
 		"Szukanie elementu:\n";
 	for (int i = 0; i < 100; i++)
 	{
-		generateElementsTest(iTTDChoice);
+		generateElements(iTTDChoice);
 
-		searchTest(iTTDChoice);
+		int iTTSearchValue = rand();
+		auto o1 = chrono::high_resolution_clock::now();
 
-		clearAllTTest();
+		displayOneValue(iTTSearchValue);
+
+		auto o2 = chrono::high_resolution_clock::now();
+		outcomeTable.tMShort(o1, o2);
+
+		clearAllT();
 	}
 	shT.done();
-}
-
-void Tablica::generateElementsTest(int iTTPuChoice)
-{
-	auto *tempTable = new int[iTTPuChoice];
-
-	
-
-	for (int z = 0; z < iTTPuChoice; z++)
-	{							
-		tempTable[z] = rand();
-	}
-	delete[] this->newTable;											
-	this->newTable = tempTable;										
-	tempTable = nullptr;										
-	this->iTSize = iTTPuChoice;						
-}
-
-void Tablica::clearAllTTest()
-{		
-	delete[] this->newTable;										
-	this->iTSize = 0;
-	this->newTable = nullptr;
-}
-
-void Tablica::pushFrontTest()
-{
-	auto o1 = chrono::high_resolution_clock::now();				
-
-	int iTTempSize = iTSize + 1;
-	auto tempTable = new int[iTSize + 1];						
-
-	tempTable[0] = rand();
-	if (iTSize != 0)
-	{
-		for (int i = iTTempSize; i >= 1; i--)					
-		{
-			tempTable[i] = newTable[i - 1];						
-		}
-	}
-	delete[] newTable;											
-	newTable = tempTable;										
-	tempTable = nullptr;										
-	iTSize++;													
-	auto o2 = chrono::high_resolution_clock::now();			
-
-	outcomeTable.tMShort(o1, o2);						
-
-}
-
-void Tablica::pushEndTest()
-{
-	auto o1 = chrono::high_resolution_clock::now();				
-
-	auto tempTable = new int[iTSize + 1];						
-
-	tempTable[iTSize] = rand();						
-	if (iTSize != 0)
-	{
-		for (int i = 0; i < iTSize; i++)						
-		{
-			tempTable[i] = newTable[i];							
-		}
-	}
-	delete[] newTable;											
-	newTable = tempTable;										
-	tempTable = nullptr;										
-	iTSize++;													
-	auto o2 = chrono::high_resolution_clock::now();				
-
-	outcomeTable.tMShort(o1, o2);								
-
-}
-
-void Tablica::pushMiddleTest(int iTTPuChoice)
-{
-	int iTNewMidElement = rand();
-										
-	int iTRightPush = ((rand() % iTTPuChoice) + 0);
-								
-
-	auto o1 = chrono::high_resolution_clock::now();			
-	auto tempTable = new int[iTSize + 1];					
-	tempTable[iTRightPush] = iTNewMidElement;				
-	for (int i = 0; i < iTRightPush; i++)					
-	{
-		tempTable[i] = newTable[i];							
-	}
-	for (int i = iTRightPush + 1; i < iTSize + 1; i++)		
-	{
-		tempTable[i] = newTable[i - 1];						
-	}
-	delete[] newTable;										
-	newTable = tempTable;									
-	tempTable = nullptr;									
-	iTSize++;												
-	auto o2 = chrono::high_resolution_clock::now();			
-	outcomeTable.tMShort(o1, o2);						
-}
-
-void Tablica::popFrontTest()
-{
-	auto o1 = chrono::high_resolution_clock::now();			
-	auto tempTable = new int[iTSize - 1];					
-
-	for (int i = iTSize - 1; i >= 0; i--)				
-	{
-		tempTable[i] = newTable[i + 1];						
-	}
-	delete[] newTable;										
-	newTable = tempTable;									
-	tempTable = nullptr;									
-	iTSize--;												
-	auto o2 = chrono::high_resolution_clock::now();			
-
-	outcomeTable.tMShort(o1, o2);
-}
-
-void Tablica::popEndTest()
-{
-	auto o1 = chrono::high_resolution_clock::now();			
-	auto tempTable = new int[iTSize - 1];					
-
-	for (int i = 0; i < iTSize - 1; i++)					
-	{
-		tempTable[i] = newTable[i];							
-	}
-	delete[] newTable;										
-	newTable = tempTable;									
-	tempTable = nullptr;									
-	iTSize--;												
-	auto o2 = chrono::high_resolution_clock::now();			
-
-	outcomeTable.tMShort(o1, o2);
-
-}
-
-void Tablica::popMiddleTest(int iTTPoChoice)
-{
-	int iTRightPop = ((rand() % iTTPoChoice) + 0);
-
-	auto o1 = chrono::high_resolution_clock::now();			
-	auto tempTable = new int[iTSize - 1];					
-
-	for (int i = 0; i < iTRightPop; i++)					
-	{
-		tempTable[i] = newTable[i];							
-	}
-	for (int i = iTRightPop; i < iTSize; i++)				
-	{
-		tempTable[i] = newTable[i + 1];						
-	}
-	delete[] newTable;										
-	newTable = tempTable;									 
-	tempTable = nullptr;									
-	iTSize--;												
-	auto o2 = chrono::high_resolution_clock::now();			
-
-	outcomeTable.tMShort(o1, o2);
-}
-
-void Tablica::searchTest(int iTTDChoicev)
-{
-	int iTChoiceDisplay = rand();
-								
-	auto o1 = chrono::high_resolution_clock::now();			
-
-	for (int s = 0; s < iTTDChoicev; s++)
-	{
-		if (newTable[s] == iTChoiceDisplay)
-		{
-			goto searched;
-		}
-	}
-	searched:
-	auto o2 = chrono::high_resolution_clock::now();			
-
-	outcomeTable.tMShort(o1, o2);
 }

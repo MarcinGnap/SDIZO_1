@@ -17,4 +17,5 @@ public:
 	void opened();
 	void noFile();
 	void empty();
+	void noIn();
 };

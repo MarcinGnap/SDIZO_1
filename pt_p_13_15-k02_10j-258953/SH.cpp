@@ -34,7 +34,7 @@ void SH::noOption()		//	Metoda mówi¹ca u¿ytkownikowi, ¿e wybra³ nieistniej¹c¹ op
 	getchar();
 }
 
-void SH::away()			//	Metoda mówi¹ca u¿ytkownikowi, ¿e wybrany element znajduje siê poza struktur¹.
+void SH::away()			//	Metoda mówi¹ca u¿ytkownikowi, ¿e wybrana pozycja znajduje siê poza struktur¹.
 {
 	cout << "Wybrana pozycja znajduje sie poza struktura...\n"
 			"Wybierz inna pozycje...\n";
@@ -58,4 +58,9 @@ void SH::noFile()		//	Metoda daj¹ca komunikat, ¿e plik nie zosta³ otwarty poyœln
 void SH::empty()		//	Metoda mówi¹ca u¿ytkownikowi, ¿e struktura nie ma zawartoœci.
 {
 	cout << "Struktura nie ma zawartosci...\n";
+}
+
+void SH::noIn()			//	Metoda mówi¹ca u¿ytkownikowi, ¿e wybranej wartoœci nie ma w strukturze.
+{
+	cout << "Wybranego elementu nie ma w strukturze.\n";
 }
