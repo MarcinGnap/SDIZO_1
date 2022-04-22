@@ -296,8 +296,9 @@ void Tablica::pushFront()			//	Dodanie elementu na pocz¹tek tablicy.
 	auto o2 = chrono::high_resolution_clock::now();				//	Pomiar czasu w momencie zakoñczenia programu.
 
 	outcomeTable.tMOutcome(o1, o2);								//	Wyœwietlenie czasu wykonania operacji.
-	
+	 
 	shT.done();													//	Wyœwietlenie komunikatu o zakoñczeniu zadania oraz czekanie na naciœniêcie klawisza przez u¿ytkownika.
+	displayAll();
 }
 
 void Tablica::pushEnd()											//	Dodanie na koniec tablicy.
@@ -326,8 +327,9 @@ void Tablica::pushEnd()											//	Dodanie na koniec tablicy.
 	auto o2 = chrono::high_resolution_clock::now();				//	Pomiar czasu w momencie zakoñczenia wykonywania operacji.
 
 	outcomeTable.tMOutcome(o1, o2);								//	Wypisanie czasu wykonania operacji.
-
+	 
 	shT.done();													//	Wyœwietlenie komunikatu o zakoñczeniu zadania oraz czekanie na naciœniêcie klawisza przez u¿ytkownika.
+	displayAll();
 }
 
 void Tablica::pushMiddle()
@@ -368,7 +370,9 @@ void Tablica::pushMiddle()
 	{
 		shT.away();												//	Wyœwietlenie komunikatu, ¿e wybrana pozycja znajduje siê poza tablic¹.
 	}
+	 
 	shT.done();													//	Wyœwietlenie kounikatu o wykonaniu operacji.
+	displayAll();
 }
 
 void Tablica::readFromFileT()									//	Odczyt i przypisanie wartoœci z pliku tekstowego do tablicy.
@@ -406,8 +410,9 @@ void Tablica::readFromFileT()									//	Odczyt i przypisanie wartoœci z pliku t
 		auto o2 = chrono::high_resolution_clock::now();			//	Pomiar czasu w momecie zakoñczenia operacji.
 
 		outcomeTable.tMOutcome(o1, o2);							//	Wyœwietlenie czasu wykonywania operacji.
-
+		 
 		shT.done();												//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+		displayAll();
 	}
 	else
 	{
@@ -439,8 +444,9 @@ void Tablica::generateElements()								//	Wygenerowanie okreœlonej liczby eleme
 	auto o2 = chrono::high_resolution_clock::now();				//	Pomiar czasu w momencie zakoñczenia operacji.
 
 	outcomeTable.tMOutcome(o1, o2);								//	Wyœwietlenie czasu wykonania operacji.
-
+	 
 	shT.done();													//	Wyœwieltenie komunikatu o zakoñczeniu operacji.
+	displayAll();
 }
 
 void Tablica::popFront()										//	Usuniêcie elementu na pierwszym miejscu tablicy.
@@ -466,8 +472,9 @@ void Tablica::popFront()										//	Usuniêcie elementu na pierwszym miejscu tab
 	{
 		shT.empty();											//	Jeœli tablica nie ma elementów wyœwietli siê komunikat o tym zdarzeniu.
 	}
-
+	 
 	shT.done();													//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+	displayAll();
 }
 
 void Tablica::popEnd()											//	Usuniêcie ostatniego elementu z tablicy.
@@ -493,7 +500,9 @@ void Tablica::popEnd()											//	Usuniêcie ostatniego elementu z tablicy.
 	{
 		shT.empty();											//	Jeœli tablica nie ma elementów wyœwietli siê komunikat o tym zdarzeniu.
 	}
+	 
 	shT.done();													//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+	displayAll();
 }
 
 void Tablica::popMiddle()										//	Usuniêcie elementu z wybranej pozycji tablicy.
@@ -530,7 +539,9 @@ void Tablica::popMiddle()										//	Usuniêcie elementu z wybranej pozycji tabl
 	{
 		shT.away();												//	Wyœwietlenie komunikatu o braku wybranej pozycji w liœcie.
 	}
+	
 	shT.done();													//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+	displayAll();
 }
 
 void Tablica::clearAllT()										//	Usuniêcie wszystkich elementów z tablicy.
@@ -549,8 +560,9 @@ void Tablica::clearAllT()										//	Usuniêcie wszystkich elementów z tablicy.
 	{
 		shT.empty();											//	Wyœwietlenie komunikatu o braku zawartoœci tablicy.
 	}
-
+	
 	shT.done();													//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+	displayAll();
 }
 
 void Tablica::displayAll()										//	Wyœwietlenie wszystkich elementów tablicy.

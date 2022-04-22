@@ -293,8 +293,9 @@ void Lista::pushFront()									//	Dodanie elementu na pocz¹tek listy.
 	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 	
 	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
-
+	 
 	shL.done();											//	Wyœwietlenie komunikatu zakoñczenia wykonywania operacji.
+	displayAll();
 }
 
 void Lista::pushEnd()									//	Dodanie elementu na koniec listy.
@@ -321,8 +322,9 @@ void Lista::pushEnd()									//	Dodanie elementu na koniec listy.
 	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia wykonywania operacji.
 
 	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
-
+	 
 	shL.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania zadania.
+	displayAll();
 }
 
 void Lista::pushMiddle()								//	Dodanie elementu w okreœlone miejsce w liœcie.
@@ -370,7 +372,9 @@ pushed:													//	Etykieta.
 	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 
 	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
+	 
 	shL.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+	displayAll();
 }
 
 void Lista::readFromFileL()								//	Odczytanie i zapisanie elementów z pliku tekstowego.
@@ -417,8 +421,9 @@ void Lista::readFromFileL()								//	Odczytanie i zapisanie elementów z pliku t
 		auto o2 = chrono::high_resolution_clock::now();	//	Pomiaer czasu w momencie zakoñczenia operacji.
 
 		outcomeList.tMOutcome(o1, o2);					//	Wyœwietlenie czasu wykonywania operacji.
-
+		 
 		shL.done();										//	Wyœwietlenie komuniaktu o wykonaniu operacji.
+		displayAll();
 	}
 	else
 	{
@@ -457,8 +462,9 @@ void Lista::generateElements()							//	Wygenerowanie okreœlonej liczby elemetów
 	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia wykonywania operacji.
 
 	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
-
+	 
 	shL.done();											//	Wyœwietlenie komuniaktu o zakoñczeniu wykonywania operacji.
+	displayAll();
 }
 
 void Lista::popFront()									//	Usuniêcie elementu z pocz¹tki listy.
@@ -484,8 +490,9 @@ void Lista::popFront()									//	Usuniêcie elementu z pocz¹tki listy.
 	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 
 	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
-
+	 
 	shL.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+	displayAll();
 }
 
 void Lista::popEnd()									//	Usuniêcie elementu z koñca listy.
@@ -512,8 +519,9 @@ void Lista::popEnd()									//	Usuniêcie elementu z koñca listy.
 	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 
 	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
-
+	 
 	shL.done();											//	Wyœwietlenie komunikatu i zakoñczeniu wykonywania operacji.
+	displayAll();
 }
 
 void Lista::popMiddle()									//	Usuniêcie wskazanego elementu.
@@ -548,7 +556,9 @@ void Lista::popMiddle()									//	Usuniêcie wskazanego elementu.
 	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 
 	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
+	
 	shL.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+	displayAll();
 }
 
 void Lista::clearAll()									//	Usuniêcie wszystkich elementów listy.
@@ -573,7 +583,9 @@ void Lista::clearAll()									//	Usuniêcie wszystkich elementów listy.
 	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 
 	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
+	
 	shL.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+	displayAll();
 }
 
 void Lista::displayAll()								//	Wyœwietlenie ca³ej zawartoœci listy.
@@ -600,6 +612,7 @@ void Lista::displayAll()								//	Wyœwietlenie ca³ej zawartoœci listy.
 	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 
 	outcomeList.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywanie operacji.
+	
 	shL.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
 }
 

@@ -274,8 +274,9 @@ void Heap::pushElement()								//	Dodanie elementu do kopca.
 	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 
 	outcomeHeap.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonania operacji.
-
+	 
 	shH.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+	displayAll();
 }
 
 void Heap::readFromFileH()								//	Odczytanie i skopiowanie wartoœci z pliku tekstowego do kopca.
@@ -314,8 +315,9 @@ void Heap::readFromFileH()								//	Odczytanie i skopiowanie wartoœci z pliku t
 		auto o2 = chrono::high_resolution_clock::now();	//	Pomiar czasu w momencie zakoñczenia operacji.
 
 		outcomeHeap.tMOutcome(o1, o2);					//	Wyœwieltenie czasu wykonywania operacji.
-		
+		 
 		shH.done();										//	Wyœwieltenie komunikatu o zakoñczeniu wykonywania operacji.
+		displayAll();
 	}
 	else
 	{
@@ -348,8 +350,9 @@ void Heap::generateElements()
 	auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 
 	outcomeHeap.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
-
+	 
 	shH.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+	displayAll();
 }
 
 void Heap::popElement()									//	Usuniêcie elementu z kopca.
@@ -379,7 +382,9 @@ void Heap::popElement()									//	Usuniêcie elementu z kopca.
 	{
 		shH.empty();									//	Wyœwietlenie komunikatu o braku zawartoœci kopca.
 	}
+	 
 	shH.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+	displayAll();
 }
 
 void Heap::clearAll()									//	Usuniêcie wszystkich elementów kopca.
@@ -398,8 +403,9 @@ void Heap::clearAll()									//	Usuniêcie wszystkich elementów kopca.
 	{
 		shH.empty();									//	Wyœwietlenie komunikatu o braku zawartoœci kopca.
 	}
-
+	 
 	shH.done();											//	Wyœwietlenie komunikatu o zakoñczeniu wykonywania operacji.
+	displayAll();
 }
 
 void Heap::displayAll()									//	Wyœwietlenie wszystkich elementów kopca.
