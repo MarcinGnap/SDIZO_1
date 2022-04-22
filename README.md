@@ -1,14 +1,14 @@
 # pt_p_13_15-k02_10j-258953
 projekt nr 1 SDIZO
- Menu:
-1. Tablica dynamiczna
-  1.1. Menu dodawania
-    1.1.1. Dodanie na początek
-    1.1.2. Dodanie na koniec
-    1.1.3. Dodanie w określone miejsce
-    1.1.4. Wczytanie z pliku
-    1.1.5. Wylosowanie określonej ilości danych
-    1.1.6. Powrót
+ Menu:<br />
+1. Tablica dynamiczna<br />
+  1.1. Menu dodawania<br />
+    1.1.1. Dodanie na początek<br />
+    1.1.2. Dodanie na koniec<br />
+    1.1.3. Dodanie w określone miejsce<br />
+    1.1.4. Wczytanie z pliku<br />
+    1.1.5. Wylosowanie określonej ilości danych<br />
+    1.1.6. Powrót<br />
   1.2. Menu usuwania
     1.2.1. Usunięcie z początku
     1.2.2. Usunięcie z końca
