@@ -2,8 +2,8 @@
 projekt nr 1 SDIZO<br />
  Menu:<br />
 1. Tablica dynamiczna<br />
-  1.1. Menu dodawania<br />
-    1.1.1. Dodanie na początek<br />
+  *1.1. Menu dodawania<br />
+   ** 1.1.1. Dodanie na początek<br />
     1.1.2. Dodanie na koniec<br />
     1.1.3. Dodanie w określone miejsce<br />
     1.1.4. Wczytanie z pliku<br />
