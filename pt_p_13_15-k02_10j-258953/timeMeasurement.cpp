@@ -25,7 +25,7 @@ void timeMeasurement::tMShort(chrono::high_resolution_clock::time_point o1, chro
 	fstream fTMTests("fTMTests.txt", ios::app | ios::out);
 	if (fTMTests.good())
 	{
-		//	Zapisanie wyniku do pliku tekstowego.
+		//	Zapisanie wyniku w pliku tekstowym.
 		fTMTests << time_span.count() << endl;
 		fTMTests.flush();
 	}
