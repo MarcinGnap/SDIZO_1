@@ -360,7 +360,10 @@ void Heap::readFromFileH()								//	Odczytanie i skopiowanie wartoœci z pliku t
 		int iHLineCount = stoi(sHLineCountBuffer);		//	Zmiana typu string odczytanej wartoœci na typ int.
 		cout << "Ilosc elementow przekazanych do struktury: " << iHLineCount << endl;
 
-		auto tempHeap = new int[iHLineCount];			// Stworzenie tymczasowego kopca z okreœlon¹ iloœci¹ komórek.
+		delete[] newHeap;									//	Usuniêcie zawartoœci kopca u¿ywanego w programie.
+		newHeap = nullptr;
+		iHSize = 0;											//	Wyzerowanie zmiennej przechowuj¹cej rozmiar kopca.
+		newHeap = new int[iHLineCount];					//	Stworzenie nowej tablicy przechowuj¹cej element kopca o okreœlonej wczeœniej wielkoœci.
 
 		for (int i = 0; i < iHLineCount; i++)			//	Pêtla wykonuj¹ca siê tyle razy ile zostanie wczytanych elementów.
 		{
@@ -369,13 +372,11 @@ void Heap::readFromFileH()								//	Odczytanie i skopiowanie wartoœci z pliku t
 
 			int iHLineValue = stoi(sHLineValueBuffer);	//	Zmiana typu string odczytanej wartoœci na typ int.
 
-			tempHeap[i] = iHLineValue;					//	Przypisanie odczytanej wartoœci do okreœlonej komórki w kopcu.
-			
+			newHeap[i] = iHLineValue;					//	Przypisanie odczytanej wartoœci do okreœlonej komórki w kopcu.
+
+			iHSize = i + 1;
 			HeapifyUp();								//	Posortowanie kopca po odczytaniu wartoœci.
 		}
-		delete[] newHeap;								//	Usuniêcie zawartoœci kopca u¿ywanego w programie.
-		newHeap = tempHeap;								//	Skopiowanie zawartoœci tymczasowego kopca do kopca u¿ywanego w programie.
-		tempHeap = nullptr;
 		iHSize = iHLineCount;							//	Przypisanie do zmiennej przechowuj¹cej rozmiar kopca zmiennej przechowuj¹cej iloœæ odczytanych danych z pliku.
 
 		ifHFile.close();								//	Zamkniêcie pliku.
