@@ -31,7 +31,7 @@ void Heap::heapMenu()									//	Menu g³ówne kopca.
 
 		cout << "Prosze wybrac:\n"
 				"\t1.Menu dodawania.\n"
-				"\t2.Menu odejmowania.\n"
+				"\t2.Menu usuwania.\n"
 				"\t3.Menu wyswietlania.\n"
 				"\t4.Menu testow.\n"
 				"\t5.Powrot.\n";
@@ -410,19 +410,29 @@ void Heap::popElement()									//	Usuniêcie elementu z kopca.
 {
 	if (iHSize != 0)									//	Sprawdzenie czy kopiec ma zawartoœæ.
 	{
-		auto tempHeap = new int[iHSize - 1];			//	Stworzenie nowego kopca z pomniejszon¹ iloœci¹ elementów.
-
-		tempHeap[0] = newHeap[iHSize - 1];				//	Przypisanie wartoœæ ostatniego elementu do pierwszego miejsca.
-		for (int i = 1; i < iHSize - 1; i++)			//	Pêtla wykonuj¹ca siê od drugiego do przedostatniego elementu.
+		if (iHSize == 1)
 		{
-			tempHeap[i] = newHeap[i];					//	Przypisanie wartoœci poprzedniego kopca do nowego kopca.
-		}
-		delete[] newHeap;								//	Usuniêcie zawartoœci poprzedniego kopca.
-		newHeap = tempHeap;								//	Przypisanie zawartoœci tyczasowego kopca do kopca u¿ywanego w programie.
-		tempHeap = nullptr;								//	Usuniêcie zawartoœci tymczasowego kopca.
-		iHSize--;										//	Dekrementacja zimennej przechowuj¹cej rozmiar kopca.
+			delete[] newHeap;								//	Usuniêcie zawartoœci poprzedniego kopca.
+			newHeap = nullptr;
+			iHSize--;										//	Dekrementacja zimennej przechowuj¹cej rozmiar kopca.
 
-		HeapifyDown(0);									//	Posortowanie elementów w dó³.
+		}
+		else
+		{
+			auto tempHeap = new int[iHSize - 1];			//	Stworzenie nowego kopca z pomniejszon¹ iloœci¹ elementów.
+
+			tempHeap[0] = newHeap[iHSize - 1];				//	Przypisanie wartoœæ ostatniego elementu do pierwszego miejsca.
+			for (int i = 1; i < iHSize - 1; i++)			//	Pêtla wykonuj¹ca siê od drugiego do przedostatniego elementu.
+			{
+				tempHeap[i] = newHeap[i];					//	Przypisanie wartoœci poprzedniego kopca do nowego kopca.
+			}
+			delete[] newHeap;								//	Usuniêcie zawartoœci poprzedniego kopca.
+			newHeap = tempHeap;								//	Przypisanie zawartoœci tyczasowego kopca do kopca u¿ywanego w programie.
+			tempHeap = nullptr;								//	Usuniêcie zawartoœci tymczasowego kopca.
+			iHSize--;										//	Dekrementacja zimennej przechowuj¹cej rozmiar kopca.
+
+			HeapifyDown(0);									//	Posortowanie elementów w dó³.
+		}
 	}
 	else
 	{

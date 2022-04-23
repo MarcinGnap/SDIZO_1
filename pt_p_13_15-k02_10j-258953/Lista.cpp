@@ -31,7 +31,7 @@ void Lista::listMenu()									//	Menu g³ówne listy dwukierunkowej.
 
 		cout << "Prosze wybrac:\n"
 				"\t1.Menu dodawania.\n"
-				"\t2.Menu odejmowania.\n"
+				"\t2.Menu usuwania.\n"
 				"\t3.Menu wyswietlania.\n"
 				"\t4.Menu testow.\n"
 				"\t5.Powrot.\n";
