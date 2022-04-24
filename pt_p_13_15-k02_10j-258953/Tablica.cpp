@@ -868,7 +868,7 @@ void Tablica::testSearch()
 
 	cout << "------------------------------------------\n"
 		"Szukanie elementu:\n";
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < iTTTrial; i++)
 	{
 		generateElements(iTTDChoice);
 

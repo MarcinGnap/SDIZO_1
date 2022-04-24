@@ -868,6 +868,12 @@ int Lista::displayOneIndex(int iLDisplayIndex)
 void Lista::testPush()
 {
 	int iLTPuChoice;
+	int iLTTrial;
+	long long llLTPushFrontAvg = 0;
+	long long llLTPushEndAvg = 0;
+	long long llLTPushMiddletAvg = 0;
+	cout << "Ile razy maja zostac przeprowadzone pomiary?";
+	cin >> iLTTrial;
 	cout << "Dla ilu elementow maja zostac przeprowadzone testy?";
 	cin >> iLTPuChoice;
 
@@ -875,7 +881,7 @@ void Lista::testPush()
 
 	cout << "------------------------------------------\n"
 		"Dodawanie na poczatek:\n";
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < iLTTrial; i++)
 	{
 		generateElements(iLTPuChoice);
 
@@ -886,12 +892,13 @@ void Lista::testPush()
 
 		auto o2 = chrono::high_resolution_clock::now();
 		outcomeList.tMShort(o1, o2);
+		llLTPushFrontAvg = llLTPushFrontAvg + outcomeList.tMShort(o1, o2);
 
 		clearAll();
 	}
 	cout << "------------------------------------------\n"
 		"Dodawanie na koniec:\n";
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < iLTTrial; i++)
 	{
 		generateElements(iLTPuChoice);
 
@@ -902,12 +909,13 @@ void Lista::testPush()
 
 		auto o2 = chrono::high_resolution_clock::now();
 		outcomeList.tMShort(o1, o2);
+		llLTPushEndAvg = llLTPushEndAvg + outcomeList.tMShort(o1, o2);
 
 		clearAll();
 	}
 	cout << "------------------------------------------\n"
 		"Dodawanie w srodek:\n";
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < iLTTrial; i++)
 	{
 		generateElements(iLTPuChoice);
 
@@ -919,9 +927,14 @@ void Lista::testPush()
 
 		auto o2 = chrono::high_resolution_clock::now();
 		outcomeList.tMShort(o1, o2);
+		llLTPushMiddletAvg = llLTPushMiddletAvg + outcomeList.tMShort(o1, o2);
 
 		clearAll();
 	}
+
+	cout << "\n* Dodawanie na poczatek zajmuje srednio: " << llLTPushFrontAvg / iLTTrial << " nanosekund.\n";
+	cout << "\n* Dodawanie na koniec zajmuje srednio: " << llLTPushEndAvg / iLTTrial << " nanosekund.\n";
+	cout << "\n* Dodawanie w srodek zajmuje srednio: " << llLTPushMiddletAvg / iLTTrial << " nanosekund.\n\n";
 
 	shL.done();
 }
@@ -929,6 +942,12 @@ void Lista::testPush()
 void Lista::testPop()
 {
 	int iLTPoChoice;
+	int iLTTrial;
+	long long llLTPopFrontAvg = 0;
+	long long llLTPopEndAvg = 0;
+	long long llLTPopMiddletAvg = 0;
+	cout << "Ile razy maja zostac przeprowadzone pomiary?";
+	cin >> iLTTrial;
 	cout << "Dla ilu elementow maja zostac przeprowadzone testy?";
 	cin >> iLTPoChoice;
 
@@ -936,7 +955,7 @@ void Lista::testPop()
 
 	cout << "------------------------------------------\n"
 		"Usuwanie z poczatku:\n";
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < iLTTrial; i++)
 	{
 		generateElements(iLTPoChoice);
 
@@ -946,12 +965,13 @@ void Lista::testPop()
 
 		auto o2 = chrono::high_resolution_clock::now();
 		outcomeList.tMShort(o1, o2);
+		llLTPopFrontAvg = llLTPopFrontAvg + outcomeList.tMShort(o1, o2);
 
 		clearAll();
 	}
 	cout << "------------------------------------------\n"
 		"Usuwanie z konca:\n";
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < iLTTrial; i++)
 	{
 		generateElements(iLTPoChoice);
 
@@ -961,12 +981,13 @@ void Lista::testPop()
 
 		auto o2 = chrono::high_resolution_clock::now();
 		outcomeList.tMShort(o1, o2);
+		llLTPopEndAvg = llLTPopEndAvg + outcomeList.tMShort(o1, o2);
 
 		clearAll();
 	}
 	cout << "------------------------------------------\n"
 		"Usuwanie ze srodka:\n";
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < iLTTrial; i++)
 	{
 		generateElements(iLTPoChoice);
 
@@ -977,16 +998,24 @@ void Lista::testPop()
 
 		auto o2 = chrono::high_resolution_clock::now();
 		outcomeList.tMShort(o1, o2);
+		llLTPopMiddletAvg = llLTPopMiddletAvg + outcomeList.tMShort(o1, o2);
 
 		clearAll();
 	}
+
+	cout << "\n* Usuwanie z poczatku zajmuje srednio: " << llLTPopFrontAvg / iLTTrial << " nanosekund.\n";
+	cout << "\n* Usuwanie z konieca zajmuje srednio: " << llLTPopEndAvg / iLTTrial << " nanosekund.\n";
+	cout << "\n* Usuwanie ze srodka zajmuje srednio: " << llLTPopMiddletAvg / iLTTrial << " nanosekund.\n\n";
 
 	shL.done();
 }
 
 void Lista::testSearch()
 {
-	int iLTDChoice;
+	int iLTDChoice, iLTTrial;
+	long long llLTSearchAvg = 0;
+	cout << "Ile razy maja zostac przeprowadzone pomiary?";
+	cin >> iLTTrial;
 	cout << "Dla ilu elementow maja zostac przeprowadzone testy?";
 	cin >> iLTDChoice;
 
@@ -994,7 +1023,7 @@ void Lista::testSearch()
 
 	cout << "------------------------------------------\n"
 		"Szukanie elementu:\n";
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < iLTTrial; i++)
 	{
 		generateElements(iLTDChoice);
 
@@ -1005,8 +1034,10 @@ void Lista::testSearch()
 
 		auto o2 = chrono::high_resolution_clock::now();
 		outcomeList.tMShort(o1, o2);
+		llLTSearchAvg = llLTSearchAvg + outcomeList.tMShort(o1, o2);
 
 		clearAll();
 	}
+	cout << "\n* Wyszukiwanie zajmuje srednio: " << llLTSearchAvg / iLTTrial << " nanosekund.\n\n";
 	shL.done();
 }

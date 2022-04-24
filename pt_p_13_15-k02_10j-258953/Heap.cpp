@@ -585,7 +585,10 @@ int Heap::getParent(int x)									//	Zwrócenie indeksu rodzica.
 
 void Heap::testPush()										//	Testowanie dodawania.
 {
-	int iHTPuChoice;
+	int iHTPuChoice, iHTTrial;
+	long long llHTPushAvg = 0;
+	cout << "Ile razy maja zostac przeprowadzone pomiary?";
+	cin >> iHTTrial;
 	cout << "Dla ilu elementow maja zostac przeprowadzone testy?";
 	cin >> iHTPuChoice;										//	Wybór iloœci daneych dla których maj¹ zostaæ przeprowadzone testy.
 
@@ -593,27 +596,32 @@ void Heap::testPush()										//	Testowanie dodawania.
 
 	cout << "------------------------------------------\n"
 		"Dodawanie:\n";
-	for (int i = 0; i < 100; i++)							//	Pêtla wykonuj¹ca siê 100 razy ze wzglêdu na 100 pomiarów.
+	for (int i = 0; i < iHTTrial; i++)						//	Pêtla wykonuj¹ca siê 100 razy ze wzglêdu na 100 pomiarów.
 	{
-		generateElements(iHTPuChoice);					//	Wygenerowanie okreœlonej iloœci elementów.
+		generateElements(iHTPuChoice);						//	Wygenerowanie okreœlonej iloœci elementów.
 
-		int iHTNewElement = rand();						//	Wygenerowanie nowej wartoœci.
+		int iHTNewElement = rand();							//	Wygenerowanie nowej wartoœci.
 		auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
 
-		pushElement(iHTNewElement);											//	Dodanie pseudo losowego elementu.
+		pushElement(iHTNewElement);							//	Dodanie pseudo losowego elementu.
 
 		auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 		outcomeHeap.tMShort(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji i zapisanie go do pliku tekstowego.
+		llHTPushAvg = llHTPushAvg + outcomeHeap.tMShort(o1, o2);
 
-		clearAll();									//	Usuniêcie ca³ej zawartoœci struktury.
+		clearAll();											//	Usuniêcie ca³ej zawartoœci struktury.
 	}
+	cout << "\n* Dodawanie zajmuje srednio: " << llHTPushAvg / iHTTrial << " nanosekund.\n\n";
 
 	shH.done();
 }
 
 void Heap::testPop()
 {
-	int iHTPoChoice;
+	int iHTPoChoice, iHTTrial;
+	long long llHTPopAvg = 0;
+	cout << "Ile razy maja zostac przeprowadzone pomiary?";
+	cin >> iHTTrial;
 	cout << "Dla ilu elementow maja zostac przeprowadzone testy?";
 	cin >> iHTPoChoice;
 
@@ -621,7 +629,7 @@ void Heap::testPop()
 
 	cout << "------------------------------------------\n"
 		"Usuwanie:\n";
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < iHTTrial; i++)
 	{
 		generateElements(iHTPoChoice);
 
@@ -631,16 +639,21 @@ void Heap::testPop()
 
 		auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 		outcomeHeap.tMShort(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji i zapisanie go do pliku tekstowego.
+		llHTPopAvg = llHTPopAvg + outcomeHeap.tMShort(o1, o2);
 
 		clearAll();
 	}
+	cout << "\n* Usuwanie zajmuje srednio: " << llHTPopAvg / iHTTrial << " nanosekund.\n\n";
 
 	shH.done();
 }
 
 void Heap::testSearch()
 {
-	int iHTDChoice;
+	int iHTDChoice, iHTTrial;
+	long long llHTSearchAvg = 0;
+	cout << "Ile razy maja zostac przeprowadzone pomiary?";
+	cin >> iHTTrial;
 	cout << "Dla ilu elementow maja zostac przeprowadzone testy?";
 	cin >> iHTDChoice;
 
@@ -648,7 +661,7 @@ void Heap::testSearch()
 
 	cout << "------------------------------------------\n"
 		"Szukanie elementu:\n";
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < iHTTrial; i++)
 	{
 		generateElements(iHTDChoice);
 
@@ -659,8 +672,11 @@ void Heap::testSearch()
 
 		auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 		outcomeHeap.tMShort(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji i zapisanie go do pliku tekstowego.
+		llHTSearchAvg = llHTSearchAvg + outcomeHeap.tMShort(o1, o2);
 
 		clearAll();
 	}
+	cout << "\n* Wyszukiwanie zajmuje srednio: " << llHTSearchAvg / iHTTrial << " nanosekund.\n\n";
+
 	shH.done();
 }
