@@ -159,12 +159,13 @@ void Lista::pushMenu()									//	Menu dodawania elementów do listy.
 			cin >> iLPushPosition;								//	Wybranie po jakim elemencie ma zostaæ wstawiony nowy element.
 			cout << "Wybierz wartosc wstawianego elementu:\n";
 			cin >> iLPushElement;								//	Wybranie wartoœci wstawianego elementu.
+			int iLRightPush = iLPushPosition - 1;
 			
 			auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
 
-			if (pushMiddleValue(iLPushPosition, iLPushElement) == true)	//	Dodanie elementu w okreœlone miejsce listy.
+			if (pushMiddleIndex(iLRightPush, iLPushElement) == true)	//	Dodanie elementu w okreœlone miejsce listy.
 			{
-				cout << "Wybrany element zostal wstawiony po elemencie: " << iLPushPosition << ", na pozycji: " << iLPushPosition << " i ma mial wartosc: " << iLPushElement << ".\n";
+				cout << "Wybrany element zostal na pozycje: " << iLPushPosition << " i ma ma wartosc: " << iLPushElement << ".\n";
 			}
 			else
 			{
@@ -531,7 +532,7 @@ bool Lista::pushMiddleValue(int iLPushValue, int iLPushElement)		//	Dodanie elem
 	return false;
 }
 
-bool Lista::pushMiddleIndex(int iLPushPosition, int iLPushElementI)
+bool Lista::pushMiddleIndex(int iLRightPush, int iLPushElementI)
 {
 	int i = 0;
 	Node *tempNode = nHead;								//	Stworzenie nowego wskaŸnika i przypisanie do niego g³owy.
@@ -539,7 +540,7 @@ bool Lista::pushMiddleIndex(int iLPushPosition, int iLPushElementI)
 	{
 		while (tempNode != NULL)						//	Pêtla wykonuj¹ca siê od pocz¹tkowego do ostatniego elementu listy.
 		{
-			if (i == iLPushPosition)					//	Sprawdzenie czy index aktualnie "przegl¹danej" komórki jest taki sama jak wybrany.
+			if (i == iLRightPush)					//	Sprawdzenie czy index aktualnie "przegl¹danej" komórki jest taki sama jak wybrany.
 			{
 				if (tempNode == nHead)
 				{
