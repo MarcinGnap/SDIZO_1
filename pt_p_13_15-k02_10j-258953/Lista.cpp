@@ -73,11 +73,11 @@ void Lista::listMenu()									//	Menu g³ówne listy dwukierunkowej.
 	}
 }
 
-void Lista::pushMenu()									//	Menu dodawania elementów do listy.
+void Lista::pushMenu()											//	Menu dodawania elementów do listy.
 {
 	for (;;)
 	{
-		shL.cls();										//	"Wyczyszczenie" konsoli.
+		shL.cls();												//	"Wyczyszczenie" konsoli.
 
 		short sLChoicePushMenu;
 
@@ -137,7 +137,7 @@ void Lista::pushMenu()									//	Menu dodawania elementów do listy.
 			
 			auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
 
-			if (pushMiddleValue(iLPushValue, iLPushElement) == true)		//	Dodanie elementu w okreœlone miejsce listy.
+			if (pushMiddleValue(iLPushValue, iLPushElement) == true)	//	Dodanie elementu w okreœlone miejsce listy.
 			{
 				cout << "Udalo sie dodac element...\n";
 			}
@@ -540,7 +540,7 @@ bool Lista::pushMiddleIndex(int iLRightPush, int iLPushElementI)
 	{
 		while (tempNode != NULL)						//	Pêtla wykonuj¹ca siê od pocz¹tkowego do ostatniego elementu listy.
 		{
-			if (i == iLRightPush)					//	Sprawdzenie czy index aktualnie "przegl¹danej" komórki jest taki sama jak wybrany.
+			if (i == iLRightPush)						//	Sprawdzenie czy index aktualnie "przegl¹danej" komórki jest taki sama jak wybrany.
 			{
 				if (tempNode == nHead)
 				{
@@ -749,7 +749,7 @@ bool Lista::popMiddleIndex(int iLPopIndex)
 	{
 		while (tempNode != NULL)						//	Pêtla wykonuj¹ca siê od pocz¹tkowego do ostatniego elementu listy.
 		{
-			if (i == iLPopIndex)					//	Sprawdzenie czy index aktualnie "przegl¹danej" komórki jest taki sama jak wybrany.
+			if (i == iLPopIndex)						//	Sprawdzenie czy index aktualnie "przegl¹danej" komórki jest taki sama jak wybrany.
 			{
 				if (tempNode == nHead)
 				{
@@ -763,17 +763,17 @@ bool Lista::popMiddleIndex(int iLPopIndex)
 				{
 					tempNode->nNext->nPrev = tempNode->nPrev;	//	WskaŸnik komórki nastêpnej po elemencie tymczasowym na element nastêpny zostaje przypisany do wskaŸnika komórki tymczasowej na komórkê poprzedni¹ od nastêpnej.
 					tempNode->nPrev->nNext = tempNode->nNext;	//	WskaŸnik komórki poprzedniej od elementu usuwanego na komórkê nastêpn¹ zostaje przypisany do wskaŸnika usuwanej komórki na element nastêpny.
-					delete tempNode;						//	Usuniêcie elementu.
+					delete tempNode;							//	Usuniêcie elementu.
 				}
 				return true;
 			}
 			i++;
-			tempNode = tempNode->nNext;					//	Przypisanie wskaŸnikowi tyczasowej komórki adresu elementu nastêpnego.
+			tempNode = tempNode->nNext;							//	Przypisanie wskaŸnikowi tyczasowej komórki adresu elementu nastêpnego.
 		}
 	}
 	else
 	{
-		shL.empty();												//	Wyœwietlenie komunikatu o braku wybranej pozycji w liœcie.
+		shL.empty();											//	Wyœwietlenie komunikatu o braku wybranej pozycji w liœcie.
 	}
 	return false;
 }

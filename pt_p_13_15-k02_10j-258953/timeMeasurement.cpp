@@ -18,7 +18,7 @@ void timeMeasurement::tMOutcome(chrono::high_resolution_clock::time_point o1, ch
 	cout << "\nWykonanie operacji zajelo " << time_span.count() << " nanosekund." << endl;
 }
 
-void timeMeasurement::tMShort(chrono::high_resolution_clock::time_point o1, chrono::high_resolution_clock::time_point o2)
+long long timeMeasurement::tMShort(chrono::high_resolution_clock::time_point o1, chrono::high_resolution_clock::time_point o2)
 {
 	chrono::nanoseconds time_span = chrono::duration_cast<chrono::nanoseconds> (o2 - o1);
 	cout << "* " << time_span.count() << " nanosekund" << endl;
@@ -30,4 +30,5 @@ void timeMeasurement::tMShort(chrono::high_resolution_clock::time_point o1, chro
 		fTMTests.flush();
 	}
 	fTMTests.close();
+	return time_span.count();
 }

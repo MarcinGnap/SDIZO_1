@@ -139,7 +139,7 @@ void Tablica::pushMenu()										//	Menu dodawania do tablicy.
 			auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
 			int iTRightPush = iTPushPosition - 1;				//	Przypisanie do zmiennej prawdziwej pozycji w tablicy.
 
-			pushMiddle(iTRightPush, iTNewMidElement);		//	Dodanie elementu w okreœlone miejsce.
+			pushMiddle(iTRightPush, iTNewMidElement);			//	Dodanie elementu w okreœlone miejsce.
 
 			auto o2 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie zakoñczenia operacji.
 			outcomeTable.tMOutcome(o1, o2);						//	Wyœwietlenie czasu wykonywania operacji.
@@ -714,6 +714,12 @@ void Tablica::displayOneIndex(int iTChoiceDisplay)				//	Wyœwietlenie elementu z
 void Tablica::testPush()
 {
 	int iTTPuChoice;
+	int iTTTrial;
+	long long llTTPushFrontAvg = 0;
+	long long llTTPushEndAvg = 0;
+	long long llTTPushMiddletAvg = 0;
+	cout << "Ile razy maja zostac przeprowadzone pomiary?";
+	cin >> iTTTrial;
 	cout << "Dla ilu elementow maja zostac przeprowadzone testy?";
 	cin >> iTTPuChoice;
 
@@ -721,7 +727,7 @@ void Tablica::testPush()
 
 	cout << "------------------------------------------\n"
 			"Dodawanie na poczatek:\n";
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < iTTTrial; i++)
 	{
 		generateElements(iTTPuChoice);
 		int iTTGenerated = rand();
@@ -732,12 +738,13 @@ void Tablica::testPush()
 
 		auto o2 = chrono::high_resolution_clock::now();
 		outcomeTable.tMShort(o1, o2);
+		llTTPushFrontAvg = llTTPushFrontAvg + outcomeTable.tMShort(o1, o2);
 
 		clearAllT();
 	}
 	cout << "------------------------------------------\n"
 			"Dodawanie na koniec:\n";
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < iTTTrial; i++)
 	{
 		generateElements(iTTPuChoice);
 		int iTTGenerated = rand();
@@ -748,12 +755,13 @@ void Tablica::testPush()
 
 		auto o2 = chrono::high_resolution_clock::now();
 		outcomeTable.tMShort(o1, o2);
+		llTTPushEndAvg = llTTPushEndAvg + outcomeTable.tMShort(o1, o2);
 
 		clearAllT();
 	}
 	cout << "------------------------------------------\n"
 			"Dodawanie w srodek:\n";
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < iTTTrial; i++)
 	{
 		generateElements(iTTPuChoice);
 		int iTTPuPosition = ((rand() % iTTPuChoice) + 0);
@@ -765,9 +773,14 @@ void Tablica::testPush()
 
 		auto o2 = chrono::high_resolution_clock::now();
 		outcomeTable.tMShort(o1, o2);
+		llTTPushMiddletAvg = llTTPushMiddletAvg + outcomeTable.tMShort(o1, o2);
 
 		clearAllT();
 	}
+
+	cout << "\n* Dodawanie na poczatek zajmuje srednio: " << llTTPushFrontAvg / iTTTrial << " nanosekund.\n";
+	cout << "\n* Dodawanie na koniec zajmuje srednio: " << llTTPushEndAvg / iTTTrial << " nanosekund.\n";
+	cout << "\n* Dodawanie w srodek zajmuje srednio: " << llTTPushMiddletAvg / iTTTrial << " nanosekund.\n\n";
 
 	shT.done();
 }
@@ -775,6 +788,12 @@ void Tablica::testPush()
 void Tablica::testPop()
 {
 	int iTTPoChoice;
+	int iTTTrial;
+	long long llTTPopFrontAvg = 0;
+	long long llTTPopEndAvg = 0;
+	long long llTTPopMiddletAvg = 0;
+	cout << "Ile razy maja zostac przeprowadzone pomiary?";
+	cin >> iTTTrial;
 	cout << "Dla ilu elementow maja zostac przeprowadzone testy?";
 	cin >> iTTPoChoice;
 
@@ -782,7 +801,7 @@ void Tablica::testPop()
 
 	cout << "------------------------------------------\n"
 		"Usuwanie z poczatku:\n";
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < iTTTrial; i++)
 	{
 		generateElements(iTTPoChoice);
 
@@ -792,12 +811,13 @@ void Tablica::testPop()
 
 		auto o2 = chrono::high_resolution_clock::now();
 		outcomeTable.tMShort(o1, o2);
+		llTTPopFrontAvg = llTTPopFrontAvg + outcomeTable.tMShort(o1, o2);
 
 		clearAllT();
 	}
 	cout << "------------------------------------------\n"
 		"Usuwanie z konca:\n";
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < iTTTrial; i++)
 	{
 		generateElements(iTTPoChoice);
 
@@ -807,12 +827,13 @@ void Tablica::testPop()
 
 		auto o2 = chrono::high_resolution_clock::now();
 		outcomeTable.tMShort(o1, o2);
+		llTTPopEndAvg = llTTPopEndAvg + outcomeTable.tMShort(o1, o2);
 
 		clearAllT();
 	}
 	cout << "------------------------------------------\n"
 		"Usuwanie ze srodka:\n";
-	for (int i = 0; i < 100; i++)
+	for (int i = 0; i < iTTTrial; i++)
 	{
 		generateElements(iTTPoChoice);
 
@@ -823,15 +844,23 @@ void Tablica::testPop()
 
 		auto o2 = chrono::high_resolution_clock::now();
 		outcomeTable.tMShort(o1, o2);
+		llTTPopMiddletAvg = llTTPopMiddletAvg + outcomeTable.tMShort(o1, o2);
 
 		clearAllT();
 	}
+	cout << "\n* Usuwanie z poczatku zajmuje srednio: " << llTTPopFrontAvg / iTTTrial << " nanosekund.\n";
+	cout << "\n* Usuwanie z konieca zajmuje srednio: " << llTTPopEndAvg / iTTTrial << " nanosekund.\n";
+	cout << "\n* Usuwanie ze srodka zajmuje srednio: " << llTTPopMiddletAvg / iTTTrial << " nanosekund.\n\n";
+
 	shT.done();
 }
 
 void Tablica::testSearch()
 {
-	int iTTDChoice;
+	int iTTDChoice, iTTTrial;
+	long long llTTSearchAvg = 0;
+	cout << "Ile razy maja zostac przeprowadzone pomiary?";
+	cin >> iTTTrial;
 	cout << "Dla ilu elementow maja zostac przeprowadzone testy?";
 	cin >> iTTDChoice;
 
@@ -850,8 +879,10 @@ void Tablica::testSearch()
 
 		auto o2 = chrono::high_resolution_clock::now();
 		outcomeTable.tMShort(o1, o2);
+		llTTSearchAvg = llTTSearchAvg + outcomeTable.tMShort(o1, o2);
 
 		clearAllT();
 	}
+	cout << "\n* Wyszukiwanie zajmuje srednio: " << llTTSearchAvg / iTTTrial << " nanosekund.\n\n";
 	shT.done();
 }
