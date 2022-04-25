@@ -292,7 +292,7 @@ void Heap::testMenu()									//	Menu testowania operacji kopca.
 		cout << "Prosze wybrac:\n"
 			"\t1.Testy dodawania.\n"
 			"\t2.Testy usuwania.\n"
-			"\t3.Testy wyswietlania.\n"
+			"\t3.Testy wyszukiwania.\n"
 			"\t4.Powrot.\n";
 		cin >> sHChoiceTestMenu;						//	Wybór opcji.
 
