@@ -400,7 +400,7 @@ void Heap::generateElements(int iHNumberOfGen)
 	
 	for (int i = 0; i < iHNumberOfGen; i++)				//	Pêtla wykonuj¹ca siê wybran¹ iloœæ razy.
 	{
-		newHeap[i] = rand();							//	Przypisanie generowanej wartoœci do komórki kopca.
+		newHeap[i] = ((rand() * rand() * rand()) % 2147483647);							//	Przypisanie generowanej wartoœci do komórki kopca.
 		iHSize++;										//	Inkrementacja zmiennej przechowuj¹cej rozmiar kopca.
 		HeapifyUp();									//	Posortowanie po wygenerowaniu elementu.
 	}
@@ -600,7 +600,7 @@ void Heap::testPush()										//	Testowanie dodawania.
 	{
 		generateElements(iHTPuChoice);						//	Wygenerowanie okreœlonej iloœci elementów.
 
-		int iHTNewElement = rand();							//	Wygenerowanie nowej wartoœci.
+		int iHTNewElement = ((rand() * rand() * rand()) % 2147483647);							//	Wygenerowanie nowej wartoœci.
 		auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
 
 		pushElement(iHTNewElement);							//	Dodanie pseudo losowego elementu.
@@ -665,7 +665,7 @@ void Heap::testSearch()
 	{
 		generateElements(iHTDChoice);
 
-		int iHTSearchValue = rand();
+		int iHTSearchValue = ((rand() * rand() * rand()) % 2147483647);
 		auto o1 = chrono::high_resolution_clock::now();		//	Pomiar czasu w momencie rozpoczêcia operacji.
 
 		displayOneValue(iHTDChoice);

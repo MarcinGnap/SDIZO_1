@@ -730,7 +730,7 @@ void Tablica::testPush()
 	for (int i = 0; i < iTTTrial; i++)
 	{
 		generateElements(iTTPuChoice);
-		int iTTGenerated = rand();
+		int iTTGenerated = ((rand() * rand() * rand()) % 2147483647);
 
 		auto o1 = chrono::high_resolution_clock::now();
 
@@ -747,7 +747,7 @@ void Tablica::testPush()
 	for (int i = 0; i < iTTTrial; i++)
 	{
 		generateElements(iTTPuChoice);
-		int iTTGenerated = rand();
+		int iTTGenerated = ((rand() * rand() * rand()) % 2147483647);
 
 		auto o1 = chrono::high_resolution_clock::now();
 
@@ -764,8 +764,8 @@ void Tablica::testPush()
 	for (int i = 0; i < iTTTrial; i++)
 	{
 		generateElements(iTTPuChoice);
-		int iTTPuPosition = ((rand() % iTTPuChoice) + 0);
-		int iTTNewMidElement = rand();
+		int iTTPuPosition = (rand() % (iTTPuChoice - 1) + 0);
+		int iTTNewMidElement = ((rand() * rand() * rand()) % 2147483647);
 
 		auto o1 = chrono::high_resolution_clock::now();
 
@@ -837,7 +837,7 @@ void Tablica::testPop()
 	{
 		generateElements(iTTPoChoice);
 
-		int iTTPopValue = ((rand() % iTTPoChoice) + 0);
+		int iTTPopValue = ((rand() * rand() * rand()) % 2147483647);
 		auto o1 = chrono::high_resolution_clock::now();
 
 		popMiddleValue(iTTPopValue);
@@ -872,7 +872,7 @@ void Tablica::testSearch()
 	{
 		generateElements(iTTDChoice);
 
-		int iTTSearchValue = rand();
+		int iTTSearchValue = ((rand() * rand() * rand()) % 2147483647);
 		auto o1 = chrono::high_resolution_clock::now();
 
 		displayOneValue(iTTSearchValue);

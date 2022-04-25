@@ -885,7 +885,7 @@ void Lista::testPush()
 	{
 		generateElements(iLTPuChoice);
 
-		int iLTNewFrontElement = rand();
+		int iLTNewFrontElement = ((rand() * rand() * rand()) % 2147483647);
 		auto o1 = chrono::high_resolution_clock::now();
 
 		pushFront(iLTNewFrontElement);
@@ -902,7 +902,7 @@ void Lista::testPush()
 	{
 		generateElements(iLTPuChoice);
 
-		int iLTNewEndElement = rand();
+		int iLTNewEndElement = ((rand() * rand() * rand()) % 2147483647);
 		auto o1 = chrono::high_resolution_clock::now();
 
 		pushEnd(iLTNewEndElement);
@@ -919,8 +919,8 @@ void Lista::testPush()
 	{
 		generateElements(iLTPuChoice);
 
-		int iLTNewMiddleIndex = rand();
-		int iLTNewMiddleElement = rand();
+		int iLTNewMiddleIndex = (rand() % iLTPuChoice + 0);
+		int iLTNewMiddleElement = ((rand() * rand() * rand()) % 2147483647);
 		auto o1 = chrono::high_resolution_clock::now();
 
 		pushMiddleIndex(iLTNewMiddleIndex, iLTNewMiddleElement);
@@ -991,10 +991,10 @@ void Lista::testPop()
 	{
 		generateElements(iLTPoChoice);
 
-		int iLTPopValue = ((rand() % iLTPoChoice) + 0);
+		int iLTPopIndex = (rand() % (iLTPoChoice - 1) + 0);
 		auto o1 = chrono::high_resolution_clock::now();
 
-		popMiddleIndex(iLTPopValue);
+		popMiddleIndex(iLTPopIndex);
 
 		auto o2 = chrono::high_resolution_clock::now();
 		outcomeList.tMShort(o1, o2);
@@ -1027,7 +1027,7 @@ void Lista::testSearch()
 	{
 		generateElements(iLTDChoice);
 
-		int iLTSearchValue = rand();
+		int iLTSearchValue = ((rand() * rand() * rand()) % 2147483647);
 		auto o1 = chrono::high_resolution_clock::now();
 
 		displayOneValue(iLTSearchValue);
